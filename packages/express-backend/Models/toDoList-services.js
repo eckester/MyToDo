@@ -1,6 +1,6 @@
 // toDoList-services.js
 import mongoose from "mongoose";
-import toDoModel from "./toDoList";
+import toDoModel from "./toDoList.js";
 
 mongoose.set("debug", true);
 
@@ -20,19 +20,14 @@ function findToDoByDate(date) {
     return toDoModel.find({ due: date });
 }
 
-function addTask(inTask) {
-    const taskToAdd = new toDoModel(inTask);
+function addTask(task) {
+    const taskToAdd = new toDoModel(task);
     const promise = taskToAdd.save();
     return promise;
-}
-
-function deleteTask(inTask) {
-    const taskToDelete = toDoModel.deleteOne({task: inTask})
 }
 
 export default {
     sortToDoByDate,
     findToDoByDate,
     addTask,
-    deleteTask,
 };
