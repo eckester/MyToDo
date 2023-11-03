@@ -27,15 +27,17 @@ function addTask(task) {
 }
 
 function deleteTask(inTask) {
-    const taskToDelete = toDoModel.deleteOne({task: inTask})
+    return toDoModel.deleteOne({task: inTask}).save();
 }
 
 function getTasks() {
-    return task = toDoModel.find();
+    return toDoModel.find();
 }
 
 export default {
     sortToDoByDate,
     findToDoByDate,
     addTask,
+    deleteTask,
+    getTasks,
 };

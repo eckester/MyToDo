@@ -15,13 +15,14 @@ app.get("/", (req, res) => {
 
 // get tasks
 app.get('/tasks', async (req, res) => {
-    const task = req.query.task;
-    const category = req.query.category;
-    const dueDate = req.query.due;
-    const priority = req.query.priority;
+    // const task = req.query.task;
+    // const category = req.query.category;
+    // const dueDate = req.query.due;
+    // const priority = req.query.priority;
+    // task, category, dueDate, priority
     try {
-        const result = await toDoListServices.getTasks(task, category, dueDate, priority);
-        res.send({tasks_list: result});
+        const result = await toDoListServices.getTasks();
+        res.send({toDoList: result});
     } catch (error) {
         console.log(error);
         res.status(500).send("An error occurred in the server.");

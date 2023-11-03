@@ -7,10 +7,6 @@ const toDoSchema = new Schema ({
     task: {
         type: String,
         required: true, 
-        notes: {
-            type: String,
-            required: false,
-        },
     },
     category: { // create categories for school i.e. class type?
         type: String,
@@ -31,6 +27,10 @@ const toDoSchema = new Schema ({
         type: Boolean,
         default: false
         // false if not done, true if done
+    },
+    notes: {
+        type: String,
+        required: false,
     },
 }, 
 { virtuals: {
