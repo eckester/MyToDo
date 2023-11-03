@@ -7,10 +7,10 @@ const toDoSchema = new Schema ({
     task: {
         type: String,
         required: true, 
-    },
-    notes: {
-        type: String,
-        required: false,
+        notes: {
+            type: String,
+            required: false,
+        },
     },
     category: { // create categories for school i.e. class type?
         type: String,
@@ -37,7 +37,7 @@ const toDoSchema = new Schema ({
     isOverdue: {
         get() {
             const currentDate = new Date();
-            return !this.status && this.dueDate > currentDate;
+            return !this.status && this.due > currentDate;
         }
     }
 },},
