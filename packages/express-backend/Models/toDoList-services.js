@@ -20,14 +20,19 @@ function findToDoByDate(date) {
     return toDoModel.find({ due: date });
 }
 
-function addTask(task) {
-    const taskToAdd = new toDoModel(task);
+function addTask(inTask) {
+    const taskToAdd = new toDoModel(inTask);
     const promise = taskToAdd.save();
     return promise;
+}
+
+function deleteTask(inTask) {
+    const taskToDelete = toDoModel.deleteOne({task: inTask})
 }
 
 export default {
     sortToDoByDate,
     findToDoByDate,
     addTask,
+    deleteTask,
 };
