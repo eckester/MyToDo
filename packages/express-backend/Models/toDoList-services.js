@@ -26,8 +26,8 @@ function addTask(task) {
     return promise;
 }
 
-function deleteTask(inTask) {
-    return toDoModel.deleteOne({task: inTask}).save();
+function deleteTask(taskId) {
+    return toDoModel.findByIdAndDelete(taskId);
 }
 
 function getTasks() {
