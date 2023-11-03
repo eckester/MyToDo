@@ -26,6 +26,14 @@ function addTask(task) {
     return promise;
 }
 
+function deleteTask(inTask) {
+    const taskToDelete = toDoModel.deleteOne({task: inTask})
+}
+
+function getTasks() {
+    return task = toDoModel.find();
+}
+
 export default {
     sortToDoByDate,
     findToDoByDate,
