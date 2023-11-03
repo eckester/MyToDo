@@ -1,6 +1,6 @@
 // toDoList-services.js
 import mongoose from "mongoose";
-import toDoModel from "./toDoList";
+import toDoModel from "./toDoList.js";
 
 mongoose.set("debug", true);
 
@@ -28,6 +28,10 @@ function addTask(inTask) {
 
 function deleteTask(inTask) {
     const taskToDelete = toDoModel.deleteOne({task: inTask})
+}
+
+function getTasks() {
+    return task = toDoModel.find();
 }
 
 export default {
