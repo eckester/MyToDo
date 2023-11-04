@@ -34,10 +34,15 @@ function getTasks() {
     return toDoModel.find();
 }
 
+function findTaskById(id) {
+    return toDoModel.find({ _id: id });
+}
+
 export default {
     sortToDoByDate,
     findToDoByDate,
     addTask,
     deleteTask,
     getTasks,
+    findTaskById,
 };
