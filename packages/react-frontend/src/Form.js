@@ -3,24 +3,42 @@ function Form(props){
     const[person, setPerson] = useState(
         {
             name: "",
-            job: "",
+            category: "",
+            priority: "",
+            date: "",
+            status: "",
         }
     );
 
     function handleChange(event){
         const{name, value} = event.target;
-        if (name === "job")
-            setPerson({name: person['name'], job: value}
-        );
-        else
-            setPerson(
-                {name: value, job: person['job']}
-                );
+        if (name === "category"){
+            setPerson({name: person['name'], category: value, priority: person['priority'],
+                date: person['date'], status: person['status']})
+        }
+        else if (name === "name"){
+            setPerson({name: value, category: person['category'], priority: person['priority'],
+                date: person['date'], status: person['status']})
+        }
+        else if (name === "priority"){
+            setPerson({name: person['name'], category: person['category'], priority: value,
+                date: person['date'], status: person['status']})
+        }
+        else if (name === "date"){
+            setPerson({name: person['name'], category: person['category'], priority: person['priority'],
+                date: value, status: person['status']})
+        }
+        else {
+            setPerson({
+                name: person['name'], category: person['category'], priority: person['priority'],
+                date: person['date'], status: value
+            })
+        }
     }
 
     function submitForm(){
         props.handleSubmit(person);
-        setPerson({name: '', job: ''});
+        setPerson({name: '', category: '', priority: '', date: '', status: ''});
     }
 
     return (
@@ -32,12 +50,33 @@ function Form(props){
                 id="name"
                 value={person.name}
                 onChange={handleChange} />
-            <label htmlFor="job">Job</label>
+            <label htmlFor="category">Category</label>
             <input
                 type="text"
-                name="job"
-                id="job"
-                value={person.job}
+                name="category"
+                id="category"
+                value={person.category}
+                onChange={handleChange} />
+            <label htmlFor="priority">Priority</label>
+            <input
+                type="text"
+                name="priority"
+                id="priority"
+                value={person.priority}
+                onChange={handleChange} />
+            <label htmlFor="date">Due Date</label>
+            <input
+                type="text"
+                name="date"
+                id="date"
+                value={person.date}
+                onChange={handleChange} />
+            <label htmlFor="status">Status</label>
+            <input
+                type="text"
+                name="status"
+                id="status"
+                value={person.status}
                 onChange={handleChange} />
             <input 
                 type="button" 

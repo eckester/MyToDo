@@ -18,6 +18,8 @@ function MyApp() {
     }, [] );
 
     function removeOneCharacter(id) {
+        const updated = characters.filter((character) => character.id !== id);
+        setCharacters(updated);
         fetch(`http://localhost:8000/users/${id}`, {
             method: "DELETE",
         })
@@ -38,6 +40,7 @@ function MyApp() {
     }
 
     function updateList(person) {
+        setCharacters([...characters, person]);
         postUser(person)
         .then((response) => {
             if (response.status === 201) {
