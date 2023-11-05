@@ -10,6 +10,9 @@ function Form(props){
         }
     );
 
+    const categoryOptions = ['School', 'Work', 'Other'];  
+    const priorityOptions = ['Low', 'Medium', 'High'];
+ 
     function handleChange(event){
         const{name, value} = event.target;
         if (name === "category"){
@@ -51,22 +54,38 @@ function Form(props){
                 value={person.name}
                 onChange={handleChange} />
             <label htmlFor="category">Category</label>
-            <input
-                type="text"
+            <select
                 name="category"
                 id="category"
                 value={person.category}
-                onChange={handleChange} />
+                onChange={handleChange}
+            >
+                <option value="">Select a category</option>
+                {categoryOptions.map((option) => (
+                    <option key={option} value={option}>
+                        {option}
+                    </option>
+                ))}
+            </select>
+
             <label htmlFor="priority">Priority</label>
-            <input
-                type="text"
+            <select
                 name="priority"
                 id="priority"
                 value={person.priority}
-                onChange={handleChange} />
+                onChange={handleChange}
+            >
+                <option value="">Select a priority</option>
+                {priorityOptions.map((option) => (
+                    <option key={option} value={option}>
+                        {option}
+                    </option>
+                ))}
+            </select>
+            
             <label htmlFor="date">Due Date</label>
             <input
-                type="text"
+                type="date"
                 name="date"
                 id="date"
                 value={person.date}
