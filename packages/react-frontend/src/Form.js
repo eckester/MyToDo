@@ -1,44 +1,45 @@
 import React, {useState} from 'react';
 function Form(props){
-    const[person, setPerson] = useState(
+    const[tasks, setTask] = useState(
         {
-            name: "",
+            task: "",
             category: "",
             priority: "",
-            date: "",
+            due: "",
             status: "",
+            _id: "",
         }
     );
 
     function handleChange(event){
         const{name, value} = event.target;
         if (name === "category"){
-            setPerson({name: person['name'], category: value, priority: person['priority'],
-                date: person['date'], status: person['status']})
+            setTask({task: tasks['task'], category: value,
+                priority: tasks['priority'], due: tasks['due']})
         }
         else if (name === "name"){
-            setPerson({name: value, category: person['category'], priority: person['priority'],
-                date: person['date'], status: person['status']})
+            setTask({task: value, category: tasks['category'],
+                priority: tasks['priority'], due: tasks['due']})
         }
         else if (name === "priority"){
-            setPerson({name: person['name'], category: person['category'], priority: value,
-                date: person['date'], status: person['status']})
+            setTask({task: tasks['task'], category: tasks['category'],
+                priority: value, due: tasks['due']})
         }
         else if (name === "date"){
-            setPerson({name: person['name'], category: person['category'], priority: person['priority'],
-                date: value, status: person['status']})
+            setTask({task: tasks['task'], category: tasks['category'],
+                priority: tasks['priority'], due: value})
         }
         else {
-            setPerson({
-                name: person['name'], category: person['category'], priority: person['priority'],
-                date: person['date'], status: value
+            setTask({
+                task: tasks['task'], category: tasks['category'],
+                priority: tasks['priority'], due: tasks['due']
             })
         }
     }
 
     function submitForm(){
-        props.handleSubmit(person);
-        setPerson({name: '', category: '', priority: '', date: '', status: ''});
+        props.handleSubmit(tasks);
+        setTask({task: '', category: tasks['category'], priority: tasks['priority'], due: '', status: '', _id: ''});
     }
 
     return (
@@ -48,40 +49,42 @@ function Form(props){
                 type="text"
                 name="name"
                 id="name"
-                value={person.name}
+                value={tasks.task}
                 onChange={handleChange} />
             <label htmlFor="category">Category</label>
-            <input
+            <select
                 type="text"
                 name="category"
                 id="category"
-                value={person.category}
-                onChange={handleChange} />
+                onChange={handleChange}>
+                <option value="other">---Choose Category---</option>
+                <option value="school">School</option>
+                <option value="work">Work</option>
+                <option value="other">Other</option>
+            </select>
             <label htmlFor="priority">Priority</label>
-            <input
+            <select
                 type="text"
                 name="priority"
                 id="priority"
-                value={person.priority}
-                onChange={handleChange} />
+                onChange={handleChange}>
+                <option value="none">---Choose Priority---</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+                <option value="none">None</option>
+            </select>
             <label htmlFor="date">Due Date</label>
             <input
                 type="text"
                 name="date"
                 id="date"
-                value={person.date}
-                onChange={handleChange} />
-            <label htmlFor="status">Status</label>
-            <input
-                type="text"
-                name="status"
-                id="status"
-                value={person.status}
+                value={tasks.due}
                 onChange={handleChange} />
             <input 
                 type="button" 
                 value="Submit" 
-                onClick={submitForm} />
+                onClick= {submitForm} />
         </form>
     );
 }
