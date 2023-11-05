@@ -12,6 +12,7 @@ function Form(props){
 
     const categoryOptions = ['School', 'Work', 'Other'];  
     const priorityOptions = ['Low', 'Medium', 'High'];
+    const statusOptions = ['Not started', 'In progress', 'Completed']
  
     function handleChange(event){
         const{name, value} = event.target;
@@ -91,12 +92,19 @@ function Form(props){
                 value={person.date}
                 onChange={handleChange} />
             <label htmlFor="status">Status</label>
-            <input
-                type="text"
+            <select
                 name="status"
                 id="status"
                 value={person.status}
-                onChange={handleChange} />
+                onChange={handleChange}
+            >
+                <option value="">Select a status</option>
+                {statusOptions.map((option) => (
+                    <option key={option} value={option}>
+                        {option}
+                    </option>
+                ))}
+            </select>
             <input 
                 type="button" 
                 value="Submit" 
