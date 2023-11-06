@@ -44,7 +44,12 @@ function Form(props){
 
     function submitForm(){
         props.handleSubmit(tasks);
-        setTask({task: '', category: tasks['category'], priority: tasks['priority'], due: '', status: '', _id: ''});
+        setTask({task: '',
+        category: tasks['category'],
+        priority: tasks['priority'],
+        due: '',
+        status: '',
+        _id: ''});
         setShowPopup(false); // close the popup after submitting
     }
 
