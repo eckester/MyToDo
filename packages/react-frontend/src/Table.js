@@ -15,17 +15,17 @@ function TableHeader() {
   }
   
   function TableBody(props) {
-    const rows = props.characterData.map((row, index) => {
+    const rows = props.taskData.map((row, index) => {
         return (
           <tr key={index}>
-            <td>{row.name}</td>
+            <td>{row.task}</td>
             <td>{row.category}</td>
-              <td>{row.priority}</td>
-              <td>{row.date}</td>
+            <td>{row.priority}</td>
+            <td>{row.due}</td>
             <td>{row.status}</td>
             <td>
 			        <button onClick={() => 
-				        props.removeCharacter(row.id)}>
+				        props.removeTask(row._id)}>
 				        Delete
 			        </button>
 	  </td>
@@ -43,8 +43,8 @@ function TableHeader() {
     return (
         <table>
             <TableHeader />
-            <TableBody characterData={props.characterData} 
-                        removeCharacter={props.removeCharacter}
+            <TableBody taskData={props.taskData}
+                        removeTask={props.removeTask}
                         />
         </table>
     );

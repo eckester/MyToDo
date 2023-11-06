@@ -1,48 +1,49 @@
 import React, {useState} from 'react';
 function Form(props){
-    const[person, setPerson] = useState(
+    const[tasks, setTask] = useState(
         {
-            name: "",
+            task: "",
             category: "",
             priority: "",
-            date: "",
+            due: "",
             status: "",
+            _id: "",
         }
     );
 
     const categoryOptions = ['School', 'Work', 'Other'];  
-    const priorityOptions = ['Low', 'Medium', 'High'];
+    const priorityOptions = ['Low', 'Medium', 'High', 'None'];
     const statusOptions = ['Not started', 'In progress', 'Completed']
  
     function handleChange(event){
         const{name, value} = event.target;
         if (name === "category"){
-            setPerson({name: person['name'], category: value, priority: person['priority'],
-                date: person['date'], status: person['status']})
+            setTask({task: tasks['task'], category: value,
+                priority: tasks['priority'], due: tasks['due']})
         }
         else if (name === "name"){
-            setPerson({name: value, category: person['category'], priority: person['priority'],
-                date: person['date'], status: person['status']})
+            setTask({task: value, category: tasks['category'],
+                priority: tasks['priority'], due: tasks['due']})
         }
         else if (name === "priority"){
-            setPerson({name: person['name'], category: person['category'], priority: value,
-                date: person['date'], status: person['status']})
+            setTask({task: tasks['task'], category: tasks['category'],
+                priority: value, due: tasks['due']})
         }
         else if (name === "date"){
-            setPerson({name: person['name'], category: person['category'], priority: person['priority'],
-                date: value, status: person['status']})
+            setTask({task: tasks['task'], category: tasks['category'],
+                priority: tasks['priority'], due: value})
         }
         else {
-            setPerson({
-                name: person['name'], category: person['category'], priority: person['priority'],
-                date: person['date'], status: value
+            setTask({
+                task: tasks['task'], category: tasks['category'],
+                priority: tasks['priority'], due: tasks['due']
             })
         }
     }
 
     function submitForm(){
-        props.handleSubmit(person);
-        setPerson({name: '', category: '', priority: '', date: '', status: ''});
+        props.handleSubmit(tasks);
+        setTask({task: '', category: tasks['category'], priority: tasks['priority'], due: '', status: '', _id: ''});
     }
 
     return (
@@ -52,16 +53,16 @@ function Form(props){
                 type="text"
                 name="name"
                 id="name"
-                value={person.name}
+                value={tasks.task}
                 onChange={handleChange} />
             <label htmlFor="category">Category</label>
             <select
                 name="category"
                 id="category"
-                value={person.category}
+                value={tasks.category}
                 onChange={handleChange}
             >
-                <option value="">Select a category</option>
+                <option value="">---Choose Category---</option>
                 {categoryOptions.map((option) => (
                     <option key={option} value={option}>
                         {option}
@@ -73,10 +74,10 @@ function Form(props){
             <select
                 name="priority"
                 id="priority"
-                value={person.priority}
+                value={tasks.priority}
                 onChange={handleChange}
             >
-                <option value="">Select a priority</option>
+                <option value="">---Choose Priority---</option>
                 {priorityOptions.map((option) => (
                     <option key={option} value={option}>
                         {option}
@@ -89,26 +90,12 @@ function Form(props){
                 type="date"
                 name="date"
                 id="date"
-                value={person.date}
+                value={tasks.due}
                 onChange={handleChange} />
-            <label htmlFor="status">Status</label>
-            <select
-                name="status"
-                id="status"
-                value={person.status}
-                onChange={handleChange}
-            >
-                <option value="">Select a status</option>
-                {statusOptions.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
-            </select>
             <input 
                 type="button" 
                 value="Submit" 
-                onClick={submitForm} />
+                onClick= {submitForm} />
         </form>
     );
 }
