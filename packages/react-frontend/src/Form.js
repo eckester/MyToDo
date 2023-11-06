@@ -15,30 +15,30 @@ function Form(props){
 
     const categoryOptions = ['School', 'Work', 'Other'];  
     const priorityOptions = ['Low', 'Medium', 'High', 'None'];
-    const statusOptions = ['In-Progress', 'Complete'];
+    //const statusOptions = ['In-Progress', 'Complete'];
  
     function handleChange(event){
         const{name, value} = event.target;
         if (name === "category"){
             setTask({task: tasks['task'], category: value,
-                priority: tasks['priority'], due: tasks['due'], status: statusOptions[0]})
+                priority: tasks['priority'], due: tasks['due']})
         }
         else if (name === "name"){
             setTask({task: value, category: tasks['category'],
-                priority: tasks['priority'], due: tasks['due'], status: statusOptions[0]})
+                priority: tasks['priority'], due: tasks['due']})
         }
         else if (name === "priority"){
             setTask({task: tasks['task'], category: tasks['category'],
-                priority: value, due: tasks['due'], status: statusOptions[0]})
+                priority: value, due: tasks['due']})
         }
         else if (name === "date"){
             setTask({task: tasks['task'], category: tasks['category'],
-                priority: tasks['priority'], due: value, status: statusOptions[0]})
+                priority: tasks['priority'], due: value})
         }
         else {
             setTask({
                 task: tasks['task'], category: tasks['category'],
-                priority: tasks['priority'], due: tasks['due'], status: statusOptions[0]
+                priority: tasks['priority'], due: tasks['due']
             })
         }
     }
@@ -49,8 +49,7 @@ function Form(props){
         category: tasks['category'],
         priority: tasks['priority'],
         due: '',
-        status: statusOptions[0],
-        _id: ''});
+        status: false});
         setShowPopup(false); // close the popup after submitting
     }
 
