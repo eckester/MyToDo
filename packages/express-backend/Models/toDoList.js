@@ -11,7 +11,7 @@ const toDoSchema = new Schema ({
     category: { // create categories for school i.e. class type?
         type: String,
         required: true, 
-        enum: ['school', 'work', 'other'],
+        enum: ['School', 'Work', 'Other'],
     }, 
     due: { 
         type: Date,
@@ -20,13 +20,12 @@ const toDoSchema = new Schema ({
     },
     priority: {
         type: String,
-        default: 'none',
-        enum: ['low', 'medium', 'high', 'none']
+        default: 'None',
+        enum: ['Low', 'Medium', 'High', 'None'],
     },
     status: {
         type: Boolean,
-        default: false
-        // false if not done, true if done
+        default: false,
     },
     notes: {
         type: String,
