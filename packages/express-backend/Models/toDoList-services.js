@@ -20,6 +20,10 @@ function findToDoByDate(date) {
     return toDoModel.find({ due: date });
 }
 
+function findTaskById(id) {
+    return toDoModel.findById(id);
+}
+
 function addTask(task) {
     const taskToAdd = new toDoModel(task);
     const promise = taskToAdd.save();
@@ -40,4 +44,5 @@ export default {
     addTask,
     deleteTask,
     getTasks,
-};
+    findTaskById,
+}
