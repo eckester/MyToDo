@@ -2,13 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toDoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,13 +33,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/camie/Desktop/Fall 2023/CSC 307/MyToDo/packages/express-backend/Models",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+    "WebServerToolWindowFactoryState": "false"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -62,6 +66,8 @@
       <updated>1698731905367</updated>
       <workItem from="1698731911909" duration="125000" />
       <workItem from="1698732074017" duration="1027000" />
+      <workItem from="1699150817928" duration="4139000" />
+      <workItem from="1699219316973" duration="8222000" />
     </task>
     <servers />
   </component>

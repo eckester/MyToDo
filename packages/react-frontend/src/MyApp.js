@@ -1,32 +1,35 @@
 import React, {useState, useEffect} from "react";
 import Table from "./Table";
 import Form from './Form';
+import Header from "./header";
   
 function MyApp() {
-    const [characters, setCharacters] = useState([]);
+    const [tasks, setTasks] = useState([]);
     
-    function fetchUsers(){
-        const promise = fetch("http://localhost:8000/users");
+    function fetchTasks(){
+        const promise = fetch("http://localhost:8000/tasks");
         return promise;
     }
     useEffect(() => {
-        fetchUsers()
+        fetchTasks()
             .then((res) => res.json())
-            .then((json) => setCharacters(json["users_list"]))
+            .then((json) => setTasks(json["toDoList"]))
             .catch((error) => {console.log(error)});
 
     }, [] );
 
-    function removeOneCharacter(id) {
-        fetch(`http://localhost:8000/users/${id}`, {
+    function removeOneTask(id) {
+        const updated = tasks.filter((task) => task._id !== id);
+        setTasks(updated);
+        fetch(`http://localhost:8000/tasks/${id}`, {
             method: "DELETE",
         })
         .then((response) => {
             if (response.status === 204) {
-                const updated = characters.filter((character) => character.id !== id);
-                setCharacters(updated);
+                const updated = tasks.filter((task) => task.id !== id);
+                setTasks(updated);
             } else if (response.status === 404) {
-                console.log('User not found');
+                console.log('Task not found');
             } else {
                 console.log('Failed to delete with status code: ', response.status);
             }
@@ -37,19 +40,20 @@ function MyApp() {
    
     }
 
-    function updateList(person) {
-        postUser(person)
+    function updateList(task) {
+        setTasks([...tasks, task]);
+        postTask(task)
         .then((response) => {
             if (response.status === 201) {
                 return response.json();
             } else {
-                console.log('User insertion failed with status code:',response.status);
+                console.log('Task insertion failed with status code:',response.status);
 
             }
         })
-        .then((newUser) => {
-            if (newUser) {
-                setCharacters([...characters, newUser]);
+        .then((newTask) => {
+            if (newTask) {
+                setTasks([...tasks, newTask]);
             }
         })
         .catch((error) => {
@@ -57,13 +61,13 @@ function MyApp() {
         });
     }
 
-    function postUser(person) {
-        const promise = fetch("http://localhost:8000/users", {
+    function postTask(task) {
+        const promise = fetch("http://localhost:8000/tasks", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(person),
+            body: JSON.stringify(task),
         });
         return promise;
     }
@@ -71,9 +75,11 @@ function MyApp() {
     
 
     return (
+
     <div className="container">
-        <Table characterData={characters}
-                removeCharacter = {removeOneCharacter}/>
+        <Header />
+        <Table taskData={tasks}
+                removeTask = {removeOneTask}/>
         <Form handleSubmit={updateList}/>
     </div>
     );
