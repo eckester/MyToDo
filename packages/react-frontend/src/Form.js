@@ -15,6 +15,7 @@ function Form(props){
 
     const categoryOptions = ['School', 'Work', 'Other'];  
     const priorityOptions = ['Low', 'Medium', 'High', 'None'];
+    //const statusOptions = ['In-Progress', 'Complete'];
  
     function handleChange(event){
         const{name, value} = event.target;
@@ -48,8 +49,7 @@ function Form(props){
         category: tasks['category'],
         priority: tasks['priority'],
         due: '',
-        status: '',
-        _id: ''});
+        status: false});
         setShowPopup(false); // close the popup after submitting
     }
 
