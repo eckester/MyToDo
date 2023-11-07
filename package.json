@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "format": "npx prettier . --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "lint": "npx eslint .",
     "start": "cd packages && cd react-frontend && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,6 +17,7 @@
     "@testing-library/user-event": "^13.5.0",
     "create-react-app": "^5.0.1",
     "dotenv": "^16.3.1",
+    "eslint": "^8.53.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -25,6 +28,9 @@
     "packages/express-backend"
   ],
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3"
   }
 }
