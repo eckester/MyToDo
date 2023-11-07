@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "format": "npx prettier . --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "format": "npx prettier . --write",
     "lint": "npx eslint .",
     "start": "cd packages && cd react-frontend && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"

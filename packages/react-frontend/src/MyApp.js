@@ -56,6 +56,7 @@ function MyApp() {
             "Task insertion failed with status code:",
             response.status
           );
+          return {};
         }
       })
       .then((newTask) => {
