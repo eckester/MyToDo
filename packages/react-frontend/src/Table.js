@@ -19,12 +19,13 @@ function TableBody(props) {
       const stat = "In-Progress";
       if (row.status){
                     let stat = "Complete"}
+      const date = new Date(row.due);
     return (
       <tr key={index}>
         <td>{row.task}</td>
         <td>{row.category}</td>
         <td>{row.priority}</td>
-        <td>{row.due}</td>
+        <td>{date.toDateString()}</td>
         <td>{stat}</td>
         <td>
           <button onClick={() => props.removeTask(row._id)}>
