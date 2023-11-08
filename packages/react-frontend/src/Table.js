@@ -16,9 +16,10 @@ function TableHeader() {
 
 function TableBody(props) {
   const rows = props.taskData.map((row, index) => {
-      const stat = "In-Progress";
-      if (row.status){
-                    let stat = "Complete"}
+    let stat = "In-Progress";
+    if (row.status) {
+      stat = "Complete";
+    }
     return (
       <tr key={index}>
         <td>{row.task}</td>
