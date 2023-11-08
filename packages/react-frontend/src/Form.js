@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 function Form(props) {
+  //let date = Date.now();
+  //let str = date.toDateString();
+  let date = Date
   const [tasks, setTask] = useState({
     task: "",
     category: "",
     priority: "",
-    due: "",
+    due: Date.now(),
     status: "",
     _id: ""
   });
@@ -61,7 +64,7 @@ function Form(props) {
       task: "",
       category: tasks["category"],
       priority: tasks["priority"],
-      due: "",
+      due: tasks["due"],
       status: false
     });
     setShowPopup(false); // close the popup after submitting
