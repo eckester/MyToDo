@@ -17,7 +17,6 @@
     "@testing-library/user-event": "^13.5.0",
     "create-react-app": "^5.0.1",
     "dotenv": "^16.3.1",
-    "eslint": "^8.53.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
@@ -29,9 +28,11 @@
     "packages/express-backend"
   ],
   "devDependencies": {
+    "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
     "nodemon": "^3.0.1",
-    "prettier": "^3.0.3"
+    "prettier": "3.0.3"
   }
 }

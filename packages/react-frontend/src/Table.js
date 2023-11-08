@@ -16,13 +16,16 @@ function TableHeader() {
 
 function TableBody(props) {
   const rows = props.taskData.map((row, index) => {
+      const stat = "In-Progress";
+      if (row.status){
+                    let stat = "Complete"}
     return (
       <tr key={index}>
         <td>{row.task}</td>
         <td>{row.category}</td>
         <td>{row.priority}</td>
         <td>{row.due}</td>
-        <td>{row.status}</td>
+        <td>{stat}</td>
         <td>
           <button onClick={() => props.removeTask(row._id)}>
             Delete
