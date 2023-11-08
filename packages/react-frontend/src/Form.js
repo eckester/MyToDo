@@ -2,11 +2,12 @@ import React, { useState } from "react";
 function Form(props) {
   //let date = Date.now();
   //let str = date.toDateString();
+  let date = Date
   const [tasks, setTask] = useState({
     task: "",
     category: "",
     priority: "",
-    due: "",
+    due: Date.now(),
     status: "",
     _id: ""
   });
