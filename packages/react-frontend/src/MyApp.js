@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Table from "./Table";
 import Form from "./Form";
 import Header from "./header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
@@ -83,9 +85,30 @@ function MyApp() {
   return (
     <div className="container">
       <Header />
-      <Table taskData={tasks} removeTask={removeOneTask} />
-      <Form handleSubmit={updateList} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ListPage
+                taskData={tasks}
+                removeTask={removeOneTask}
+                handleSubmit={updateList}
+              ></ListPage>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
+  );
+}
+function ListPage(props) {
+  const { taskData, removeTask, handleSubmit } = props;
+  return (
+    <>
+      <Table taskData={taskData} removeTask={removeTask} />
+      <Form handleSubmit={handleSubmit} />
+    </>
   );
 }
 
