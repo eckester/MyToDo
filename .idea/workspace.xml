@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,11 +28,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/packages/express-backend/Models" />
@@ -67,7 +64,9 @@
       <workItem from="1698731911909" duration="125000" />
       <workItem from="1698732074017" duration="1027000" />
       <workItem from="1699150817928" duration="4139000" />
-      <workItem from="1699219316973" duration="8222000" />
+      <workItem from="1699219316973" duration="8629000" />
+      <workItem from="1699374830690" duration="9000" />
+      <workItem from="1699374868701" duration="51000" />
     </task>
     <servers />
   </component>
