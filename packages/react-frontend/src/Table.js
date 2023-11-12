@@ -1,4 +1,5 @@
 import React from "react";
+import "./Table.css";
 
 function TableHeader() {
   return (
@@ -25,7 +26,9 @@ function TableBody(props) {
       <tr key={index}>
         <td>{row.task}</td>
         <td>{row.category}</td>
-        <td>{row.priority}</td>
+        <td>
+          <div className={row.priority}>!</div>
+        </td>
         <td>{date.toDateString()}</td>
         <td>{stat}</td>
         <td>

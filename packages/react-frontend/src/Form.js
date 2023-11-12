@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Form.css";
 function Form(props) {
   //let date = Date.now();
   //let str = date.toDateString();
@@ -112,7 +113,7 @@ function Form(props) {
               <option value="">---Choose Priority---</option>
               {priorityOptions.map((option) => (
                 <option key={option} value={option}>
-                  {option}
+                  <div className={option}>!</div>
                 </option>
               ))}
             </select>
