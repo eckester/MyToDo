@@ -1,5 +1,8 @@
 import React from "react";
 import "./Table.css";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 
 function TableHeader() {
   return (
@@ -24,6 +27,20 @@ function TableBody(props) {
     const date = new Date(row.due);
     return (
       <tr key={index}>
+        <Card style={{ width: "20rem" }}>
+          <Card.Body>
+            <div
+              style={{
+                justifyContent: "space-around",
+                display: "flex"
+              }}
+            >
+              <Card.Text>TO DO: do homework</Card.Text>
+              <CheckBoxRoundedIcon></CheckBoxRoundedIcon>
+            </div>
+            <Button variant="primary">Go somewhere</Button>
+          </Card.Body>
+        </Card>
         <td>{row.task}</td>
         <td>{row.category}</td>
         <td>
