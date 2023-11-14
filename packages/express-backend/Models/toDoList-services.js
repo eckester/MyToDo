@@ -11,7 +11,7 @@ mongoose.set("debug", true);
 console.log(">>mongo cluster: ");
 
 mongoose
-  .connect(Process.env.MONGODB_URI, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -22,7 +22,7 @@ function sortToDoByDate(date) {
 }
 
 //function findToDoByDate(date) {
-  //return toDoModel.find({ due: date });
+//return toDoModel.find({ due: date });
 //}
 
 function addTask(task) {
