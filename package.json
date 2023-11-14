@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "format": "npx prettier . --write",
-    "lint": "npx eslint .",
+    "lint": "npx eslint . && npx prettier --check .",
     "start": "cd packages && cd react-frontend && npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "author": "",
   "license": "ISC",

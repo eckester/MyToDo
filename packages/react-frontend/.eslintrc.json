@@ -1,29 +1,28 @@
 {
-    "extends": [
+  "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
-    ],
-    "env": {
+  ],
+  "env": {
     "browser": true,
     "es2023": true
-    },
-    "parserOptions": {
+  },
+  "parserOptions": {
     "ecmaFeatures": {
-    "jsx": true
+      "jsx": true
     },
     "sourceType": "module"
-    },
-    "rules": {
+  },
+  "rules": {
     "consistent-return": "error",
     "eqeqeq": "warn",
     "react/prop-types": 0,
     "react/react-in-jsx-scope": "off"
-    },
-    "settings": {
+  },
+  "settings": {
     "react": {
-    "version": "detect"
+      "version": "detect"
     }
-    }
-    }
-    
+  }
+}

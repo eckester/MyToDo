@@ -1,47 +1,47 @@
 .None {
-    width: 30px;
-    font-size:20px;
-    background: #bffbb4;
-    color: #1d1d1e;
-    padding: 0 12px;
-    border-radius: 15px;
-    margin: 0 5px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+  width: 30px;
+  font-size: 20px;
+  background: #bffbb4;
+  color: #1d1d1e;
+  padding: 0 12px;
+  border-radius: 15px;
+  margin: 0 5px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .Low {
-    width: 30px;
-    font-size:20px;
-    background: #fbf4cc;
-    color: #1d1d1e;
-    padding: 0 12px;
-    border-radius: 15px;
-    margin: 0 5px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+  width: 30px;
+  font-size: 20px;
+  background: #fbf4cc;
+  color: #1d1d1e;
+  padding: 0 12px;
+  border-radius: 15px;
+  margin: 0 5px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .Medium {
-    width: 30px;
-    font-size:20px;
-    background: #fbc49c;
-    color: #1d1d1e;
-    padding: 0 12px;
-    border-radius: 15px;
-    margin: 0 5px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+  width: 30px;
+  font-size: 20px;
+  background: #fbc49c;
+  color: #1d1d1e;
+  padding: 0 12px;
+  border-radius: 15px;
+  margin: 0 5px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .High {
-    width: 30px;
-    font-size:20px;
-    background: #f37b7b;
-    color: #1d1d1e;
-    padding: 0 12px;
-    border-radius: 15px;
-    margin: 0 5px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+  width: 30px;
+  font-size: 20px;
+  background: #f37b7b;
+  color: #1d1d1e;
+  padding: 0 12px;
+  border-radius: 15px;
+  margin: 0 5px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
