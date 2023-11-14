@@ -6,7 +6,7 @@
   "scripts": {
     "format": "npx prettier . --write",
     "lint:fix": "npm run lint -- --fix",
-    "lint": "npx prettier --check .",
+    "lint": "npx eslint . && npx prettier --check .",
     "start": "cd packages && cd react-frontend && npm start",
     "test": "npx jest"
   },
