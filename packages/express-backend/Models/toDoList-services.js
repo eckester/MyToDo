@@ -8,7 +8,7 @@ dotenv.config();
 
 mongoose.set("debug", true);
 
-console.log(">>mongo cluster: " + process.env.MONGODB_URI);
+console.log(">>mongo cluster: ");
 
 mongoose
   .connect(process.env.MONGODB_URI, {
