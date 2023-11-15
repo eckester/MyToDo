@@ -5,12 +5,15 @@ import Header from "./header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import { useParams } from "react-router-dom";
 
+const host = "http://localhost:8000";
+
 function MyApp() {
   const [tasks, setTasks] = useState([]);
 
   function fetchTasks() {
     const promise = fetch(
-      "http://mytodo2-307.azurewebsites.net/tasks"
+      //"http://localhost:8000"
+        "https://black-beach-0a186661e.4.azurestaticapps.net"
     );
     return promise;
   }
@@ -26,7 +29,7 @@ function MyApp() {
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
     setTasks(updated);
-    fetch(`http://mytodo2-307.azurewebsites.net/tasks/${id}`, {
+    fetch(`https://black-beach-0a186661e.4.azurestaticapps.net/${id}`, {
       method: "DELETE"
     })
       .then((response) => {
@@ -75,7 +78,7 @@ function MyApp() {
 
   function postTask(task) {
     const promise = fetch(
-      "http://mytodo2-307.azurewebsites.net/tasks",
+      "https://black-beach-0a186661e.4.azurestaticapps.net/tasks",
       {
         method: "POST",
         headers: {
