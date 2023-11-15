@@ -64,7 +64,5 @@ app.delete("/tasks/:id", async (req, res) => {
 });
 
 app.listen(process.env.PORT || port, () => {
-  console.log(
-    `REST API is listening`
-  );
+  console.log(`REST API is listening`);
 });
