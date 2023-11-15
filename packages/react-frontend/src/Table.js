@@ -83,7 +83,10 @@ function TableBody(props) {
                 <span
                   style={{ fontSize: "12px", color: "#777" }}
                 >
-                  {date.toDateString()}
+                  {new Date(date).toLocaleDateString(
+                    undefined,
+                    { month: "short", day: "numeric" }
+                  )}
                 </span>
               </div>
               <button
