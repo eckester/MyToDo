@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +55,7 @@
       <workItem from="1699303518961" duration="6527000" />
       <workItem from="1699989651373" duration="4990000" />
       <workItem from="1700022479413" duration="1608000" />
-      <workItem from="1700074846226" duration="4393000" />
+      <workItem from="1700074846226" duration="4499000" />
     </task>
     <servers />
   </component>

@@ -5,7 +5,7 @@ import Header from "./header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import { useParams } from "react-router-dom";
 
-const host = "http://localhost:8000";
+//const host = "http://localhost:8000";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
