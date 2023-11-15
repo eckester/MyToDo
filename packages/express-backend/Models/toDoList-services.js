@@ -21,6 +21,10 @@ function sortToDoByDate(date) {
   return toDoModel.find().sort({ due: 1 });
 }
 
+function filterCategoryTasks(cat) {
+  return toDoModel.find().sort({category: cat });
+}
+
 //function findToDoByDate(date) {
 //return toDoModel.find({ due: date });
 //}
@@ -46,6 +50,7 @@ function findTaskById(id) {
 export default {
   sortToDoByDate,
   //findToDoByDate,
+  filterCategoryTasks,
   addTask,
   deleteTask,
   getTasks,
