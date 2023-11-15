@@ -13,7 +13,7 @@ function MyApp() {
   function fetchTasks() {
     const promise = fetch(
       //"http://localhost:8000"
-        "https://black-beach-0a186661e.4.azurestaticapps.net"
+      "https://black-beach-0a186661e.4.azurestaticapps.net"
     );
     return promise;
   }
@@ -29,9 +29,12 @@ function MyApp() {
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
     setTasks(updated);
-    fetch(`https://black-beach-0a186661e.4.azurestaticapps.net/${id}`, {
-      method: "DELETE"
-    })
+    fetch(
+      `https://black-beach-0a186661e.4.azurestaticapps.net/${id}`,
+      {
+        method: "DELETE"
+      }
+    )
       .then((response) => {
         if (response.status === 204) {
           const updated = tasks.filter(
