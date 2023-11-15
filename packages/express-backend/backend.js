@@ -38,7 +38,8 @@ app.get("/tasks/:id", async (req, res) => {
 // get task by category
 app.get("/tasks/category/:cat", async (req, res) => {
   const id = req.params.id;
-  const result = await toDoListServices.filterCategoryTasks(cat);
+  const result =
+    await toDoListServices.filterCategoryTasks(cat);
   if (result === undefined || result === null)
     res.status(404).send("Resource not found.");
   else {

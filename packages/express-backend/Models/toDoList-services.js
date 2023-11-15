@@ -22,7 +22,7 @@ function sortToDoByDate(date) {
 }
 
 function filterCategoryTasks(cat) {
-  return toDoModel.find().sort({category: cat });
+  return toDoModel.find().sort({ category: cat });
 }
 
 //function findToDoByDate(date) {
