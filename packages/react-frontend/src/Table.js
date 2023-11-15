@@ -33,7 +33,6 @@ function TableHeader() {
     <thead>
       <tr>
         <th>Name</th>
-        <th>Priority</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -104,9 +103,6 @@ function TableBody(props) {
             </div>
           </Card.Body>
         </Card>
-        <td>
-          <div className={row.priority}>!</div>
-        </td>
         <td>{stat}</td>
       </tr>
     );
