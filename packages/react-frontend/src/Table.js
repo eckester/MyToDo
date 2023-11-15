@@ -37,32 +37,40 @@ function TableBody(props) {
             <div
               style={{
                 display: "flex",
-                flexDirection: "column", // Arrange children vertically
-                alignItems: "start" // Align children to the start of the container
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "start"
               }}
             >
-              <Card.Text>{row.task}</Card.Text>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center"
-                }}
-              >
-                <button
-                  onClick={() => props.removeTask(row._id)}
+              <div>
+                <Card.Text>{row.task}</Card.Text>
+                <span
+                  style={{ fontSize: "12px", color: "#777" }}
                 >
-                  <CheckBoxRoundedIcon />
-                </button>
+                  {row.category}
+                </span>
+                <span
+                  style={{ fontSize: "12px", color: "#777" }}
+                >
+                  {date.toDateString()}
+                </span>
               </div>
+              <button
+                style={{
+                  border: "none",
+                  padding: "1px", // Adjust padding as needed
+                  cursor: "pointer"
+                }}
+                onClick={() => props.removeTask(row._id)}
+              >
+                <CheckBoxRoundedIcon />
+              </button>
             </div>
           </Card.Body>
         </Card>
-        <td>{row.category}</td>
         <td>
           <div className={row.priority}>!</div>
         </td>
-        <td>{date.toDateString()}</td>
         <td>{stat}</td>
       </tr>
     );
