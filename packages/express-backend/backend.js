@@ -63,8 +63,8 @@ app.delete("/tasks/:id", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(
-    `Example app listening at http://localhost:${port}`
+    `REST API is listening`
   );
 });

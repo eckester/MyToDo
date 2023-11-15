@@ -9,7 +9,9 @@ function MyApp() {
   const [tasks, setTasks] = useState([]);
 
   function fetchTasks() {
-    const promise = fetch("http://localhost:8000/tasks");
+    const promise = fetch(
+      "http://mytodo2-307.azurewebsites.net/tasks"
+    );
     return promise;
   }
   useEffect(() => {
@@ -24,7 +26,7 @@ function MyApp() {
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
     setTasks(updated);
-    fetch(`http://localhost:8000/tasks/${id}`, {
+    fetch(`http://mytodo2-307.azurewebsites.net/tasks/${id}`, {
       method: "DELETE"
     })
       .then((response) => {
@@ -72,13 +74,16 @@ function MyApp() {
   }
 
   function postTask(task) {
-    const promise = fetch("http://localhost:8000/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(task)
-    });
+    const promise = fetch(
+      "http://mytodo2-307.azurewebsites.net/tasks",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(task)
+      }
+    );
     return promise;
   }
 
