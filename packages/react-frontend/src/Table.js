@@ -3,6 +3,31 @@ import "./Table.css";
 import Card from "react-bootstrap/Card";
 import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 
+const getCategoryTextColor = (category) => {
+  switch (category) {
+    case "School":
+      return "#069B39";
+    case "Work":
+      return "#06399B";
+    case "Other":
+      return "#9B062A";
+    default:
+      return "#000"; // Default color if the category doesn't match any case
+  }
+};
+
+const getCategoryBackgroundColor = (category) => {
+  switch (category) {
+    case "School":
+      return "#8FF5A6";
+    case "Work":
+      return "#8FE3F5";
+    case "Other":
+      return "#F58F9B";
+    default:
+      return "#FFF"; // Default background color if the category doesn't match any case
+  }
+};
 function TableHeader() {
   return (
     <thead>
@@ -43,7 +68,15 @@ function TableBody(props) {
               <div>
                 <Card.Text>{row.task}</Card.Text>
                 <span
-                  style={{ fontSize: "12px", color: "#777" }}
+                  style={{
+                    fontSize: "12px",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    color: getCategoryTextColor(row.category),
+                    backgroundColor: getCategoryBackgroundColor(
+                      row.category
+                    )
+                  }}
                 >
                   {row.category}
                 </span>
