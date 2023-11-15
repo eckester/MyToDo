@@ -8,9 +8,7 @@ function TableHeader() {
     <thead>
       <tr>
         <th>Name</th>
-        <th>Category</th>
         <th>Priority</th>
-        <th>Due Date</th>
         <th>Status</th>
       </tr>
     </thead>
