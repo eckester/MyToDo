@@ -56,13 +56,14 @@ function TableBody(props) {
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
           }}
         >
-          <Card.Body>
+          <Card.Body style={{ padding: "16px" }}>
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
-                alignItems: "start"
+                alignItems: "start",
+                gap: "12px"
               }}
             >
               <div>
@@ -88,6 +89,7 @@ function TableBody(props) {
                     { month: "short", day: "numeric" }
                   )}
                 </span>
+                <div className={row.priority}>!</div>
               </div>
               <button
                 style={{
