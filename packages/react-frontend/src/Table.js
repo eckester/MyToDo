@@ -1,6 +1,5 @@
 import React from "react";
 import "./Table.css";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 
@@ -27,32 +26,44 @@ function TableBody(props) {
     const date = new Date(row.due);
     return (
       <tr key={index}>
-        <Card style={{ width: "20rem" }}>
+        <Card
+          style={{
+            width: "18rem",
+            border: "1px solid #ced4da",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+          }}
+        >
           <Card.Body>
             <div
               style={{
-                justifyContent: "space-around",
-                display: "flex"
+                display: "flex",
+                flexDirection: "column", // Arrange children vertically
+                alignItems: "start" // Align children to the start of the container
               }}
             >
-              <Card.Text>TO DO: do homework</Card.Text>
-              <CheckBoxRoundedIcon></CheckBoxRoundedIcon>
+              <Card.Text>{row.task}</Card.Text>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+              >
+                <button
+                  onClick={() => props.removeTask(row._id)}
+                >
+                  <CheckBoxRoundedIcon />
+                </button>
+              </div>
             </div>
-            <Button variant="primary">Go somewhere</Button>
           </Card.Body>
         </Card>
-        <td>{row.task}</td>
         <td>{row.category}</td>
         <td>
           <div className={row.priority}>!</div>
         </td>
         <td>{date.toDateString()}</td>
         <td>{stat}</td>
-        <td>
-          <button onClick={() => props.removeTask(row._id)}>
-            Delete
-          </button>
-        </td>
       </tr>
     );
   });
