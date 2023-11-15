@@ -8,7 +8,7 @@ dotenv.config();
 
 mongoose.set("debug", true);
 
-console.log(">>mongo cluster: " + process.env.MONGODB_URI);
+console.log(">>mongo cluster: ");
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -21,9 +21,9 @@ function sortToDoByDate(date) {
   return toDoModel.find().sort({ due: 1 });
 }
 
-function findToDoByDate(date) {
-  return toDoModel.find({ due: date });
-}
+//function findToDoByDate(date) {
+//return toDoModel.find({ due: date });
+//}
 
 function addTask(task) {
   const taskToAdd = new toDoModel(task);
@@ -45,7 +45,7 @@ function findTaskById(id) {
 
 export default {
   sortToDoByDate,
-  findToDoByDate,
+  //findToDoByDate,
   addTask,
   deleteTask,
   getTasks,
