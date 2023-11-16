@@ -29,13 +29,24 @@ const getCategoryBackgroundColor = (category) => {
       return "#FFF"; // Default background color if the category doesn't match any case
   }
 };
+
+const filterOptions = [
+  "Due Date",
+  "Class",
+  "Category",
+  "Priority"
+];
 function TableHeader() {
   return (
     <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-      </tr>
+      <select name="Filter">
+        <option value="">Filter By</option>
+        {filterOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
     </thead>
   );
 }
