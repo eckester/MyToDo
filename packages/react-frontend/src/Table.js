@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Table.css";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
@@ -52,6 +52,10 @@ function TableHeader() {
 }
 
 function TableBody(props) {
+  const [showPopup, setShowPopup] = useState({
+    inUse: false,
+    id: ""
+  });
   const rows = props.taskData.map((row, index) => {
     let stat = "In-Progress";
     if (row.status) {
@@ -80,16 +84,43 @@ function TableBody(props) {
               }}
             >
               <Card.Text>{row.task}</Card.Text>
-              <button
+              <TaskAltOutlinedIcon
                 style={{
                   border: "none",
                   padding: "1px", // Adjust padding as needed
                   cursor: "pointer"
                 }}
-                onClick={() => props.removeTask(row._id)}
-              >
-                <CheckBoxRoundedIcon />
-              </button>
+                onClick={() =>
+                  setShowCompletePopup({
+                    inUse: true,
+                    id: row._id,
+                  })
+                }
+              ></TaskAltOutlinedIcon>
+              {showCompletePopup.inUse &&
+                row._id === showCompletePopup.id && (
+                  <div className="popup">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        props.removeTask(showCompletePopup.id)
+                      }
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowCompletePopup({
+                          inUse: false,
+                          id: ""
+                        })
+                      }
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
             </div>
             <Container
               style={{
