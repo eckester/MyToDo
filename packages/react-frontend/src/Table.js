@@ -65,7 +65,8 @@ function TableBody(props) {
             width: "18rem",
             border: "1px solid #ced4da",
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-            borderRadius: "5px"
+            borderRadius: "5px",
+            marginBottom: "10px"
           }}
         >
           <Card.Body style={{ padding: "16px" }}>
