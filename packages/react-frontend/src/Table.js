@@ -103,7 +103,8 @@ function TableBody(props) {
               <span
                 style={{
                   fontSize: "12px",
-                  color: "#6E7C87"
+                  color: "#6E7C87",
+                  alignSelf: "center"
                 }}
               >
                 {new Date(date).toLocaleDateString(undefined, {
