@@ -21,13 +21,17 @@ function sortToDoByDate(date) {
   return toDoModel.find().sort({ due: 1 });
 }
 
-function filterCategoryTasks(cat) {
-  return toDoModel.find().sort({ category: cat });
+function sortToDoByPrior() {
+  return toDoModel.find().sort({ priority: 1 });
 }
 
-//function findToDoByDate(date) {
-//return toDoModel.find({ due: date });
-//}
+function filterCategoryTasks(cat) {
+  return toDoModel.find({ category: cat });
+}
+
+// function findToDoByDate(date) {
+// //return toDoModel.find({ due: date });
+// }
 
 function addTask(task) {
   const taskToAdd = new toDoModel(task);
