@@ -1,6 +1,7 @@
 import React from "react";
 import "./Table.css";
 import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
 import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 
 const getCategoryTextColor = (category) => {
@@ -52,7 +53,8 @@ function TableBody(props) {
           style={{
             width: "18rem",
             border: "1px solid #ced4da",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            borderRadius: "5px"
           }}
         >
           <Card.Body style={{ padding: "16px" }}>
@@ -65,31 +67,7 @@ function TableBody(props) {
                 gap: "12px"
               }}
             >
-              <div>
-                <Card.Text>{row.task}</Card.Text>
-                <span
-                  style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
-                    color: getCategoryTextColor(row.category),
-                    backgroundColor: getCategoryBackgroundColor(
-                      row.category
-                    )
-                  }}
-                >
-                  {row.category}
-                </span>
-                <span
-                  style={{ fontSize: "12px", color: "#777" }}
-                >
-                  {new Date(date).toLocaleDateString(
-                    undefined,
-                    { month: "short", day: "numeric" }
-                  )}
-                </span>
-                <div className={row.priority}>!</div>
-              </div>
+              <Card.Text>{row.task}</Card.Text>
               <button
                 style={{
                   border: "none",
@@ -101,6 +79,40 @@ function TableBody(props) {
                 <CheckBoxRoundedIcon />
               </button>
             </div>
+            <Container
+              style={{
+                justifyContent: "space-between",
+                display: "flex",
+                flexDirection: "row",
+                padding: "0px"
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "12px",
+                  padding: "5px",
+                  borderRadius: "5px",
+                  color: getCategoryTextColor(row.category),
+                  backgroundColor: getCategoryBackgroundColor(
+                    row.category
+                  )
+                }}
+              >
+                {row.category}
+              </span>
+              <span
+                style={{
+                  fontSize: "12px",
+                  color: "#6E7C87"
+                }}
+              >
+                {new Date(date).toLocaleDateString(undefined, {
+                  month: "short",
+                  day: "numeric"
+                })}
+              </span>
+              <div className={row.priority}>!</div>
+            </Container>
           </Card.Body>
         </Card>
         <td>{stat}</td>
