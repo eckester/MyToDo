@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Table.css";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
+import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 
 const getCategoryTextColor = (category) => {
   switch (category) {
@@ -52,7 +52,7 @@ function TableHeader() {
 }
 
 function TableBody(props) {
-  const [showPopup, setShowPopup] = useState({
+  const [showCompletePopup, setShowCompletePopup] = useState({
     inUse: false,
     id: ""
   });
@@ -93,7 +93,7 @@ function TableBody(props) {
                 onClick={() =>
                   setShowCompletePopup({
                     inUse: true,
-                    id: row._id,
+                    id: row._id
                   })
                 }
               ></TaskAltOutlinedIcon>
