@@ -30,18 +30,53 @@ const getCategoryBackgroundColor = (category) => {
   }
 };
 
-const filterOptions = ["Work", "School", "Other", "Priority"];
-function TableHeader() {
+const filterOptions = [
+  "All",
+  "Work",
+  "School",
+  "Other",
+  "Priority"
+];
+const priorityOptions = ["None", "High", "Medium", "Low"];
+function TableHeader({ setCategoryFilter, setPriorityFilter }) {
+  const handleCategoryFilterChange = (e) => {
+    setCategoryFilter(e.target.value);
+  };
+
+  const handlePriorityFilterChange = (e) => {
+    setPriorityFilter(e.target.value);
+  };
+
   return (
     <thead>
-      <select name="Filter">
-        <option value="">Filter By</option>
-        {filterOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      <div>
+        <label>
+          Filter By Category:
+          <select
+            name="Filter"
+            onChange={handleCategoryFilterChange}
+          >
+            {filterOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Filter By Priority:
+          <select
+            name="Priority"
+            onChange={handlePriorityFilterChange}
+          >
+            {priorityOptions.map((option) => (
+              <option key={option} value={option.toLowerCase()}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
     </thead>
   );
 }
@@ -51,7 +86,28 @@ function TableBody(props) {
     inUse: false,
     id: ""
   });
-  const rows = props.taskData.map((row, index) => {
+
+  const { categoryFilter, priorityFilter } = props.filters;
+  const filteredTasks = props.taskData.filter((row) => {
+    // Apply category filter
+    if (
+      categoryFilter !== "All" &&
+      row.category !== categoryFilter
+    ) {
+      return false;
+    }
+
+    // Apply priority filter
+    if (
+      priorityFilter !== "none" &&
+      row.priority !== priorityFilter
+    ) {
+      return false;
+    }
+
+    return true; // Task passes all filters
+  });
+  const rows = filteredTasks.map((row, index) => {
     let stat = "In-Progress";
     if (row.status) {
       stat = "Complete";
@@ -158,7 +214,7 @@ function TableBody(props) {
       </tr>
     );
   });
-  const rows2 = props.task2Data.map((row, index) => {
+  const rows2 = filteredTasks.map((row, index) => {
     let stat = "In-Progress";
     if (row.status) {
       stat = "Complete";
@@ -287,13 +343,29 @@ function TableBody(props) {
   );
 }
 function Table(props) {
+  const [filters, setFilters] = useState({
+    categoryFilter: "All",
+    priorityFilter: "none"
+  });
+
+  const setCategoryFilter = (value) => {
+    setFilters({ ...filters, categoryFilter: value });
+  };
+
+  const setPriorityFilter = (value) => {
+    setFilters({ ...filters, priorityFilter: value });
+  };
   return (
     <table>
-      <TableHeader />
+      <TableHeader
+        setCategoryFilter={setCategoryFilter}
+        setPriorityFilter={setPriorityFilter}
+      />
       <TableBody
         taskData={props.taskData}
         task2Data={props.task2Data}
         removeTask={props.removeTask}
+        filters={filters}
       />
     </table>
   );
