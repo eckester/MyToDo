@@ -208,13 +208,10 @@ function TableBody(props) {
                     alignSelf: "center"
                   }}
                 >
-                  {new Date(date).toLocaleDateString(
-                    undefined,
-                    {
-                      month: "short",
-                      day: "numeric"
-                    }
-                  )}
+                  {date.toLocaleDateString(undefined, {
+                    month: "short",
+                    day: "numeric"
+                  })}
                 </span>
                 <div className={row.priority}>!</div>
               </Container>
@@ -331,13 +328,10 @@ function TableBody(props) {
                     alignSelf: "center"
                   }}
                 >
-                  {new Date(date).toLocaleDateString(
-                    undefined,
-                    {
-                      month: "short",
-                      day: "numeric"
-                    }
-                  )}
+                  {date.toLocaleDateString(undefined, {
+                    month: "short",
+                    day: "numeric"
+                  })}
                 </span>
                 <div className={row.priority}>!</div>
               </Container>
@@ -450,13 +444,10 @@ function TableBody(props) {
                     alignSelf: "center"
                   }}
                 >
-                  {new Date(date).toLocaleDateString(
-                    undefined,
-                    {
-                      month: "short",
-                      day: "numeric"
-                    }
-                  )}
+                  {date.toLocaleDateString(undefined, {
+                    month: "short",
+                    day: "numeric"
+                  })}
                 </span>
                 <div className={row.priority}>!</div>
               </Container>
