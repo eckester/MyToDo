@@ -79,7 +79,7 @@ function deleteTask(taskId) {
 }
 
 function getTasks() {
-  return toDoModel.find();
+  return toDoModel.find().sort({ due: 1 });
 }
 
 function findTaskById(id) {
