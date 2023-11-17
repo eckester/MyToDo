@@ -105,6 +105,7 @@ function TableBody(props) {
 
     return true; // Task passes all filters
   });
+
   const overdueTasks = filteredTasks
     .filter((row) => {
       const dueDate = new Date(row.due);
@@ -222,113 +223,248 @@ function TableBody(props) {
         </tr>
       );
     });
-  const thisWeekTasks = filteredTasks.map((row, index) => {
-    // let stat = "In-Progress";
-    // if (row.status) {
-    //   stat = "Complete";
-    // }
-    const date = new Date(row.due);
-    return (
-      <tr key={index}>
-        <Card
-          className="custom-card"
-          style={{
-            width: "18rem",
-            border: "1px solid #ced4da",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-            borderRadius: "5px",
-            marginBottom: "10px"
-          }}
-        >
-          <Card.Body style={{ padding: "16px" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "start",
-                gap: "12px"
-              }}
-            >
-              <Card.Text>{row.task}</Card.Text>
-              <TaskAltOutlinedIcon
+
+  const thisWeekTasks = filteredTasks
+    .filter((row) => {
+      const dueDate = new Date(row.due);
+      const currentDate = new Date();
+      const weekFromToday = new Date();
+      weekFromToday.setDate(weekFromToday.getDate() + 7);
+
+      return (
+        (dueDate > currentDate) & (dueDate < weekFromToday)
+      );
+    })
+    .map((row, index) => {
+      // let stat = "In-Progress";
+      // if (row.status) {
+      //   stat = "Complete";
+      // }
+      const date = new Date(row.due);
+
+      return (
+        <tr key={index}>
+          <Card
+            className="custom-card"
+            style={{
+              width: "18rem",
+              border: "1px solid #ced4da",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              borderRadius: "5px",
+              marginBottom: "10px"
+            }}
+          >
+            <Card.Body style={{ padding: "16px" }}>
+              <div
                 style={{
-                  border: "none",
-                  padding: "1px", // Adjust padding as needed
-                  cursor: "pointer"
-                }}
-                onClick={() =>
-                  setShowCompletePopup({
-                    inUse: true,
-                    id: row._id
-                  })
-                }
-              ></TaskAltOutlinedIcon>
-              {showCompletePopup.inUse &&
-                row._id === showCompletePopup.id && (
-                  <div className="popup">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        props.removeTask(showCompletePopup.id)
-                      }
-                    >
-                      Delete
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setShowCompletePopup({
-                          inUse: false,
-                          id: ""
-                        })
-                      }
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                )}
-            </div>
-            <Container
-              style={{
-                justifyContent: "space-between",
-                display: "flex",
-                flexDirection: "row",
-                padding: "0px"
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  padding: "5px",
-                  borderRadius: "5px",
-                  color: getCategoryTextColor(row.category),
-                  backgroundColor: getCategoryBackgroundColor(
-                    row.category
-                  )
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "start",
+                  gap: "12px"
                 }}
               >
-                {row.category}
-              </span>
-              <span
+                <Card.Text>{row.task}</Card.Text>
+                <TaskAltOutlinedIcon
+                  style={{
+                    border: "none",
+                    padding: "1px", // Adjust padding as needed
+                    cursor: "pointer"
+                  }}
+                  onClick={() =>
+                    setShowCompletePopup({
+                      inUse: true,
+                      id: row._id
+                    })
+                  }
+                ></TaskAltOutlinedIcon>
+                {showCompletePopup.inUse &&
+                  row._id === showCompletePopup.id && (
+                    <div className="popup">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          props.removeTask(showCompletePopup.id)
+                        }
+                      >
+                        Delete
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setShowCompletePopup({
+                            inUse: false,
+                            id: ""
+                          })
+                        }
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+              </div>
+              <Container
                 style={{
-                  fontSize: "12px",
-                  color: "#6E7C87",
-                  alignSelf: "center"
+                  justifyContent: "space-between",
+                  display: "flex",
+                  flexDirection: "row",
+                  padding: "0px"
                 }}
               >
-                {new Date(date).toLocaleDateString(undefined, {
-                  month: "short",
-                  day: "numeric"
-                })}
-              </span>
-              <div className={row.priority}>!</div>
-            </Container>
-          </Card.Body>
-        </Card>
-      </tr>
-    );
-  });
+                <span
+                  style={{
+                    fontSize: "12px",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    color: getCategoryTextColor(row.category),
+                    backgroundColor: getCategoryBackgroundColor(
+                      row.category
+                    )
+                  }}
+                >
+                  {row.category}
+                </span>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    color: "#6E7C87",
+                    alignSelf: "center"
+                  }}
+                >
+                  {new Date(date).toLocaleDateString(
+                    undefined,
+                    {
+                      month: "short",
+                      day: "numeric"
+                    }
+                  )}
+                </span>
+                <div className={row.priority}>!</div>
+              </Container>
+            </Card.Body>
+          </Card>
+        </tr>
+      );
+    });
+
+  const nextWeekTasks = filteredTasks
+    .filter((row) => {
+      const dueDate = new Date(row.due);
+      const weekFromToday = new Date();
+      weekFromToday.setDate(weekFromToday.getDate() + 7);
+      return dueDate > weekFromToday;
+    })
+    .map((row, index) => {
+      // let stat = "In-Progress";
+      // if (row.status) {
+      //   stat = "Complete";
+      // }
+      const date = new Date(row.due);
+
+      return (
+        <tr key={index}>
+          <Card
+            className="custom-card"
+            style={{
+              width: "18rem",
+              border: "1px solid #ced4da",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              borderRadius: "5px",
+              marginBottom: "10px"
+            }}
+          >
+            <Card.Body style={{ padding: "16px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "start",
+                  gap: "12px"
+                }}
+              >
+                <Card.Text>{row.task}</Card.Text>
+                <TaskAltOutlinedIcon
+                  style={{
+                    border: "none",
+                    padding: "1px", // Adjust padding as needed
+                    cursor: "pointer"
+                  }}
+                  onClick={() =>
+                    setShowCompletePopup({
+                      inUse: true,
+                      id: row._id
+                    })
+                  }
+                ></TaskAltOutlinedIcon>
+                {showCompletePopup.inUse &&
+                  row._id === showCompletePopup.id && (
+                    <div className="popup">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          props.removeTask(showCompletePopup.id)
+                        }
+                      >
+                        Delete
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setShowCompletePopup({
+                            inUse: false,
+                            id: ""
+                          })
+                        }
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+              </div>
+              <Container
+                style={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  flexDirection: "row",
+                  padding: "0px"
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "12px",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    color: getCategoryTextColor(row.category),
+                    backgroundColor: getCategoryBackgroundColor(
+                      row.category
+                    )
+                  }}
+                >
+                  {row.category}
+                </span>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    color: "#6E7C87",
+                    alignSelf: "center"
+                  }}
+                >
+                  {new Date(date).toLocaleDateString(
+                    undefined,
+                    {
+                      month: "short",
+                      day: "numeric"
+                    }
+                  )}
+                </span>
+                <div className={row.priority}>!</div>
+              </Container>
+            </Card.Body>
+          </Card>
+        </tr>
+      );
+    });
   return (
     <tbody>
       <tr>
@@ -342,7 +478,7 @@ function TableBody(props) {
         </td>
         <td>
           <b>~Next Week</b>
-          {thisWeekTasks}
+          {nextWeekTasks}
         </td>
       </tr>
     </tbody>
