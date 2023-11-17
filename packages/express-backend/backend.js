@@ -109,6 +109,30 @@ app.delete("/tasks/:id", async (req, res) => {
   }
 });
 
+// edit existing task by ID
+app.put("/tasks/:id", async (req, res) => {
+  const id = req.params.id;
+  const updatedTask = req.body;
+
+  try {
+    const result = await toDoListServices.updateTask(
+      id,
+      updatedTask
+    );
+    if (!result) {
+      res.status(404).send("Task not found.");
+    } else {
+      res.send({
+        message: "Task updated successfully.",
+        updatedTask: result
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
 app.listen(port, () => {
   console.log(
     `Example app listening at http://localhost:${port}`
