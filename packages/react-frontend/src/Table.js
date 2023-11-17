@@ -111,7 +111,7 @@ function TableBody(props) {
       const dueDate = new Date(row.due);
       const currentDate = new Date();
 
-      return dueDate <= currentDate;
+      return dueDate < currentDate;
     })
     .map((row, index) => {
       // let stat = "In-Progress";
@@ -232,7 +232,7 @@ function TableBody(props) {
       weekFromToday.setDate(weekFromToday.getDate() + 7);
 
       return (
-        (dueDate > currentDate) & (dueDate < weekFromToday)
+        (dueDate >= currentDate) & (dueDate < weekFromToday)
       );
     })
     .map((row, index) => {
