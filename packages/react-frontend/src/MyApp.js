@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
+  //const [overdueTasks, setTasks] = useState([]);
 
   function fetchTasks() {
     const promise = fetch("http://localhost:8000/tasks");
@@ -92,6 +93,7 @@ function MyApp() {
             element={
               <ListPage
                 taskData={tasks}
+                task2Data={tasks}
                 removeTask={removeOneTask}
                 handleSubmit={updateList}
               ></ListPage>
@@ -102,11 +104,18 @@ function MyApp() {
     </div>
   );
 }
+
 function ListPage(props) {
-  const { taskData, removeTask, handleSubmit } = props;
+  const { taskData, task2Data, removeTask, handleSubmit } =
+    props;
+  //task2Data = fetchOverDue(taskData);
   return (
     <>
-      <Table taskData={taskData} removeTask={removeTask} />
+      <Table
+        taskData={taskData}
+        task2Data={task2Data}
+        removeTask={removeTask}
+      />
       <Form handleSubmit={handleSubmit} />
     </>
   );

@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/express-backend/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/backend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,8 @@
       <workItem from="1699989651373" duration="4990000" />
       <workItem from="1700022479413" duration="1608000" />
       <workItem from="1700074846226" duration="4991000" />
-      <workItem from="1700162272806" duration="5176000" />
+      <workItem from="1700162272806" duration="5772000" />
+      <workItem from="1700202050334" duration="1628000" />
     </task>
     <servers />
   </component>
