@@ -30,7 +30,7 @@ const getCategoryBackgroundColor = (category) => {
   }
 };
 
-const filterOptions = ["Class", "Category", "Priority"];
+const filterOptions = ["Work", "School", "Other", "Priority"];
 function TableHeader() {
   return (
     <thead>
@@ -267,14 +267,22 @@ function TableBody(props) {
   });
   return (
     <tbody>
-      <b>~Overdue</b>
-      {rows}
-      <text>{"\n"}</text>
-      <b>~This Week</b>
-      {rows2}
-      <text>{"\n"}</text>
-      <b>~Next Week</b>
-      {rows}
+      <tr>
+        <td>
+          <b>~Overdue</b>
+          {rows}
+        </td>
+        <text>{"\n"}</text>
+        <td>
+          <b>~This Week</b>
+          {rows2}
+        </td>
+        <text>{"\n"}</text>
+        <td>
+          <b>~Next Week</b>
+          {rows}
+        </td>
+      </tr>
     </tbody>
   );
 }
