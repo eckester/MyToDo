@@ -45,3 +45,11 @@
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+td{
+  vertical-align: top;
+}
+
+.custom-card{
+  vertical-align: top;
+}
