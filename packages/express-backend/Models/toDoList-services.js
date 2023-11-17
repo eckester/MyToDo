@@ -22,7 +22,42 @@ function sortToDoByDate(date) {
 }
 
 function sortToDoByPrior() {
-  return toDoModel.find().sort({ priority: 1 });
+  return toDoModel.aggregate([
+    {
+      $addFields: {
+        sortPriority: {
+          $switch: {
+            branches: [
+              {
+                case: {
+                  $eq: ["$priority", "High"]
+                },
+                then: 3
+              },
+              {
+                case: {
+                  $eq: ["$priority", "Medium"]
+                },
+                then: 2
+              },
+              {
+                case: {
+                  $eq: ["$priority", "Low"]
+                },
+                then: 1
+              }
+            ],
+            default: 0
+          }
+        }
+      }
+    },
+    {
+      $sort: {
+        sortPriority: -1
+      }
+    }
+  ]);
 }
 
 function filterCategoryTasks(cat) {
@@ -54,6 +89,7 @@ function findTaskById(id) {
 export default {
   sortToDoByDate,
   //findToDoByDate,
+  sortToDoByPrior,
   filterCategoryTasks,
   addTask,
   deleteTask,

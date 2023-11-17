@@ -71,16 +71,15 @@ app.get("/tasks_date", async (req, res) => {
 });
 
 // get tasks sorted by priority
-// app.get("/tasks_priority", async (req, res) => {
-//
-//   try {
-//     const result = await toDoListServices.sortToDoByPrior();
-//     res.send({ toDoList: result });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send("An error occurred in the server.");
-//   }
-// });
+app.get("/tasks_priority", async (req, res) => {
+  try {
+    const result = await toDoListServices.sortToDoByPrior();
+    res.send({ toDoList: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
 
 // add task
 app.post("/tasks", async (req, res) => {

@@ -6,7 +6,7 @@ function Form(props) {
   const [tasks, setTask] = useState({
     task: "",
     category: "",
-    priority: "",
+    priority: 0,
     due: Date.now(),
     status: "",
     _id: ""
