@@ -49,34 +49,38 @@ function TableHeader({ setCategoryFilter, setPriorityFilter }) {
 
   return (
     <thead>
-      <div>
-        <label>
-          Filter By Category:
-          <select
-            name="Filter"
-            onChange={handleCategoryFilterChange}
-          >
-            {filterOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Filter By Priority:
-          <select
-            name="Priority"
-            onChange={handlePriorityFilterChange}
-          >
-            {priorityOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
+      <tr>
+        <td>
+          <label>
+            Filter By Category:
+            <select
+              name="Filter"
+              onChange={handleCategoryFilterChange}
+            >
+              {filterOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+        </td>
+        <td>
+          <label>
+            Filter By Priority:
+            <select
+              name="Priority"
+              onChange={handlePriorityFilterChange}
+            >
+              {priorityOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+        </td>
+      </tr>
     </thead>
   );
 }
@@ -108,10 +112,10 @@ function TableBody(props) {
     return true; // Task passes all filters
   });
   const rows = filteredTasks.map((row, index) => {
-    let stat = "In-Progress";
-    if (row.status) {
-      stat = "Complete";
-    }
+    // let stat = "In-Progress";
+    // if (row.status) {
+    //   stat = "Complete";
+    // }
     const date = new Date(row.due);
     return (
       <tr key={index}>
@@ -210,15 +214,14 @@ function TableBody(props) {
             </Container>
           </Card.Body>
         </Card>
-        <td>{stat}</td>
       </tr>
     );
   });
   const rows2 = filteredTasks.map((row, index) => {
-    let stat = "In-Progress";
-    if (row.status) {
-      stat = "Complete";
-    }
+    // let stat = "In-Progress";
+    // if (row.status) {
+    //   stat = "Complete";
+    // }
     const date = new Date(row.due);
     return (
       <tr key={index}>
@@ -317,7 +320,6 @@ function TableBody(props) {
             </Container>
           </Card.Body>
         </Card>
-        <td>{stat}</td>
       </tr>
     );
   });
@@ -328,12 +330,10 @@ function TableBody(props) {
           <b>~Overdue</b>
           {rows}
         </td>
-        <text>{"\n"}</text>
         <td>
           <b>~This Week</b>
           {rows2}
         </td>
-        <text>{"\n"}</text>
         <td>
           <b>~Next Week</b>
           {rows}
@@ -345,7 +345,7 @@ function TableBody(props) {
 function Table(props) {
   const [filters, setFilters] = useState({
     categoryFilter: "All",
-    priorityFilter: "none"
+    priorityFilter: "None"
   });
 
   const setCategoryFilter = (value) => {
