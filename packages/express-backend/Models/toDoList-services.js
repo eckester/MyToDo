@@ -64,10 +64,6 @@ function filterCategoryTasks(cat) {
   return toDoModel.find({ category: cat });
 }
 
-// function findToDoByDate(date) {
-// //return toDoModel.find({ due: date });
-// }
-
 function addTask(task) {
   const taskToAdd = new toDoModel(task);
   const promise = taskToAdd.save();
@@ -94,7 +90,6 @@ function updateTask(taskId, updatedTask) {
 
 export default {
   sortToDoByDate,
-  //findToDoByDate,
   sortToDoByPrior,
   filterCategoryTasks,
   addTask,
