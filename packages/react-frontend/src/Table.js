@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Table.css";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
+import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 
 const getCategoryTextColor = (category) => {
   switch (category) {
@@ -47,6 +47,10 @@ function TableHeader() {
 }
 
 function TableBody(props) {
+  const [showCompletePopup, setShowCompletePopup] = useState({
+    inUse: false,
+    id: ""
+  });
   const rows = props.taskData.map((row, index) => {
     let stat = "In-Progress";
     if (row.status) {
@@ -75,16 +79,43 @@ function TableBody(props) {
               }}
             >
               <Card.Text>{row.task}</Card.Text>
-              <button
+              <TaskAltOutlinedIcon
                 style={{
                   border: "none",
                   padding: "1px", // Adjust padding as needed
                   cursor: "pointer"
                 }}
-                onClick={() => props.removeTask(row._id)}
-              >
-                <CheckBoxRoundedIcon />
-              </button>
+                onClick={() =>
+                  setShowCompletePopup({
+                    inUse: true,
+                    id: row._id
+                  })
+                }
+              ></TaskAltOutlinedIcon>
+              {showCompletePopup.inUse &&
+                row._id === showCompletePopup.id && (
+                  <div className="popup">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        props.removeTask(showCompletePopup.id)
+                      }
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowCompletePopup({
+                          inUse: false,
+                          id: ""
+                        })
+                      }
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
             </div>
             <Container
               style={{
@@ -127,7 +158,125 @@ function TableBody(props) {
       </tr>
     );
   });
-  return <tbody>{rows}</tbody>;
+  const rows2 = props.task2Data.map((row, index) => {
+    let stat = "In-Progress";
+    if (row.status) {
+      stat = "Complete";
+    }
+    const date = new Date(row.due);
+    return (
+      <tr key={index}>
+        <Card
+          style={{
+            width: "18rem",
+            border: "1px solid #ced4da",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            borderRadius: "5px",
+            marginBottom: "10px"
+          }}
+        >
+          <Card.Body style={{ padding: "16px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "start",
+                gap: "12px"
+              }}
+            >
+              <Card.Text>{row.task}</Card.Text>
+              <TaskAltOutlinedIcon
+                style={{
+                  border: "none",
+                  padding: "1px", // Adjust padding as needed
+                  cursor: "pointer"
+                }}
+                onClick={() =>
+                  setShowCompletePopup({
+                    inUse: true,
+                    id: row._id
+                  })
+                }
+              ></TaskAltOutlinedIcon>
+              {showCompletePopup.inUse &&
+                row._id === showCompletePopup.id && (
+                  <div className="popup">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        props.removeTask(showCompletePopup.id)
+                      }
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowCompletePopup({
+                          inUse: false,
+                          id: ""
+                        })
+                      }
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
+            </div>
+            <Container
+              style={{
+                justifyContent: "space-between",
+                display: "flex",
+                flexDirection: "row",
+                padding: "0px"
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "12px",
+                  padding: "5px",
+                  borderRadius: "5px",
+                  color: getCategoryTextColor(row.category),
+                  backgroundColor: getCategoryBackgroundColor(
+                    row.category
+                  )
+                }}
+              >
+                {row.category}
+              </span>
+              <span
+                style={{
+                  fontSize: "12px",
+                  color: "#6E7C87",
+                  alignSelf: "center"
+                }}
+              >
+                {new Date(date).toLocaleDateString(undefined, {
+                  month: "short",
+                  day: "numeric"
+                })}
+              </span>
+              <div className={row.priority}>!</div>
+            </Container>
+          </Card.Body>
+        </Card>
+        <td>{stat}</td>
+      </tr>
+    );
+  });
+  return (
+    <tbody>
+      <b>~Overdue</b>
+      {rows}
+      <text>{"\n"}</text>
+      <b>~This Week</b>
+      {rows2}
+      <text>{"\n"}</text>
+      <b>~Next Week</b>
+      {rows}
+    </tbody>
+  );
 }
 function Table(props) {
   return (
@@ -135,6 +284,7 @@ function Table(props) {
       <TableHeader />
       <TableBody
         taskData={props.taskData}
+        task2Data={props.task2Data}
         removeTask={props.removeTask}
       />
     </table>
