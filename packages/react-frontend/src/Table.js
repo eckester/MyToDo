@@ -30,12 +30,7 @@ const getCategoryBackgroundColor = (category) => {
   }
 };
 
-const filterOptions = [
-  "Due Date",
-  "Class",
-  "Category",
-  "Priority"
-];
+const filterOptions = ["Class", "Category", "Priority"];
 function TableHeader() {
   return (
     <thead>
