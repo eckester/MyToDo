@@ -70,7 +70,7 @@ function TableHeader({ setCategoryFilter, setPriorityFilter }) {
             onChange={handlePriorityFilterChange}
           >
             {priorityOptions.map((option) => (
-              <option key={option} value={option.toLowerCase()}>
+              <option key={option} value={option}>
                 {option}
               </option>
             ))}
@@ -99,7 +99,7 @@ function TableBody(props) {
 
     // Apply priority filter
     if (
-      priorityFilter !== "none" &&
+      priorityFilter !== "None" &&
       row.priority !== priorityFilter
     ) {
       return false;
