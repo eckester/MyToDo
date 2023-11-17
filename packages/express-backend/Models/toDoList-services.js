@@ -86,6 +86,12 @@ function findTaskById(id) {
   return toDoModel.find({ _id: id });
 }
 
+function updateTask(taskId, updatedTask) {
+  return toDoModel.findByIdAndUpdate(taskId, updatedTask, {
+    new: true
+  });
+}
+
 export default {
   sortToDoByDate,
   //findToDoByDate,
@@ -94,5 +100,6 @@ export default {
   addTask,
   deleteTask,
   getTasks,
-  findTaskById
+  findTaskById,
+  updateTask
 };
