@@ -1,3 +1,4 @@
+// Table.js
 import React, { useState } from "react";
 import "./Table.css";
 import Card from "react-bootstrap/Card";
@@ -79,6 +80,13 @@ function TableHeader({ setCategoryFilter, setPriorityFilter }) {
   );
 }
 
+const convertUTCtoLocal = (utc) => {
+  const utcDate = new Date(utc);
+  return new Date(
+    utcDate.getTime() + utcDate.getTimezoneOffset() * 60000
+  );
+};
+
 function TableBody(props) {
   const [showCompletePopup, setShowCompletePopup] = useState({
     inUse: false,
@@ -108,17 +116,14 @@ function TableBody(props) {
 
   const overdueTasks = filteredTasks
     .filter((row) => {
-      const dueDate = new Date(row.due);
+      const dueDate = convertUTCtoLocal(row.due);
       const currentDate = new Date();
-
+      currentDate.setHours(0, 0, 0, 0);
       return dueDate < currentDate;
     })
     .map((row, index) => {
-      // let stat = "In-Progress";
-      // if (row.status) {
-      //   stat = "Complete";
-      // }
-      const date = new Date(row.due);
+      const date = convertUTCtoLocal(row.due);
+
       return (
         <tr key={index}>
           <Card
@@ -223,9 +228,12 @@ function TableBody(props) {
 
   const thisWeekTasks = filteredTasks
     .filter((row) => {
-      const dueDate = new Date(row.due);
+      console.log(row);
+      const dueDate = convertUTCtoLocal(row.due);
       const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
       const weekFromToday = new Date();
+      weekFromToday.setHours(0, 0, 0, 0);
       weekFromToday.setDate(weekFromToday.getDate() + 7);
 
       return (
@@ -233,11 +241,7 @@ function TableBody(props) {
       );
     })
     .map((row, index) => {
-      // let stat = "In-Progress";
-      // if (row.status) {
-      //   stat = "Complete";
-      // }
-      const date = new Date(row.due);
+      const date = convertUTCtoLocal(row.due);
 
       return (
         <tr key={index}>
@@ -343,17 +347,14 @@ function TableBody(props) {
 
   const nextWeekTasks = filteredTasks
     .filter((row) => {
-      const dueDate = new Date(row.due);
+      const dueDate = convertUTCtoLocal(row.due);
       const weekFromToday = new Date();
+      weekFromToday.setHours(0, 0, 0, 0);
       weekFromToday.setDate(weekFromToday.getDate() + 7);
       return dueDate >= weekFromToday;
     })
     .map((row, index) => {
-      // let stat = "In-Progress";
-      // if (row.status) {
-      //   stat = "Complete";
-      // }
-      const date = new Date(row.due);
+      const date = convertUTCtoLocal(row.due);
 
       return (
         <tr key={index}>
