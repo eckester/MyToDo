@@ -102,7 +102,6 @@ function TableBody(props) {
     ) {
       return false;
     }
-
     // Apply priority filter
     if (
       priorityFilter !== "None" &&
@@ -110,7 +109,6 @@ function TableBody(props) {
     ) {
       return false;
     }
-
     return true; // Task passes all filters
   });
 
@@ -213,10 +211,12 @@ function TableBody(props) {
                     alignSelf: "center"
                   }}
                 >
-                  {date.toLocaleDateString(undefined, {
-                    month: "short",
-                    day: "numeric"
-                  })}
+                  {date
+                    .toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "numeric"
+                    })
+                    .toUpperCase()}
                 </span>
                 <div className={row.priority}>!</div>
               </Container>
@@ -332,10 +332,12 @@ function TableBody(props) {
                     alignSelf: "center"
                   }}
                 >
-                  {date.toLocaleDateString(undefined, {
-                    month: "short",
-                    day: "numeric"
-                  })}
+                  {date
+                    .toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "numeric"
+                    })
+                    .toUpperCase()}
                 </span>
                 <div className={row.priority}>!</div>
               </Container>
@@ -445,10 +447,12 @@ function TableBody(props) {
                     alignSelf: "center"
                   }}
                 >
-                  {date.toLocaleDateString(undefined, {
-                    month: "short",
-                    day: "numeric"
-                  })}
+                  {date
+                    .toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "numeric"
+                    })
+                    .toUpperCase()}
                 </span>
                 <div className={row.priority}>!</div>
               </Container>
@@ -461,15 +465,15 @@ function TableBody(props) {
     <tbody>
       <tr>
         <td>
-          <b>~Overdue</b>
+          <b className="label-grey">OVERDUE</b>
           {overdueTasks}
         </td>
         <td>
-          <b>~This Week</b>
+          <b className="label-grey">THIS WEEK</b>
           {thisWeekTasks}
         </td>
         <td>
-          <b>~Next Week</b>
+          <b className="label-grey">NEXT WEEK</b>
           {nextWeekTasks}
         </td>
       </tr>
