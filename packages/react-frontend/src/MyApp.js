@@ -83,6 +83,25 @@ function MyApp() {
     return promise;
   }
 
+  function updateTask(tasker) {
+    const updated = tasks.filter(
+      (task) => task._id !== tasker._id
+    );
+    setTasks([...updated, tasker]);
+
+    const promise = fetch(
+      `http://localhost:8000/tasks/${tasker._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(tasker)
+      }
+    );
+    return promise;
+  }
+
   return (
     <div className="container">
       <Header />
@@ -96,6 +115,7 @@ function MyApp() {
                 task2Data={tasks}
                 removeTask={removeOneTask}
                 handleSubmit={updateList}
+                updateTask={updateTask}
               ></ListPage>
             }
           />
@@ -106,8 +126,13 @@ function MyApp() {
 }
 
 function ListPage(props) {
-  const { taskData, task2Data, removeTask, handleSubmit } =
-    props;
+  const {
+    taskData,
+    task2Data,
+    removeTask,
+    handleSubmit,
+    updateTask
+  } = props;
   //task2Data = fetchOverDue(taskData);
   return (
     <>
@@ -115,6 +140,7 @@ function ListPage(props) {
         taskData={taskData}
         task2Data={task2Data}
         removeTask={removeTask}
+        updateTask={updateTask}
       />
       <Form handleSubmit={handleSubmit} />
     </>

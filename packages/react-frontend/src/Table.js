@@ -145,14 +145,20 @@ function TableBody(props) {
                 }}
               >
                 <Card.Text
-                  onClick={() =>
-                    event.target.style.setProperty(
-                      "text-decoration",
-                      "line-through"
-                    )
-                  }
+                  onClick={() => (
+                    (row.status = !row.status),
+                    props.updateTask(row)
+                  )}
                 >
-                  {row.task}
+                  {row.status === true ? (
+                    <span
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      {row.task}
+                    </span>
+                  ) : (
+                    <span>{row.task}</span>
+                  )}
                 </Card.Text>
                 <TaskAltOutlinedIcon
                   style={{
@@ -275,14 +281,20 @@ function TableBody(props) {
                 }}
               >
                 <Card.Text
-                  onClick={() =>
-                    event.target.style.setProperty(
-                      "text-decoration",
-                      "line-through"
-                    )
-                  }
+                  onClick={() => (
+                    (row.status = !row.status),
+                    props.updateTask(row)
+                  )}
                 >
-                  {row.task}
+                  {row.status === true ? (
+                    <span
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      {row.task}
+                    </span>
+                  ) : (
+                    <span>{row.task}</span>
+                  )}
                 </Card.Text>
                 <TaskAltOutlinedIcon
                   style={{
@@ -399,14 +411,20 @@ function TableBody(props) {
                 }}
               >
                 <Card.Text
-                  onClick={() =>
-                    event.target.style.setProperty(
-                      "text-decoration",
-                      "line-through"
-                    )
-                  }
+                  onClick={() => (
+                    (row.status = !row.status),
+                    props.updateTask(row)
+                  )}
                 >
-                  {row.task}
+                  {row.status === true ? (
+                    <span
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      {row.task}
+                    </span>
+                  ) : (
+                    <span>{row.task}</span>
+                  )}
                 </Card.Text>
                 <TaskAltOutlinedIcon
                   style={{
@@ -531,6 +549,7 @@ function Table(props) {
         taskData={props.taskData}
         task2Data={props.task2Data}
         removeTask={props.removeTask}
+        updateTask={props.updateTask}
         filters={filters}
       />
     </table>
