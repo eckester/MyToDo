@@ -144,7 +144,16 @@ function TableBody(props) {
                   gap: "12px"
                 }}
               >
-                <Card.Text>{row.task}</Card.Text>
+                <Card.Text
+                  onClick={() =>
+                    event.target.style.setProperty(
+                      "text-decoration",
+                      "line-through"
+                    )
+                  }
+                >
+                  {row.task}
+                </Card.Text>
                 <TaskAltOutlinedIcon
                   style={{
                     border: "none",
@@ -265,7 +274,16 @@ function TableBody(props) {
                   gap: "12px"
                 }}
               >
-                <Card.Text>{row.task}</Card.Text>
+                <Card.Text
+                  onClick={() =>
+                    event.target.style.setProperty(
+                      "text-decoration",
+                      "line-through"
+                    )
+                  }
+                >
+                  {row.task}
+                </Card.Text>
                 <TaskAltOutlinedIcon
                   style={{
                     border: "none",
@@ -380,7 +398,16 @@ function TableBody(props) {
                   gap: "12px"
                 }}
               >
-                <Card.Text>{row.task}</Card.Text>
+                <Card.Text
+                  onClick={() =>
+                    event.target.style.setProperty(
+                      "text-decoration",
+                      "line-through"
+                    )
+                  }
+                >
+                  {row.task}
+                </Card.Text>
                 <TaskAltOutlinedIcon
                   style={{
                     border: "none",
@@ -493,6 +520,7 @@ function Table(props) {
   const setPriorityFilter = (value) => {
     setFilters({ ...filters, priorityFilter: value });
   };
+
   return (
     <table>
       <TableHeader
