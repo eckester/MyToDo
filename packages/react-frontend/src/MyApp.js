@@ -84,10 +84,11 @@ function MyApp() {
   }
 
   function updateTask(tasker) {
-    const updated = tasks.filter(
-      (task) => task._id !== tasker._id
-    );
-    setTasks([...updated, tasker]);
+    const i = tasks.indexOf((task) => task._id === tasker._id);
+    const first = tasks.slice(0, i);
+    const after = tasks.slice(i + 1, tasks.length);
+    setTasks([...first, tasker]);
+    setTasks([tasks, ...after]);
 
     const promise = fetch(
       `http://localhost:8000/tasks/${tasker._id}`,
