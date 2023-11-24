@@ -6,51 +6,80 @@ function Form(props) {
     priority: 0,
     due: Date.now,
     status: "",
-    _id: ""
+    _id: "",
+    class: ""
   });
 
+  const classes = [
+    "",
+    "CS",
+    "Math",
+    "English",
+    "History",
+    "Chemistry",
+    "CSC-307"
+  ];
+
   const [showPopup, setShowPopup] = useState(false);
+  const [options, setOptions] = React.useState([""]);
 
   const categoryOptions = ["School", "Work", "Other"];
   const priorityOptions = ["Low", "Medium", "High", "None"];
-  //const statusOptions = ['In-Progress', 'Complete'];
 
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === "category") {
+      if (value === "School") {
+        setOptions(classes);
+      } else {
+        setOptions([""]);
+      }
       setTask({
         task: tasks["task"],
         category: value,
         priority: tasks["priority"],
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     } else if (name === "name") {
       setTask({
         task: value,
         category: tasks["category"],
         priority: tasks["priority"],
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     } else if (name === "priority") {
       setTask({
         task: tasks["task"],
         category: tasks["category"],
         priority: value,
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     } else if (name === "date") {
       setTask({
         task: tasks["task"],
         category: tasks["category"],
         priority: tasks["priority"],
-        due: value
+        due: value,
+        class: tasks["class"]
+      });
+    } else if (name === "class") {
+      setTask({
+        task: tasks["task"],
+        category: tasks["category"],
+        priority: tasks["priority"],
+        due: tasks["class"],
+        class: value
       });
     } else {
       setTask({
         task: tasks["task"],
         category: tasks["category"],
         priority: tasks["priority"],
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     }
   }
@@ -62,7 +91,8 @@ function Form(props) {
       category: "",
       priority: "",
       due: Date.now,
-      status: false
+      status: false,
+      class: ""
     });
     setShowPopup(false); // close the popup after submitting
   }
@@ -93,6 +123,18 @@ function Form(props) {
             >
               <option value="">---Choose Category---</option>
               {categoryOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <select
+              name="class"
+              id="class"
+              value={tasks.class}
+              onChange={handleChange}
+            >
+              {options.map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>

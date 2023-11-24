@@ -31,6 +31,10 @@ const toDoSchema = new Schema(
       type: Boolean,
       default: false
     },
+    class: {
+      type: String,
+      default: ""
+    },
     notes: {
       type: String,
       required: false
