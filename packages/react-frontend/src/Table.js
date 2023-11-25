@@ -94,12 +94,12 @@ function TableHeader({ setPriorityFilter }) {
   return (
     <thead>
       <tr>
-        <label>
+        <label style={{ paddingLeft: "7px" }}>
           Filter By Priority:
           <select
             name="Priority"
             onChange={handlePriorityFilterChange}
-            style={{ width: "300px" }}
+            style={{ width: "300px", paddingLeft: "7px" }}
           >
             {priorityOptions.map((option) => (
               <option key={option} value={option}>
@@ -157,26 +157,9 @@ function TableBody(props) {
 
       return (
         <tr key={index}>
-          <Card
-            className="custom-card"
-            style={{
-              width: "18rem",
-              border: "1px solid #ced4da",
-              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              borderRadius: "5px",
-              marginBottom: "10px"
-            }}
-          >
+          <Card className="custom-card">
             <Card.Body style={{ padding: "16px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "start",
-                  gap: "12px"
-                }}
-              >
+              <div className="card-container">
                 <Card.Text
                   onClick={() => (
                     (row.status = !row.status),
@@ -194,11 +177,7 @@ function TableBody(props) {
                   )}
                 </Card.Text>
                 <TaskAltOutlinedIcon
-                  style={{
-                    border: "none",
-                    padding: "1px", // Adjust padding as needed
-                    cursor: "pointer"
-                  }}
+                  className="card-icon"
                   onClick={() =>
                     setShowCompletePopup({
                       inUse: true,
@@ -231,19 +210,10 @@ function TableBody(props) {
                     </div>
                   )}
               </div>
-              <Container
-                style={{
-                  justifyContent: "space-between",
-                  display: "flex",
-                  flexDirection: "row",
-                  padding: "0px"
-                }}
-              >
+              <Container className="card-container">
                 <span
+                  className="card-span"
                   style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
                     color: getCategoryTextColor(row.category),
                     backgroundColor: getCategoryBackgroundColor(
                       row.category
@@ -253,10 +223,8 @@ function TableBody(props) {
                   {row.category}
                 </span>
                 <span
+                  className="card-span"
                   style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
                     color: getClassesTextColor(row.class),
                     backgroundColor: getClassesBackgroundColor(
                       row.class
@@ -265,13 +233,7 @@ function TableBody(props) {
                 >
                   {row.class}
                 </span>
-                <span
-                  style={{
-                    fontSize: "12px",
-                    color: "#6E7C87",
-                    alignSelf: "center"
-                  }}
-                >
+                <span className="card-date">
                   {date
                     .toLocaleDateString(undefined, {
                       month: "short",
@@ -306,26 +268,9 @@ function TableBody(props) {
 
       return (
         <tr key={index}>
-          <Card
-            className="custom-card"
-            style={{
-              width: "18rem",
-              border: "1px solid #ced4da",
-              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              borderRadius: "5px",
-              marginBottom: "10px"
-            }}
-          >
+          <Card className="custom-card">
             <Card.Body style={{ padding: "16px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "start",
-                  gap: "12px"
-                }}
-              >
+              <div className="card-container">
                 <Card.Text
                   onClick={() => (
                     (row.status = !row.status),
@@ -343,11 +288,7 @@ function TableBody(props) {
                   )}
                 </Card.Text>
                 <TaskAltOutlinedIcon
-                  style={{
-                    border: "none",
-                    padding: "1px", // Adjust padding as needed
-                    cursor: "pointer"
-                  }}
+                  className="card-icon"
                   onClick={() =>
                     setShowCompletePopup({
                       inUse: true,
@@ -380,19 +321,10 @@ function TableBody(props) {
                     </div>
                   )}
               </div>
-              <Container
-                style={{
-                  justifyContent: "space-between",
-                  display: "flex",
-                  flexDirection: "row",
-                  padding: "0px"
-                }}
-              >
+              <Container className="card-container">
                 <span
+                  className="card-span"
                   style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
                     color: getCategoryTextColor(row.category),
                     backgroundColor: getCategoryBackgroundColor(
                       row.category
@@ -402,10 +334,8 @@ function TableBody(props) {
                   {row.category}
                 </span>
                 <span
+                  className="card-span"
                   style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
                     color: getClassesTextColor(row.class),
                     backgroundColor: getClassesBackgroundColor(
                       row.class
@@ -414,13 +344,7 @@ function TableBody(props) {
                 >
                   {row.class}
                 </span>
-                <span
-                  style={{
-                    fontSize: "12px",
-                    color: "#6E7C87",
-                    alignSelf: "center"
-                  }}
-                >
+                <span className="card-date">
                   {date
                     .toLocaleDateString(undefined, {
                       month: "short",
@@ -449,26 +373,9 @@ function TableBody(props) {
 
       return (
         <tr key={index}>
-          <Card
-            className="custom-card"
-            style={{
-              width: "18rem",
-              border: "1px solid #ced4da",
-              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              borderRadius: "5px",
-              marginBottom: "10px"
-            }}
-          >
+          <Card className="custom-card">
             <Card.Body style={{ padding: "16px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "start",
-                  gap: "12px"
-                }}
-              >
+              <div className="card-container">
                 <Card.Text
                   onClick={() => (
                     (row.status = !row.status),
@@ -486,11 +393,7 @@ function TableBody(props) {
                   )}
                 </Card.Text>
                 <TaskAltOutlinedIcon
-                  style={{
-                    border: "none",
-                    padding: "1px", // Adjust padding as needed
-                    cursor: "pointer"
-                  }}
+                  className="card-icon"
                   onClick={() =>
                     setShowCompletePopup({
                       inUse: true,
@@ -523,19 +426,10 @@ function TableBody(props) {
                     </div>
                   )}
               </div>
-              <Container
-                style={{
-                  justifyContent: "space-between",
-                  display: "flex",
-                  flexDirection: "row",
-                  padding: "0px"
-                }}
-              >
+              <Container className="card-container">
                 <span
+                  className="card-span"
                   style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
                     color: getCategoryTextColor(row.category),
                     backgroundColor: getCategoryBackgroundColor(
                       row.category
@@ -545,10 +439,8 @@ function TableBody(props) {
                   {row.category}
                 </span>
                 <span
+                  className="card-span"
                   style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
                     color: getClassesTextColor(row.class),
                     backgroundColor: getClassesBackgroundColor(
                       row.class
@@ -557,13 +449,7 @@ function TableBody(props) {
                 >
                   {row.class}
                 </span>
-                <span
-                  style={{
-                    fontSize: "12px",
-                    color: "#6E7C87",
-                    alignSelf: "center"
-                  }}
-                >
+                <span className="card-date">
                   {date
                     .toLocaleDateString(undefined, {
                       month: "short",
