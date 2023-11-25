@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import Table from "./Table";
 import Form from "./Form";
 import Header from "./header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+  //createBrowserRouter,
+  //Link
+} from "react-router-dom";
 //import { useParams } from "react-router-dom";
 
 function MyApp() {
@@ -110,6 +116,18 @@ function MyApp() {
         <Routes>
           <Route
             path="/"
+            element={
+              <ListPage
+                taskData={tasks}
+                task2Data={tasks}
+                removeTask={removeOneTask}
+                handleSubmit={updateList}
+                updateTask={updateTask}
+              ></ListPage>
+            }
+          />
+          <Route
+            path="/login"
             element={
               <ListPage
                 taskData={tasks}
