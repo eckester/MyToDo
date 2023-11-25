@@ -17,47 +17,13 @@ mongoose
   })
   .catch((error) => console.log(error));
 
+// is this correct for date? it doesn't use the parameter
 function sortToDoByDate(date) {
   return toDoModel.find().sort({ due: 1 });
 }
 
-function sortToDoByPrior() {
-  return toDoModel.aggregate([
-    {
-      $addFields: {
-        sortPriority: {
-          $switch: {
-            branches: [
-              {
-                case: {
-                  $eq: ["$priority", "High"]
-                },
-                then: 3
-              },
-              {
-                case: {
-                  $eq: ["$priority", "Medium"]
-                },
-                then: 2
-              },
-              {
-                case: {
-                  $eq: ["$priority", "Low"]
-                },
-                then: 1
-              }
-            ],
-            default: 0
-          }
-        }
-      }
-    },
-    {
-      $sort: {
-        sortPriority: -1
-      }
-    }
-  ]);
+function filterPriorityTasks(prior) {
+  return toDoModel.find({ priority: prior });
 }
 
 function filterCategoryTasks(cat) {
@@ -90,11 +56,11 @@ function updateTask(taskId, updatedTask) {
 
 export default {
   sortToDoByDate,
-  sortToDoByPrior,
   filterCategoryTasks,
   addTask,
   deleteTask,
   getTasks,
   findTaskById,
-  updateTask
+  updateTask,
+  filterPriorityTasks
 };

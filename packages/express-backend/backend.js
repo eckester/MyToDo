@@ -13,11 +13,27 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// get tasks
+// get tasks (all, category, priority, date)
 app.get("/tasks", async (req, res) => {
+  const { category, priority, date } = req.query;
   try {
-    const result = await toDoListServices.getTasks();
-    res.send({ toDoList: result });
+    let result;
+    if (category) {
+      result =
+        await toDoListServices.filterCategoryTasks(category);
+    } else if (priority) {
+      result =
+        await toDoListServices.filterPriorityTasks(priority);
+    } else if (date) {
+      result = await toDoListServices.sortToDoByDate(date);
+    } else {
+      result = await toDoListServices.getTasks();
+    }
+    if (result === undefined || result === null)
+      res.status(404).send("Resource not found.");
+    else {
+      res.send({ toDoList: result });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send("An error occurred in the server.");
@@ -32,52 +48,6 @@ app.get("/tasks/:id", async (req, res) => {
     res.status(404).send("Resource not found.");
   else {
     res.send({ toDoList: result });
-  }
-});
-
-// get task by category
-// i.e. http://localhost:8000/tasks_category?name=Work would return all the tasks
-// categorized as "Work" tasks
-app.get("/tasks_category", async (req, res) => {
-  const cate = req.query.name;
-  if (cate != undefined) {
-    const result =
-      await toDoListServices.filterCategoryTasks(cate);
-    if (result === undefined || result === null)
-      res.status(404).send("Resource not found.");
-    else {
-      res.send({ toDoList: result });
-    }
-  } else {
-    try {
-      const result = await toDoListServices.getTasks();
-      res.send({ toDoList: result });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send("An error occurred in the server.");
-    }
-  }
-});
-
-// get tasks sorted by due date
-app.get("/tasks_date", async (req, res) => {
-  try {
-    const result = await toDoListServices.sortToDoByDate();
-    res.send({ toDoList: result });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("An error occurred in the server.");
-  }
-});
-
-// get tasks sorted by priority
-app.get("/tasks_priority", async (req, res) => {
-  try {
-    const result = await toDoListServices.sortToDoByPrior();
-    res.send({ toDoList: result });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("An error occurred in the server.");
   }
 });
 

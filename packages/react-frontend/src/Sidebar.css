@@ -1,0 +1,23 @@
+/* Sidebar.css */
+.Sidebar {
+  width: 200px; 
+  height: 100vh;
+  background-color: rgb(245, 241, 241); 
+  color: rgb(8, 8, 8);
+}
+
+.content-container {
+  display: flex;
+}
+
+.SidebarList li.active {
+  background-color: #ddd;
+  color: rgb(0, 0, 0);
+  /* Add other styles for the active category */
+}
+
+.SidebarList li:hover {
+  background-color: #ddd; /* Change to your desired highlight color */
+  cursor: pointer; /* Show pointer cursor on hover */
+  /* Other styles for the hover effect */
+}

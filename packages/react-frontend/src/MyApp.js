@@ -2,18 +2,14 @@ import React, { useState, useEffect } from "react";
 import Table from "./Table";
 import Form from "./Form";
 import Header from "./header";
-import {
-  BrowserRouter,
-  Routes,
-  Route
-  //createBrowserRouter,
-  //Link
-} from "react-router-dom";
+import Sidebar from "./Sidebar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import { useParams } from "react-router-dom";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
-  //const [overdueTasks, setTasks] = useState([]);
+  const [categoryFilter, setCategoryFilter] =
+    useState("All Tasks");
 
   function fetchTasks() {
     const promise = fetch("http://localhost:8000/tasks");
@@ -110,36 +106,42 @@ function MyApp() {
   }
 
   return (
-    <div className="container">
+    <div className="header-container">
       <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ListPage
-                taskData={tasks}
-                task2Data={tasks}
-                removeTask={removeOneTask}
-                handleSubmit={updateList}
-                updateTask={updateTask}
-              ></ListPage>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <ListPage
-                taskData={tasks}
-                task2Data={tasks}
-                removeTask={removeOneTask}
-                handleSubmit={updateList}
-                updateTask={updateTask}
-              ></ListPage>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <div className="content-container">
+        <Sidebar setCategoryFilter={setCategoryFilter} />
+        <div className="content-tasks">
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ListPage
+                    taskData={tasks}
+                    task2Data={tasks}
+                    removeTask={removeOneTask}
+                    handleSubmit={updateList}
+                    updateTask={updateTask}
+                    categoryFilter={categoryFilter}
+                  ></ListPage>
+                }
+              />
+                <Route
+                    path="/login"
+                    element={
+                        <ListPage
+                            taskData={tasks}
+                            task2Data={tasks}
+                            removeTask={removeOneTask}
+                            handleSubmit={updateList}
+                            updateTask={updateTask}
+                        ></ListPage>
+                    }
+                />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </div>
     </div>
   );
 }
@@ -150,13 +152,21 @@ function ListPage(props) {
     task2Data,
     removeTask,
     handleSubmit,
-    updateTask
+    updateTask,
+    categoryFilter
   } = props;
-  //task2Data = fetchOverDue(taskData);
+
+  const filteredTasks =
+    categoryFilter === "All Tasks"
+      ? taskData
+      : taskData.filter(
+          (task) => task.category === categoryFilter
+        );
+
   return (
     <>
       <Table
-        taskData={taskData}
+        taskData={filteredTasks}
         task2Data={task2Data}
         removeTask={removeTask}
         updateTask={updateTask}
