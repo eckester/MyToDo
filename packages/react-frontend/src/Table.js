@@ -84,13 +84,8 @@ const getClassesBackgroundColor = (classes) => {
   }
 };
 
-const filterOptions = ["All", "Work", "School", "Other"];
 const priorityOptions = ["None", "High", "Medium", "Low"];
-function TableHeader({ setCategoryFilter, setPriorityFilter }) {
-  const handleCategoryFilterChange = (e) => {
-    setCategoryFilter(e.target.value);
-  };
-
+function TableHeader({ setPriorityFilter }) {
   const handlePriorityFilterChange = (e) => {
     setPriorityFilter(e.target.value);
   };
@@ -98,36 +93,20 @@ function TableHeader({ setCategoryFilter, setPriorityFilter }) {
   return (
     <thead>
       <tr>
-        <td>
-          <label>
-            Filter By Category:
-            <select
-              name="Filter"
-              onChange={handleCategoryFilterChange}
-            >
-              {filterOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
-        </td>
-        <td>
-          <label>
-            Filter By Priority:
-            <select
-              name="Priority"
-              onChange={handlePriorityFilterChange}
-            >
-              {priorityOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
-        </td>
+        <label>
+          Filter By Priority:
+          <select
+            name="Priority"
+            onChange={handlePriorityFilterChange}
+            style={{ width: "300px" }}
+          >
+            {priorityOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
       </tr>
     </thead>
   );
@@ -602,15 +581,15 @@ function TableBody(props) {
     <tbody>
       <tr>
         <td>
-          <b className="label-grey">OVERDUE</b>
+          <b className="label-dates">OVERDUE</b>
           {overdueTasks}
         </td>
         <td>
-          <b className="label-grey">THIS WEEK</b>
+          <b className="label-dates">THIS WEEK</b>
           {thisWeekTasks}
         </td>
         <td>
-          <b className="label-grey">NEXT WEEK</b>
+          <b className="label-dates">NEXT WEEK</b>
           {nextWeekTasks}
         </td>
       </tr>

@@ -17,6 +17,7 @@ mongoose
   })
   .catch((error) => console.log(error));
 
+// is this correct for date? it doesn't use the parameter
 function sortToDoByDate(date) {
   return toDoModel.find().sort({ due: 1 });
 }
