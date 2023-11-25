@@ -85,6 +85,7 @@ const getClassesBackgroundColor = (classes) => {
 };
 
 const priorityOptions = ["None", "High", "Medium", "Low"];
+
 function TableHeader({ setPriorityFilter }) {
   const handlePriorityFilterChange = (e) => {
     setPriorityFilter(e.target.value);
