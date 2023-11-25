@@ -3,7 +3,9 @@ import Table from "./Table";
 import Form from "./Form";
 import Header from "./header";
 import Sidebar from "./Sidebar";
+import LoginPage from "./Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 //import { useParams } from "react-router-dom";
 
 function MyApp() {
@@ -108,14 +110,16 @@ function MyApp() {
   return (
     <div className="header-container">
       <Header />
-      <div className="content-container">
-        <Sidebar setCategoryFilter={setCategoryFilter} />
-        <div className="content-tasks">
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="content-container">
+                <Sidebar
+                  setCategoryFilter={setCategoryFilter}
+                />
+                <div className="content-tasks">
                   <ListPage
                     taskData={tasks}
                     task2Data={tasks}
@@ -124,24 +128,13 @@ function MyApp() {
                     updateTask={updateTask}
                     categoryFilter={categoryFilter}
                   ></ListPage>
-                }
-              />
-              <Route
-                path="/login"
-                element={
-                  <ListPage
-                    taskData={tasks}
-                    task2Data={tasks}
-                    removeTask={removeOneTask}
-                    handleSubmit={updateList}
-                    updateTask={updateTask}
-                  ></ListPage>
-                }
-              />
-            </Routes>
-          </BrowserRouter>
-        </div>
-      </div>
+                </div>
+              </div>
+            }
+          />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
