@@ -126,18 +126,18 @@ function MyApp() {
                   ></ListPage>
                 }
               />
-                <Route
-                    path="/login"
-                    element={
-                        <ListPage
-                            taskData={tasks}
-                            task2Data={tasks}
-                            removeTask={removeOneTask}
-                            handleSubmit={updateList}
-                            updateTask={updateTask}
-                        ></ListPage>
-                    }
-                />
+              <Route
+                path="/login"
+                element={
+                  <ListPage
+                    taskData={tasks}
+                    task2Data={tasks}
+                    removeTask={removeOneTask}
+                    handleSubmit={updateList}
+                    updateTask={updateTask}
+                  ></ListPage>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </div>
