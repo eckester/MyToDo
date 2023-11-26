@@ -37,7 +37,7 @@ td {
   position: sticky;
   width: 18rem;
   border: 1px solid #ced4da;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-block-end: 10px;
 }
@@ -65,7 +65,7 @@ td {
 
 .card-date {
   font-size: 12px;
-  color: #6E7C87;
+  color: #6e7c87;
   align-self: center;
 }
 
@@ -74,5 +74,3 @@ td {
   padding: 1px;
   cursor: pointer;
 }
-
-
