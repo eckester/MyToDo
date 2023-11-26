@@ -2,14 +2,20 @@
 .Low,
 .Medium,
 .High {
-  width: 30px;
-  font-size: 20px;
+  display: flex;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  width: 15px;
+  font-size: 15px;
   color: #1d1d1e;
   padding: 0 12px;
   border-radius: 15px;
   margin: 0 0px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+  align-items: center;
+  justify-content: center;
 }
 
 .None {
@@ -35,7 +41,7 @@ td {
 .custom-card {
   vertical-align: top;
   position: sticky;
-  width: 18rem;
+  width: 20rem;
   border: 1px solid #ced4da;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -44,8 +50,9 @@ td {
 
 .label-dates {
   display: flex;
-  width: 300px;
+  text-align: left;
   color: #6e7c87;
+  border-bottom: 1px solid #ccc;
 }
 
 .card-container {
@@ -61,16 +68,38 @@ td {
   font-size: 12px;
   padding: 5px;
   border-radius: 5px;
+  align-self: center;
+  margin: 0 5px;
+  font-weight: bold;
 }
 
 .card-date {
   font-size: 12px;
   color: #6e7c87;
   align-self: center;
+  position: absolute;
+  bottom: 13px;
+  right: 15px;
+  font-size: 14px;
+  color: #6E7C87;
 }
 
 .card-icon {
   border: none;
-  padding: 1px;
+  padding: 2px;
   cursor: pointer;
+}
+
+.centered-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  width: 250px; 
+  display: inline-block;
 }
