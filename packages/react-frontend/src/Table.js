@@ -6,82 +6,49 @@ import Container from "react-bootstrap/Container";
 import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 //import options from Form.js;
 
-const options = [
-  "",
-  "CS",
-  "Math",
-  "English",
-  "History",
-  "Chemistry",
-  "CSC-307"
-];
-
-const getCategoryTextColor = (category) => {
-  switch (category) {
-    case "School":
-      return "#069B39";
-    case "Work":
-      return "#06399B";
-    case "Other":
-      return "#9B062A";
-    default:
-      return "#000"; // Default color if the category doesn't match any case
-  }
+const categoryColors = {
+  School: { textColor: "#069B39", backgroundColor: "#8FF5A6" },
+  Work: { textColor: "#06399B", backgroundColor: "#8FE3F5" },
+  Other: { textColor: "#9B062A", backgroundColor: "#F58F9B" },
+  default: { textColor: "#000", backgroundColor: "#FFF" }
 };
 
-const getCategoryBackgroundColor = (category) => {
-  switch (category) {
-    case "School":
-      return "#8FF5A6";
-    case "Work":
-      return "#8FE3F5";
-    case "Other":
-      return "#F58F9B";
-    default:
-      return "#FFF"; // Default background color if the category doesn't match any case
-  }
+const getCategoryTextColor = (category) =>
+  categoryColors[category]?.textColor ||
+  categoryColors.default.textColor;
+const getCategoryBackgroundColor = (category) =>
+  categoryColors[category]?.backgroundColor ||
+  categoryColors.default.backgroundColor;
+
+const classesColors = {
+  "": { textColor: "#FFF", backgroundColor: "#FFF" },
+  CS: { textColor: "#b52602", backgroundColor: "#f59c85" },
+  Math: { textColor: "#9c752f", backgroundColor: "#fac66b" },
+  English: { textColor: "#ad9640", backgroundColor: "#ffe172" },
+  History: { textColor: "#649e48", backgroundColor: "#affc89" },
+  Chemistry: {
+    textColor: "#407185",
+    backgroundColor: "#82d8fa"
+  },
+  "CSC-307": {
+    textColor: "#7042ad",
+    backgroundColor: "#d2b6f7"
+  },
+  default: { textColor: "#FFF", backgroundColor: "#FFF" }
 };
 
-const getClassesTextColor = (classes) => {
-  switch (classes) {
-    case "":
-      return "#FFF";
-    case options[1]:
-      return "#b52602";
-    case options[2]:
-      return "#9c752f";
-    case options[3]:
-      return "#ad9640";
-    case options[4]:
-      return "#649e48";
-    case options[5]:
-      return "#407185";
-    case options[6]:
-      return "#7042ad";
-    default:
-      return "#FFF"; // Default background color if the category doesn't match any case
-  }
-};
+const getClassesTextColor = (classes) =>
+  classesColors[classes]?.textColor ||
+  classesColors.default.textColor;
+const getClassesBackgroundColor = (classes) =>
+  classesColors[classes]?.backgroundColor ||
+  classesColors.default.backgroundColor;
 
-const getClassesBackgroundColor = (classes) => {
-  switch (classes) {
-    case "":
-      return "#FFF";
-    case options[1]:
-      return "#f59c85";
-    case options[2]:
-      return "#fac66b";
-    case options[3]:
-      return "#ffe172";
-    case options[4]:
-      return "#affc89";
-    case options[5]:
-      return "#82d8fa";
-    case options[6]:
-      return "#d2b6f7";
-    default:
-      return "#FFF"; // Default background color if the category doesn't match any case
-  }
+const convertUTCtoLocal = (utc) => {
+  const utcDate = new Date(utc);
+  return new Date(
+    utcDate.getTime() + utcDate.getTimezoneOffset() * 60000
+  );
 };
 
 const priorityOptions = ["None", "High", "Medium", "Low"];
@@ -113,28 +80,15 @@ function TableHeader({ setPriorityFilter }) {
   );
 }
 
-const convertUTCtoLocal = (utc) => {
-  const utcDate = new Date(utc);
-  return new Date(
-    utcDate.getTime() + utcDate.getTimezoneOffset() * 60000
-  );
-};
-
 function TableBody(props) {
   const [showCompletePopup, setShowCompletePopup] = useState({
     inUse: false,
     id: ""
   });
 
-  const { categoryFilter, priorityFilter } = props.filters;
+  const { priorityFilter } = props.filters;
+
   const filteredTasks = props.taskData.filter((row) => {
-    // Apply category filter
-    if (
-      categoryFilter !== "All" &&
-      row.category !== categoryFilter
-    ) {
-      return false;
-    }
     // Apply priority filter
     if (
       priorityFilter !== "None" &&
@@ -145,22 +99,18 @@ function TableBody(props) {
     return true; // Task passes all filters
   });
 
-  const overdueTasks = filteredTasks
-    .filter((row) => {
-      const dueDate = convertUTCtoLocal(row.due);
-      const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
-      return dueDate < currentDate;
-    })
-    .map((row, index) => {
+  const generateTableRow = (tasks) =>
+    tasks.map((row, index) => {
       const date = convertUTCtoLocal(row.due);
-
       return (
         <tr key={index}>
           <Card className="custom-card">
-            <Card.Body style={{ padding: "16px" }}>
+            <Card.Body
+              style={{ padding: "10px", position: "relative" }}
+            >
               <div className="card-container">
                 <Card.Text
+                  className="task-title"
                   onClick={() => (
                     (row.status = !row.status),
                     props.updateTask(row)
@@ -210,260 +160,76 @@ function TableBody(props) {
                     </div>
                   )}
               </div>
-              <Container className="card-container">
-                <span
-                  className="card-span"
-                  style={{
-                    color: getCategoryTextColor(row.category),
-                    backgroundColor: getCategoryBackgroundColor(
-                      row.category
-                    )
-                  }}
-                >
-                  {row.category}
-                </span>
-                <span
-                  className="card-span"
-                  style={{
-                    color: getClassesTextColor(row.class),
-                    backgroundColor: getClassesBackgroundColor(
-                      row.class
-                    )
-                  }}
-                >
-                  {row.class}
-                </span>
-                <span className="card-date">
-                  {date
-                    .toLocaleDateString(undefined, {
-                      month: "short",
-                      day: "numeric"
-                    })
-                    .toUpperCase()}
-                </span>
-                <div className={row.priority}>!</div>
-              </Container>
+              <div className="centered-content">
+                <Container className="card-container">
+                  <div className={row.priority}>!</div>
+                  <span
+                    className="card-span"
+                    style={{
+                      color: getCategoryTextColor(row.category),
+                      backgroundColor:
+                        getCategoryBackgroundColor(row.category)
+                    }}
+                  >
+                    {row.category}
+                  </span>
+                  <span
+                    className="card-span"
+                    style={{
+                      color: getClassesTextColor(row.class),
+                      backgroundColor:
+                        getClassesBackgroundColor(row.class)
+                    }}
+                  >
+                    {row.class}
+                  </span>
+                  <span className="card-date">
+                    {date
+                      .toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric"
+                      })
+                      .toUpperCase()}
+                  </span>
+                </Container>
+              </div>
             </Card.Body>
           </Card>
         </tr>
       );
     });
 
-  const thisWeekTasks = filteredTasks
-    .filter((row) => {
-      console.log(row);
+  const overdueTasks = generateTableRow(
+    filteredTasks.filter(
+      (row) =>
+        convertUTCtoLocal(row.due) <
+        new Date().setHours(0, 0, 0, 0)
+    ),
+    "OVERDUE"
+  );
+
+  const thisWeekTasks = generateTableRow(
+    filteredTasks.filter((row) => {
       const dueDate = convertUTCtoLocal(row.due);
-      const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
-      const weekFromToday = new Date();
-      weekFromToday.setHours(0, 0, 0, 0);
+      const currentDate = new Date().setHours(0, 0, 0, 0);
+      const weekFromToday = new Date(currentDate);
       weekFromToday.setDate(weekFromToday.getDate() + 7);
+      return dueDate >= currentDate && dueDate < weekFromToday;
+    }),
+    "THIS WEEK"
+  );
 
-      return (
-        (dueDate >= currentDate) & (dueDate < weekFromToday)
-      );
-    })
-    .map((row, index) => {
-      const date = convertUTCtoLocal(row.due);
-
-      return (
-        <tr key={index}>
-          <Card className="custom-card">
-            <Card.Body style={{ padding: "16px" }}>
-              <div className="card-container">
-                <Card.Text
-                  onClick={() => (
-                    (row.status = !row.status),
-                    props.updateTask(row)
-                  )}
-                >
-                  {row.status === true ? (
-                    <span
-                      style={{ textDecoration: "line-through" }}
-                    >
-                      {row.task}
-                    </span>
-                  ) : (
-                    <span>{row.task}</span>
-                  )}
-                </Card.Text>
-                <TaskAltOutlinedIcon
-                  className="card-icon"
-                  onClick={() =>
-                    setShowCompletePopup({
-                      inUse: true,
-                      id: row._id
-                    })
-                  }
-                ></TaskAltOutlinedIcon>
-                {showCompletePopup.inUse &&
-                  row._id === showCompletePopup.id && (
-                    <div className="popup">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          props.removeTask(showCompletePopup.id)
-                        }
-                      >
-                        Delete
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setShowCompletePopup({
-                            inUse: false,
-                            id: ""
-                          })
-                        }
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
-              </div>
-              <Container className="card-container">
-                <span
-                  className="card-span"
-                  style={{
-                    color: getCategoryTextColor(row.category),
-                    backgroundColor: getCategoryBackgroundColor(
-                      row.category
-                    )
-                  }}
-                >
-                  {row.category}
-                </span>
-                <span
-                  className="card-span"
-                  style={{
-                    color: getClassesTextColor(row.class),
-                    backgroundColor: getClassesBackgroundColor(
-                      row.class
-                    )
-                  }}
-                >
-                  {row.class}
-                </span>
-                <span className="card-date">
-                  {date
-                    .toLocaleDateString(undefined, {
-                      month: "short",
-                      day: "numeric"
-                    })
-                    .toUpperCase()}
-                </span>
-                <div className={row.priority}>!</div>
-              </Container>
-            </Card.Body>
-          </Card>
-        </tr>
-      );
-    });
-
-  const nextWeekTasks = filteredTasks
-    .filter((row) => {
+  const nextWeekTasks = generateTableRow(
+    filteredTasks.filter((row) => {
       const dueDate = convertUTCtoLocal(row.due);
-      const weekFromToday = new Date();
-      weekFromToday.setHours(0, 0, 0, 0);
+      const currentDate = new Date().setHours(0, 0, 0, 0);
+      const weekFromToday = new Date(currentDate);
       weekFromToday.setDate(weekFromToday.getDate() + 7);
       return dueDate >= weekFromToday;
-    })
-    .map((row, index) => {
-      const date = convertUTCtoLocal(row.due);
+    }),
+    "NEXT WEEK"
+  );
 
-      return (
-        <tr key={index}>
-          <Card className="custom-card">
-            <Card.Body style={{ padding: "16px" }}>
-              <div className="card-container">
-                <Card.Text
-                  onClick={() => (
-                    (row.status = !row.status),
-                    props.updateTask(row)
-                  )}
-                >
-                  {row.status === true ? (
-                    <span
-                      style={{ textDecoration: "line-through" }}
-                    >
-                      {row.task}
-                    </span>
-                  ) : (
-                    <span>{row.task}</span>
-                  )}
-                </Card.Text>
-                <TaskAltOutlinedIcon
-                  className="card-icon"
-                  onClick={() =>
-                    setShowCompletePopup({
-                      inUse: true,
-                      id: row._id
-                    })
-                  }
-                ></TaskAltOutlinedIcon>
-                {showCompletePopup.inUse &&
-                  row._id === showCompletePopup.id && (
-                    <div className="popup">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          props.removeTask(showCompletePopup.id)
-                        }
-                      >
-                        Delete
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setShowCompletePopup({
-                            inUse: false,
-                            id: ""
-                          })
-                        }
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
-              </div>
-              <Container className="card-container">
-                <span
-                  className="card-span"
-                  style={{
-                    color: getCategoryTextColor(row.category),
-                    backgroundColor: getCategoryBackgroundColor(
-                      row.category
-                    )
-                  }}
-                >
-                  {row.category}
-                </span>
-                <span
-                  className="card-span"
-                  style={{
-                    color: getClassesTextColor(row.class),
-                    backgroundColor: getClassesBackgroundColor(
-                      row.class
-                    )
-                  }}
-                >
-                  {row.class}
-                </span>
-                <span className="card-date">
-                  {date
-                    .toLocaleDateString(undefined, {
-                      month: "short",
-                      day: "numeric"
-                    })
-                    .toUpperCase()}
-                </span>
-                <div className={row.priority}>!</div>
-              </Container>
-            </Card.Body>
-          </Card>
-        </tr>
-      );
-    });
   return (
     <tbody>
       <tr>
@@ -489,20 +255,13 @@ function Table(props) {
     priorityFilter: "None"
   });
 
-  const setCategoryFilter = (value) => {
-    setFilters({ ...filters, categoryFilter: value });
-  };
-
   const setPriorityFilter = (value) => {
     setFilters({ ...filters, priorityFilter: value });
   };
 
   return (
     <table>
-      <TableHeader
-        setCategoryFilter={setCategoryFilter}
-        setPriorityFilter={setPriorityFilter}
-      />
+      <TableHeader setPriorityFilter={setPriorityFilter} />
       <TableBody
         taskData={props.taskData}
         task2Data={props.task2Data}
