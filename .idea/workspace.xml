@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +70,7 @@
       <workItem from="1700691811212" duration="9980000" />
       <workItem from="1700946305225" duration="1170000" />
       <workItem from="1700950886717" duration="3150000" />
-      <workItem from="1701019315108" duration="2651000" />
+      <workItem from="1701019315108" duration="8951000" />
     </task>
     <servers />
   </component>

@@ -5,8 +5,20 @@
   flex: 1;
 }
 
+.button {
+  margin: 1em;
+  color: black;
+  text-decoration-color: black;
+  text-color: black;
+}
+.sign-in {
+  backgroundcolor: "#C0C2C4";
+  padding: 1.5em;
+  margin: 1em;
+}
+
 .textBox {
-  background-color: rgb(192, 194, 196);
+  background-color: rgb(81, 117, 164);
 }
 
 .box {
