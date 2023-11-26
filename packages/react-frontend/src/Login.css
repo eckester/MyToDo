@@ -1,0 +1,26 @@
+.centered-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.textBox {
+  background-color: rgb(192, 194, 196);
+}
+
+.box {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  padding: 5em;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  margin-left: 10em;
+  margin-right: 10em;
+  background-color: #ecefeb;
+  color: rgb(6, 6, 6);
+}

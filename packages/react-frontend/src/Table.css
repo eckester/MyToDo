@@ -81,7 +81,7 @@ td {
   bottom: 13px;
   right: 15px;
   font-size: 14px;
-  color: #6E7C87;
+  color: #6e7c87;
 }
 
 .card-icon {
@@ -99,7 +99,7 @@ td {
 .task-title {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; 
-  width: 250px; 
+  white-space: nowrap;
+  width: 250px;
   display: inline-block;
 }
