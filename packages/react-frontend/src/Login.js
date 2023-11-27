@@ -12,20 +12,16 @@ function LoginPage() {
   ]);
   //this.handleInputChange = this.handleInputChange.bind(this);
 
-  function newUser(nam, pass) {
-    setUser({
-      name: nam,
-      password: pass
-    });
-    handleSubmit(users);
-  }
-
   function handleSubmit(usars) {
     if (usars.length !== 0) {
       alert("smth");
     } else {
       alert("oooh");
     }
+    setUser({
+      name: "",
+      password: ""
+    });
   }
 
   function handleChange(event) {
@@ -92,8 +88,7 @@ function LoginPage() {
                 type="text"
                 name="username"
                 id="username"
-                // value={this.state.value}
-                // onChange={this.handleChange}
+                onChange={handleChange}
                 style={{ backgroundColor: "#FFFFFF" }}
               />
               <label htmlFor="username">
@@ -103,7 +98,6 @@ function LoginPage() {
                 type="text"
                 name="password"
                 id="password"
-                //value={this.state.value}
                 onChange={handleChange}
                 style={{ backgroundColor: "#FFFFFF" }}
               />
@@ -111,7 +105,7 @@ function LoginPage() {
                 className="button"
                 variant="outlined"
                 type="button"
-                onClick={() => newUser("emm", "123")}
+                onClick={() => handleSubmit(users)}
               >
                 Submit
               </Button>
