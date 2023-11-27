@@ -43,7 +43,7 @@ td {
   position: sticky;
   width: 20rem;
   border: 1px solid #ced4da;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-block-end: 10px;
 }
@@ -74,11 +74,14 @@ td {
 }
 
 .card-date {
+  font-size: 12px;
+  color: #6e7c87;
+  align-self: center;
   position: absolute;
   bottom: 13px;
   right: 15px;
   font-size: 14px;
-  color: #6E7C87;
+  color: #6e7c87;
 }
 
 .card-icon {
@@ -96,7 +99,7 @@ td {
 .task-title {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; 
-  width: 250px; 
+  white-space: nowrap;
+  width: 250px;
   display: inline-block;
 }

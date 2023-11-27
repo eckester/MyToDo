@@ -1,0 +1,38 @@
+.centered-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.button {
+  margin: 1em;
+  color: black;
+  text-decoration-color: black;
+  text-color: black;
+}
+.sign-in {
+  backgroundcolor: "#C0C2C4";
+  padding: 1.5em;
+  margin: 1em;
+}
+
+.textBox {
+  background-color: rgb(81, 117, 164);
+}
+
+.box {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  padding: 5em;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  margin-left: 15em;
+  margin-right: 15em;
+  background-color: #ecefeb;
+  color: rgb(6, 6, 6);
+}
