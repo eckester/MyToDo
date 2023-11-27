@@ -1,0 +1,20 @@
+
+.calendar-container {
+  width: 90%;
+  height: 600px;
+  margin: 5px auto; /* Center the calendar horizontally and add margin */
+  padding: 30px; /* Add padding around the calendar */
+  box-sizing: border-box;
+}
+
+.rbc-toolbar-label {
+  font-size: 30px; /* Adjust the font size as desired */
+  font-weight: bold;
+  display: flex;
+}
+.rbc-calendar{
+  background-color: #f0f0f0; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+}

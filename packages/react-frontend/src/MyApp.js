@@ -4,6 +4,7 @@ import Form from "./Form";
 import Header from "./header";
 import Sidebar from "./Sidebar";
 import LoginPage from "./Login";
+import MyCalendar from "./MyCalendar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //import { useParams } from "react-router-dom";
@@ -12,6 +13,7 @@ function MyApp() {
   const [tasks, setTasks] = useState([]);
   const [categoryFilter, setCategoryFilter] =
     useState("All Tasks");
+  const [tasksLoaded, setTasksLoaded] = useState(false);
 
   function fetchTasks() {
     const promise = fetch("http://localhost:8000/tasks");
@@ -20,7 +22,10 @@ function MyApp() {
   useEffect(() => {
     fetchTasks()
       .then((res) => res.json())
-      .then((json) => setTasks(json["toDoList"]))
+      .then((json) => {
+        setTasks(json["toDoList"]);
+        setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -130,6 +135,22 @@ function MyApp() {
                   ></ListPage>
                 </div>
               </div>
+            }
+          />
+          <Route
+            path="/calendar"
+            element={
+              tasksLoaded && ( // Render MyCalendar only if tasks are loaded
+                <div className="content-container">
+                  <Sidebar
+                    setCategoryFilter={setCategoryFilter}
+                  />
+                  <MyCalendar
+                    className="calendar-container"
+                    tasks={tasks}
+                  />
+                </div>
+              )
             }
           />
           <Route path="/login" element={<LoginPage />} />

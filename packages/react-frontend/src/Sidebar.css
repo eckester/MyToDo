@@ -1,9 +1,17 @@
 /* Sidebar.css */
 .Sidebar {
+  list-style: none;
+  min-width: 150px;
   width: 200px;
   height: 100vh;
   background-color: rgb(245, 241, 241);
   color: rgb(8, 8, 8);
+}
+
+.SidebarToDoListLink,
+.SidebarCalendarLink {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
 }
 
 .content-container {
