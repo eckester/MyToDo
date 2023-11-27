@@ -9,10 +9,10 @@
   margin: 1em;
   color: black;
   text-decoration-color: black;
-  text-color: black;
+  color: black;
 }
 .sign-in {
-  backgroundcolor: "#C0C2C4";
+  background-color: "#C0C2C4";
   padding: 1.5em;
   margin: 1em;
 }
