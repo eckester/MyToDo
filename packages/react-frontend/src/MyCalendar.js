@@ -7,19 +7,32 @@ import "./MyCalendar.css";
 
 const localizer = momentLocalizer(moment);
 
+const formatDate = (tasks) => {
+  console.log(tasks[0].due);
+  return tasks.map((task) => ({
+    ...task,
+    due: moment.utc(task.due).format("MM/DD/YY")
+  }));
+};
+
 const MyCalendar = ({ tasks }) => {
   console.log(tasks);
+
+  const formattedTasks = formatDate(tasks);
+
   const views = {
     month: true // Display only the month view
   };
+
   return (
     <div className="calendar-container">
       <Calendar
         localizer={localizer}
-        events={tasks}
+        events={formattedTasks}
         startAccessor="due"
         endAccessor="due"
         views={views}
+        style={{ height: "100vh" }}
       />
     </div>
   );
