@@ -1,14 +1,14 @@
 
 .calendar-container {
   width: 90%;
-  height: 600px;
-  margin: 5px auto; /* Center the calendar horizontally and add margin */
-  padding: 30px; /* Add padding around the calendar */
+  height: 100%;
+  margin: 5px auto; 
+  padding: 2%;
   box-sizing: border-box;
 }
 
 .rbc-toolbar-label {
-  font-size: 30px; /* Adjust the font size as desired */
+  font-size: 180%; /* Adjust the font size as desired */
   font-weight: bold;
   display: flex;
 }
