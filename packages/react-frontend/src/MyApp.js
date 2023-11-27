@@ -11,6 +11,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
+  //const [users, serUser] = useState([]);
+
   const [categoryFilter, setCategoryFilter] =
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);

@@ -3,8 +3,46 @@ import Button from "@mui/material/Button";
 import React, { useState } from "react";
 
 function LoginPage() {
-  //const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const [users, setUser] = useState([
+    {
+      name: "",
+      password: ""
+    }
+  ]);
+  //this.handleInputChange = this.handleInputChange.bind(this);
+
+  function newUser(nam, pass) {
+    setUser({
+      name: nam,
+      password: pass
+    });
+    handleSubmit(users);
+  }
+
+  function handleSubmit(usars) {
+    if (usars.length !== 0) {
+      alert("smth");
+    } else {
+      alert("oooh");
+    }
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    if (name === "username") {
+      setUser({
+        name: value,
+        password: users["password"]
+      });
+    } else {
+      setUser({
+        name: users["name"],
+        password: value
+      });
+    }
+  }
+
   return (
     <div>
       <h1 className="centered-content">Login</h1>
@@ -29,7 +67,7 @@ function LoginPage() {
           bsClass="button"
           variant="contained"
           onClick={() => {
-            alert("this is where the redirect goes");
+            window.location.href = "/";
           }}
         >
           Log in
@@ -54,6 +92,8 @@ function LoginPage() {
                 type="text"
                 name="username"
                 id="username"
+                // value={this.state.value}
+                // onChange={this.handleChange}
                 style={{ backgroundColor: "#FFFFFF" }}
               />
               <label htmlFor="username">
@@ -63,12 +103,15 @@ function LoginPage() {
                 type="text"
                 name="password"
                 id="password"
+                //value={this.state.value}
+                onChange={handleChange}
                 style={{ backgroundColor: "#FFFFFF" }}
               />
               <Button
                 className="button"
                 variant="outlined"
                 type="button"
+                onClick={() => newUser("emm", "123")}
               >
                 Submit
               </Button>
@@ -84,6 +127,10 @@ function LoginPage() {
           </div>
         )}
       </span>
+      {/*<span>*/}
+      {/*  users.map((row, index) =>*/}
+      {/*  <tr key={index}>{row.name}</tr>*/}
+      {/*</span>*/}
     </div>
   );
 }
