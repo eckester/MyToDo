@@ -21,28 +21,36 @@ const getCategoryBackgroundColor = (category) =>
   categoryColors.default.backgroundColor;
 
 const classesColors = {
-  "": { textColor: "#FFF", backgroundColor: "#FFF" },
-  CS: { textColor: "#b52602", backgroundColor: "#f59c85" },
-  Math: { textColor: "#9c752f", backgroundColor: "#fac66b" },
-  English: { textColor: "#ad9640", backgroundColor: "#ffe172" },
-  History: { textColor: "#649e48", backgroundColor: "#affc89" },
-  Chemistry: {
-    textColor: "#407185",
-    backgroundColor: "#82d8fa"
-  },
-  "CSC-307": {
-    textColor: "#7042ad",
-    backgroundColor: "#d2b6f7"
-  },
-  default: { textColor: "#FFF", backgroundColor: "#FFF" }
+  "": { textColor: "#FFF", backgroundColor: "#FFF" }
 };
 
-const getClassesTextColor = (classes) =>
-  classesColors[classes]?.textColor ||
-  classesColors.default.textColor;
-const getClassesBackgroundColor = (classes) =>
-  classesColors[classes]?.backgroundColor ||
-  classesColors.default.backgroundColor;
+const generateRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+const getOrCreateClassColors = (classes) => {
+  if (!classesColors[classes]) {
+    const textColor = generateRandomColor();
+    const backgroundColor = generateRandomColor();
+    classesColors[classes] = { textColor, backgroundColor };
+  }
+  return classesColors[classes];
+};
+
+const getClassesTextColor = (classes) => {
+  const colors = getOrCreateClassColors(classes);
+  return colors.textColor;
+};
+
+const getClassesBackgroundColor = (classes) => {
+  const colors = getOrCreateClassColors(classes);
+  return colors.backgroundColor;
+};
 
 const convertUTCtoLocal = (utc) => {
   const utcDate = new Date(utc);
