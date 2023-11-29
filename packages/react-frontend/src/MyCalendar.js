@@ -31,6 +31,7 @@ const MyCalendar = ({ tasks }) => {
         events={formattedTasks}
         startAccessor="due"
         endAccessor="due"
+        titleAccessor="task"
         views={views}
         style={{ height: "100vh" }}
       />
