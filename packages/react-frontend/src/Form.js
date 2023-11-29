@@ -10,18 +10,18 @@ function Form(props) {
     class: ""
   });
 
-  const classes = [
-    "",
-    "CS",
-    "Math",
-    "English",
-    "History",
-    "Chemistry",
-    "CSC-307"
-  ];
+  // const classes = [
+  //   "",
+  //   "CS",
+  //   "Math",
+  //   "English",
+  //   "History",
+  //   "Chemistry",
+  //   "CSC-307"
+  // ];
 
   const [showPopup, setShowPopup] = useState(false);
-  const [options, setOptions] = React.useState([""]);
+  //const [options, setOptions] = React.useState([""]);
 
   const categoryOptions = ["School", "Work", "Other"];
   const priorityOptions = ["Low", "Medium", "High", "None"];
@@ -29,11 +29,6 @@ function Form(props) {
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === "category") {
-      if (value === "School") {
-        setOptions(classes);
-      } else {
-        setOptions([""]);
-      }
       setTask({
         task: tasks["task"],
         category: value,
@@ -128,7 +123,7 @@ function Form(props) {
                 </option>
               ))}
             </select>
-            <select
+            {/* <select
               name="class"
               id="class"
               value={tasks.class}
@@ -139,7 +134,19 @@ function Form(props) {
                   {option}
                 </option>
               ))}
-            </select>
+            </select> */}
+            <input
+              type="text"
+              name="class"
+              id="class"
+              value={tasks.class}
+              onChange={handleChange}
+            />
+            {/* {options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))} */}
 
             <label htmlFor="priority">Priority</label>
             <select
