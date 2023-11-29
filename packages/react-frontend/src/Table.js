@@ -4,6 +4,7 @@ import "./Table.css";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
+import chroma from "chroma-js";
 //import options from Form.js;
 
 const categoryColors = {
@@ -35,11 +36,15 @@ const generateRandomColor = () => {
 
 const getOrCreateClassColors = (classes) => {
   if (!classesColors[classes]) {
-    const textColor = generateRandomColor();
+    const textColor = darkenColor(generateRandomColor(), 5);
     const backgroundColor = generateRandomColor();
     classesColors[classes] = { textColor, backgroundColor };
   }
   return classesColors[classes];
+};
+
+const darkenColor = (color, percent) => {
+  return chroma(color).darken(percent).hex();
 };
 
 const getClassesTextColor = (classes) => {
