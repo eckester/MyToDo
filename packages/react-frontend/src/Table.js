@@ -139,7 +139,6 @@ function TableBody(props) {
                   row._id === showCompletePopup.id && (
                     <div className="popup">
                       <button
-                        type="naviagtion-button"
                         className="delete-button"
                         onClick={() =>
                           props.removeTask(showCompletePopup.id)
