@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
 function Sidebar({ setCategoryFilter }) {
   const [selectedCategory, setSelectedCategory] =
     useState("All Tasks"); // Set "All Tasks" as the default
 
+  const navigate = useNavigate();
+
   const handleCategoryClick = (category) => {
     if (category === "Calendar") {
-      window.location.href = "/calendar";
+      navigate("/calendar");
     } else if (category === "To Do List") {
-      window.location.href = "/";
+      navigate("/");
     } else {
       setCategoryFilter(category);
       setSelectedCategory(category);
