@@ -139,7 +139,7 @@ function TableBody(props) {
                   row._id === showCompletePopup.id && (
                     <div className="popup">
                       <button
-                        type="button"
+                        className="delete-button"
                         onClick={() =>
                           props.removeTask(showCompletePopup.id)
                         }
@@ -147,7 +147,7 @@ function TableBody(props) {
                         Delete
                       </button>
                       <button
-                        type="button"
+                        className="cancel-button"
                         onClick={() =>
                           setShowCompletePopup({
                             inUse: false,
