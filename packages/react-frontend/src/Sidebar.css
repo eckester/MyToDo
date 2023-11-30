@@ -10,24 +10,70 @@
   margin-left: 3px;
 }
 
-.SidebarToDoListLink,
-.SidebarCalendarLink {
+.SidebarLink {
   text-decoration: none;
+  color: inherit;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.SidebarList {
+  color: rgb(77, 77, 77);
+  margin-top: 0;
+  margin-bottom: 5px;
+  padding-left: 28px;
+}
+
+.SidebarList li {
+  padding: 3px 0; /* Adjust top and bottom padding for list items */
+  
+}
+
+.SidebarList li:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+
+.SidebarList li.active {
+  background-color: #ddd;
   color: rgb(0, 0, 0);
 }
+
+.SidebarToDoListLink, .SidebarCalendarLink {
+  text-decoration-line: none;
+  color: rgb(77, 77, 77);
+  margin-right: 5px;
+  margin-bottom: 0;
+  display: inline-block; /* Change the display property */
+  line-height: 1;
+}
+
+.SidebarToDoListLink.active,
+.SidebarCalendarLink.active {
+  text-decoration: none;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: black;
+  margin: 0; /* Set margin to zero */
+  padding: 0;
+}
+
 
 .content-container {
   display: flex;
 }
 
-.SidebarList li.active {
-  background-color: #ddd;
-  color: rgb(0, 0, 0);
-  /* Add other styles for the active category */
+.IconWrapper {
+  display: flex;
+  align-items: center;
 }
 
-.SidebarList li:hover {
-  background-color: #ddd; /* Change to your desired highlight color */
-  cursor: pointer; /* Show pointer cursor on hover */
-  /* Other styles for the hover effect */
+.Icon {
+  margin-right: 8px; /* Adjust margin as needed */
+}
+
+ul {
+  list-style: none;
 }
