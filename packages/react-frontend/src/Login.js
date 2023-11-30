@@ -2,9 +2,64 @@ import "./Login.css";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
 
-function LoginPage() {
-  //const navigate = useNavigate();
+function LoginPage(props) {
   const [showPopup, setShowPopup] = useState(false);
+  const [user1, setUser1] = useState({
+    name: "",
+    password: ""
+  });
+
+  function addUser() {
+    props.handleSubmit(user1);
+    setUser1({
+      name: "",
+      password: ""
+    });
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    if (name === "username") {
+      setUser1({
+        name: value,
+        password: user1["password"]
+      });
+    } else {
+      setUser1({
+        name: user1["name"],
+        password: value
+      });
+    }
+  }
+
+  const genUsers = (users) =>
+    users.map((row, index) => (
+      <tr key={index}>
+        Name: {row.name}
+        Password: {row.password}
+      </tr>
+    ));
+
+  function login(testName, testPass) {
+    let exists = false;
+    for (let i = 0; i < props.userData.length; i++) {
+      if (
+        props.userData[i].name === testName &&
+        props.userData[i].password === testPass
+      ) {
+        exists = true;
+      }
+    }
+
+    if (exists) {
+      window.location.href = "/";
+    } else {
+      alert("invalid username/pass");
+    }
+  }
+
   return (
     <div>
       <h1 className="centered-content">Login</h1>
@@ -13,6 +68,7 @@ function LoginPage() {
         <br />
         <input
           style={{ backgroundColor: "#C0C2C4" }}
+          id="testName"
           className="textBox"
           type="text"
         />
@@ -22,6 +78,7 @@ function LoginPage() {
         <input
           style={{ backgroundColor: "#C0C2C4" }}
           className="textBox"
+          id="testPass"
           type="text"
         />
         <br />
@@ -29,7 +86,10 @@ function LoginPage() {
           bsClass="button"
           variant="contained"
           onClick={() => {
-            alert("this is where the redirect goes");
+            login(
+              document.getElementById("testName").value,
+              document.getElementById("testPass").value
+            );
           }}
         >
           Log in
@@ -54,6 +114,7 @@ function LoginPage() {
                 type="text"
                 name="username"
                 id="username"
+                onChange={handleChange}
                 style={{ backgroundColor: "#FFFFFF" }}
               />
               <label htmlFor="username">
@@ -63,12 +124,14 @@ function LoginPage() {
                 type="text"
                 name="password"
                 id="password"
+                onChange={handleChange}
                 style={{ backgroundColor: "#FFFFFF" }}
               />
               <Button
                 className="button"
                 variant="outlined"
                 type="button"
+                onClick={() => addUser()}
               >
                 Submit
               </Button>
@@ -84,6 +147,7 @@ function LoginPage() {
           </div>
         )}
       </span>
+      <span>{genUsers(props.userData)}</span>
     </div>
   );
 }

@@ -11,6 +11,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
+  const [users, setUsers] = useState([]);
+  //const [users, serUser] = useState([]);
+
   const [categoryFilter, setCategoryFilter] =
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);
@@ -112,6 +115,15 @@ function MyApp() {
     return promise;
   }
 
+  // Users!!!
+  // function fetchUsers() {
+  //   return users;
+  // }
+
+  function updateUsers(user) {
+    setUsers([...users, user]);
+  }
+
   return (
     <div className="header-container">
       <Header />
@@ -153,7 +165,15 @@ function MyApp() {
               )
             }
           />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/login"
+            element={
+              <LoginPage
+                userData={users}
+                handleSubmit={updateUsers}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
