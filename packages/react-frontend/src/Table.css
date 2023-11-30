@@ -133,7 +133,14 @@ td {
   margin: 0 5px;
   font-weight: bold;
   right: 8px;
-  background: #f37b7b;
+  background: #F58F9B;
   color: #1d1d1e;
 }
 
+.delete-button:hover {
+  background-color: #9B062A;
+}
+
+.delete-button:focus {
+  outline: none;
+}
