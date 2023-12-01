@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/packages/express-backend/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/toDoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/backend.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +80,15 @@
       <workItem from="1700950886717" duration="3150000" />
       <workItem from="1701019315108" duration="10944000" />
       <workItem from="1701105050731" duration="11000" />
-      <workItem from="1701105095938" duration="6252000" />
+      <workItem from="1701105095938" duration="15247000" />
+      <workItem from="1701140537343" duration="9000" />
+      <workItem from="1701212436976" duration="2170000" />
+      <workItem from="1701214766655" duration="16000" />
+      <workItem from="1701294071552" duration="4894000" />
+      <workItem from="1701304588008" duration="7040000" />
+      <workItem from="1701379929649" duration="5163000" />
+      <workItem from="1701389512994" duration="1445000" />
+      <workItem from="1701404264721" duration="880000" />
     </task>
     <servers />
   </component>

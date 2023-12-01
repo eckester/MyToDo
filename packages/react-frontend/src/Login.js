@@ -1,153 +1,77 @@
 import "./Login.css";
-import Button from "@mui/material/Button";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage(props) {
-  const [showPopup, setShowPopup] = useState(false);
-  const [user1, setUser1] = useState({
-    name: "",
-    password: ""
+  const [creds, setCreds] = useState({
+    username: "",
+    pwd: ""
   });
-
-  function addUser() {
-    props.handleSubmit(user1);
-    setUser1({
-      name: "",
-      password: ""
-    });
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
-  }
+  const navigate = useNavigate();
 
   function handleChange(event) {
     const { name, value } = event.target;
-    if (name === "username") {
-      setUser1({
-        name: value,
-        password: user1["password"]
-      });
-    } else {
-      setUser1({
-        name: user1["name"],
-        password: value
-      });
+    switch (name) {
+      case "username":
+        setCreds({ ...creds, username: value });
+        break;
+      case "password":
+        setCreds({ ...creds, pwd: value });
+        break;
     }
   }
 
-  const genUsers = (users) =>
-    users.map((row, index) => (
-      <tr key={index}>
-        Name: {row.name}
-        Password: {row.password}
-      </tr>
-    ));
-
-  function login(testName, testPass) {
-    let exists = false;
-    for (let i = 0; i < props.userData.length; i++) {
-      if (
-        props.userData[i].name === testName &&
-        props.userData[i].password === testPass
-      ) {
-        exists = true;
-      }
-    }
-
-    if (exists) {
-      window.location.href = "/";
-    } else {
-      alert("invalid username/pass");
-    }
+  function submitForm() {
+    props.handleSubmit(creds);
+    setCreds({ username: "", pwd: "" });
+    navigate("/");
   }
 
   return (
     <div>
       <h1 className="centered-content">Login</h1>
-      <span className="box">
-        <h2 className="center-content">Username</h2>
+      <form className="box">
+        <label htmlFor="username" className="center-content">
+          Username
+        </label>
         <br />
         <input
           style={{ backgroundColor: "#C0C2C4" }}
-          id="testName"
+          name="username"
+          id="username"
+          value={creds.username}
+          onChange={handleChange}
           className="textBox"
           type="text"
         />
         <br />
-        <h2 className="center-content">Password</h2>
+        <label htmlFor="password" className="center-content">
+          Password
+        </label>
         <br />
         <input
           style={{ backgroundColor: "#C0C2C4" }}
           className="textBox"
-          id="testPass"
-          type="text"
+          id="password"
+          name="password"
+          value={creds.pwd}
+          onChange={handleChange}
+          type="password"
         />
         <br />
-        <Button
-          bsClass="button"
-          variant="contained"
-          onClick={() => {
-            login(
-              document.getElementById("testName").value,
-              document.getElementById("testPass").value
-            );
-          }}
-        >
-          Log in
-        </Button>
-        <br />
-        <p
-          className={"centered-content"}
-          onClick={() => setShowPopup(true)}
-        >
-          No account? Create one&nbsp;<b>here</b>
-        </p>
-        {showPopup && (
-          <div
-            className="sign-in"
-            style={{ backgroundColor: "#ccd5e8" }}
-          >
-            <form>
-              <label htmlFor="username">
-                Enter your Username:
-              </label>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                onChange={handleChange}
-                style={{ backgroundColor: "#FFFFFF" }}
-              />
-              <label htmlFor="username">
-                Enter your Password:
-              </label>
-              <input
-                type="text"
-                name="password"
-                id="password"
-                onChange={handleChange}
-                style={{ backgroundColor: "#FFFFFF" }}
-              />
-              <Button
-                className="button"
-                variant="outlined"
-                type="button"
-                onClick={() => addUser()}
-              >
-                Submit
-              </Button>
-              <Button
-                className="button"
-                variant="outlined"
-                type="button"
-                onClick={() => setShowPopup(false)}
-              >
-                Cancel
-              </Button>
-            </form>
-          </div>
-        )}
-      </span>
-      <span>{genUsers(props.userData)}</span>
+        <input
+          type="button"
+          value={props.buttonLabel || "Log In"}
+          onClick={submitForm}
+        />
+      </form>
+      <br />
+      <p
+        className={"centered-content"}
+        //onClick={() => setShowPopup(true)}
+      >
+        No account? Create one&nbsp;<b>here</b>
+      </p>
     </div>
   );
 }
