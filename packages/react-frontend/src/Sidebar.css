@@ -26,7 +26,7 @@
 }
 
 .SidebarList li {
-  padding: 3px 0; /* Adjust top and bottom padding for list items */
+  padding: 3px 0;  
   
 }
 
@@ -46,7 +46,7 @@
   color: rgb(77, 77, 77);
   margin-right: 5px;
   margin-bottom: 0;
-  display: inline-block; /* Change the display property */
+  display: inline-block; 
   line-height: 1;
 }
 
@@ -56,7 +56,7 @@
   background-color: #f0f0f0;
   font-weight: bold;
   color: black;
-  margin: 0; /* Set margin to zero */
+  margin: 0;
   padding: 0;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .Icon {
-  margin-right: 8px; /* Adjust margin as needed */
+  margin-right: 8px; 
 }
 
 ul {

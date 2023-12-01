@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import ChecklistIcon from "@mui/icons-material/Checklist";
-import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
-import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListAltIcon from "@mui/icons-material/ListAlt";
+import {
+  CalendarMonth as CalendarMonthIcon,
+  Checklist as ChecklistIcon,
+  SchoolOutlined as SchoolOutlinedIcon,
+  WorkOutline as WorkOutlineIcon,
+  ChevronRight as ChevronRightIcon,
+  ListAlt as ListAltIcon
+} from "@mui/icons-material";
 import "./Sidebar.css";
 
 function Sidebar({ setCategoryFilter }) {
@@ -16,19 +18,21 @@ function Sidebar({ setCategoryFilter }) {
 
   const handleCategoryClick = (category) => {
     if (category === "Calendar") {
+      // navigate to calendar page
       navigate("/calendar");
     } else if (category === "To Do List") {
-      navigate("/");
-      setCategoryFilter("All Tasks");
+      navigate("/"); // navigate to To do list page
+      setCategoryFilter("All Tasks"); // automatically filters for all tasks
       setSelectedCategory("All Tasks");
     } else {
-      navigate("/");
-      setCategoryFilter(category);
+      navigate("/"); // navigate to To do list page
+      setCategoryFilter(category); // filtetr by category
       setSelectedCategory(category);
     }
   };
 
   const renderListItems = (categories) => {
+    // helper function to filter when category is selected
     return categories.map((category) => (
       <li
         key={category}
@@ -46,6 +50,7 @@ function Sidebar({ setCategoryFilter }) {
   };
 
   const getCategoryIcon = (category) => {
+    // helper function to get category icon for display
     switch (category) {
       case "All Tasks":
         return <ListAltIcon className="Icon" />;

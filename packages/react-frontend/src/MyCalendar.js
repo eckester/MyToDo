@@ -8,6 +8,7 @@ import "./MyCalendar.css";
 const localizer = momentLocalizer(moment);
 
 const formatDate = (tasks) => {
+  // formatting date for all tasks without time variable
   return tasks.map((task) => ({
     ...task,
     due: moment.utc(task.due).format("MM/DD/YY")
@@ -16,7 +17,6 @@ const formatDate = (tasks) => {
 
 const MyCalendar = ({ tasks }) => {
   const formattedTasks = formatDate(tasks);
-
   const [selectedEvent, setSelectedEvent] = useState(undefined);
   const [showModal, setShowModal] = useState(false);
 
@@ -31,6 +31,7 @@ const MyCalendar = ({ tasks }) => {
   };
 
   const Modal = ({ selectedEvent, closeModal }) => {
+    // formatting overlay for tasks when clicked
     return (
       <div className="modal-overlay" onClick={closeModal}>
         <div className="modal-content">
@@ -73,14 +74,14 @@ const MyCalendar = ({ tasks }) => {
         />
       )}
       <Calendar
-        popup={true}
+        popup={true} // allow calendar popups
         defaultDate={new Date()}
         localizer={localizer}
-        events={formattedTasks}
-        startAccessor="due"
+        events={formattedTasks} // use formatted tasks as the events
+        startAccessor="due" // set start & end time to the due date
         endAccessor="due"
-        titleAccessor="task"
-        views={["month"]}
+        titleAccessor="task" // make sure event title is the task title
+        views={["month"]} // only use month views
         style={{ height: "100vh" }}
         selected={selectedEvent}
         onSelectEvent={(e) => handleSelectedEvent(e)}
