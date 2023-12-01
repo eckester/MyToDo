@@ -25,9 +25,18 @@ const classesColors = {
   "": { textColor: "#FFF", backgroundColor: "#FFF" }
 };
 
+const isColorTooDark = (color) => {
+  const brightnessThreshold = 0.2;
+  return chroma(color).luminance() < brightnessThreshold;
+};
+
 const getOrCreateClassColors = (classes) => {
   if (!classesColors[classes]) {
-    const backgroundColor = chroma.random();
+    let backgroundColor;
+    do {
+      backgroundColor = chroma.random();
+    } while (isColorTooDark(backgroundColor));
+
     const textColor = darkenColor(backgroundColor, 2);
     classesColors[classes] = { textColor, backgroundColor };
   }
