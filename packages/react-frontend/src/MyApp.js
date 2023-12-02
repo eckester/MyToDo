@@ -10,6 +10,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //import { useParams } from "react-router-dom";
 
+//const host = "http://localhost:8000";
+
 function MyApp() {
   const [tasks, setTasks] = useState([]);
   const INVALID_TOKEN = "INVALID_TOKEN";
@@ -21,6 +23,14 @@ function MyApp() {
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);
 
+
+  function fetchTasks() {
+    const promise = fetch(
+      //"http://localhost:8000"
+      "https://black-beach-0a186661e.4.azurestaticapps.net"
+    );
+    return promise;
+  }
   useEffect(() => {
     fetchTasks()
       .then((res) =>
@@ -39,12 +49,6 @@ function MyApp() {
       });
   }, [token]);
 
-  function fetchTasks() {
-    const promise = fetch("http://localhost:8000/tasks", {
-      headers: addAuthHeader()
-    });
-    return promise;
-  }
 
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
