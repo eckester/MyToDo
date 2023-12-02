@@ -6,33 +6,45 @@ import Sidebar from "./Sidebar";
 import LoginPage from "./Login";
 import MyCalendar from "./MyCalendar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// { useNavigate } from "react-router-dom";
 
 //import { useParams } from "react-router-dom";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
-  const [users, setUsers] = useState([]);
-  //const [users, serUser] = useState([]);
+  const INVALID_TOKEN = "INVALID_TOKEN";
+  const [token, setToken] = useState(INVALID_TOKEN);
+  const [message, setMessage] = useState("");
+  //const [returned, setReturned] = useState(false);
 
   const [categoryFilter, setCategoryFilter] =
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);
 
-  function fetchTasks() {
-    const promise = fetch("http://localhost:8000/tasks");
-    return promise;
-  }
   useEffect(() => {
     fetchTasks()
-      .then((res) => res.json())
+      .then((res) =>
+        res.status === 200 ? res.json() : undefined
+      )
       .then((json) => {
-        setTasks(json["toDoList"]);
-        setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
+        if (json) {
+          setTasks(json["toDoList"]);
+          setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
+        } else {
+          setTasks(null);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [token]);
+
+  function fetchTasks() {
+    const promise = fetch("http://localhost:8000/tasks", {
+      headers: addAuthHeader()
+    });
+    return promise;
+  }
 
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
@@ -87,9 +99,9 @@ function MyApp() {
   function postTask(task) {
     const promise = fetch("http://localhost:8000/tasks", {
       method: "POST",
-      headers: {
+      headers: addAuthHeader({
         "Content-Type": "application/json"
-      },
+      }),
       body: JSON.stringify(task)
     });
     return promise;
@@ -115,13 +127,74 @@ function MyApp() {
     return promise;
   }
 
-  // Users!!!
-  // function fetchUsers() {
-  //   return users;
-  // }
+  function loginUser(creds) {
+    const promise = fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(creds)
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          response
+            .json()
+            .then((payload) => setToken(payload.token));
+          setMessage(`Login successful; auth token saved`);
+        } else {
+          setMessage(
+            `Login Error ${response.status}: ${response.data}`
+          );
+        }
+      })
+      .catch((error) => {
+        setMessage(`Login Error: ${error}`);
+      });
 
-  function updateUsers(user) {
-    setUsers([...users, user]);
+    return promise;
+  }
+
+  function addAuthHeader(otherHeaders = {}) {
+    if (token === INVALID_TOKEN) {
+      return otherHeaders;
+    } else {
+      return {
+        ...otherHeaders,
+        Authorization: `Bearer ${token}`
+      };
+    }
+  }
+
+  function signupUser(creds) {
+    const promise = fetch("http://localhost:8000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(creds)
+    })
+      .then((response) => {
+        console.log("Respomse", response);
+        if (response.status === 201) {
+          response.json().then((payload) => {
+            console.log("Payload", payload);
+            setToken(payload.token);
+          });
+          setMessage(
+            `Signup successful for user: ${creds.username}; auth token saved`
+          );
+        } else {
+          setMessage(
+            `Signup Error ${response.status}: ${response.data}`
+          );
+        }
+      })
+      .catch((error) => {
+        setMessage(`Signup Error: ${error}`);
+        alert(message);
+      });
+
+    return promise;
   }
 
   return (
@@ -138,8 +211,6 @@ function MyApp() {
                 />
                 <div className="content-tasks">
                   <ListPage
-                    taskData={tasks}
-                    task2Data={tasks}
                     removeTask={removeOneTask}
                     handleSubmit={updateList}
                     updateTask={updateTask}
@@ -167,10 +238,14 @@ function MyApp() {
           />
           <Route
             path="/login"
+            element={<LoginPage handleSubmit={loginUser} />}
+          />
+          <Route
+            path="/signup"
             element={
               <LoginPage
-                userData={users}
-                handleSubmit={updateUsers}
+                handleSubmit={signupUser}
+                buttonLabel="Sign Up"
               />
             }
           />
@@ -178,36 +253,69 @@ function MyApp() {
       </BrowserRouter>
     </div>
   );
-}
 
-function ListPage(props) {
-  const {
-    taskData,
-    task2Data,
-    removeTask,
-    handleSubmit,
-    updateTask,
-    categoryFilter
-  } = props;
+  function ListPage(props) {
+    const {
+      removeTask,
+      handleSubmit,
+      updateTask,
+      categoryFilter
+    } = props;
 
-  const filteredTasks =
-    categoryFilter === "All Tasks"
-      ? taskData
-      : taskData.filter(
-          (task) => task.category === categoryFilter
-        );
+    setTasks(tasks);
 
-  return (
-    <>
-      <Table
-        taskData={filteredTasks}
-        task2Data={task2Data}
-        removeTask={removeTask}
-        updateTask={updateTask}
-      />
-      <Form handleSubmit={handleSubmit} />
-    </>
-  );
+    const filteredTasks =
+      categoryFilter === "All Tasks"
+        ? tasks
+        : tasks.filter(
+            (task) => task.category === categoryFilter
+          );
+
+    return (
+      <>
+        <Table
+          taskData={filteredTasks}
+          task2Data={tasks}
+          removeTask={removeTask}
+          updateTask={updateTask}
+        />
+        <Form handleSubmit={handleSubmit} />
+      </>
+    );
+  }
 }
 
 export default MyApp;
+
+// Users!!!
+// function fetchUsers() {
+//   return users;
+// }
+
+// function fetchUsers() {
+//   // const promise = fetch("http://localhost:8000/users");
+//   // return promise;
+//     return users;
+// }
+// useEffect(() => {
+//   fetchUsers()
+//     .then((res) => res.json())
+//     .then((json) => {
+//       setUsers(json["users"]);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// }, []);
+
+// function updateUsers(user) {
+//   setUsers([...users, user]);
+//   // const promise = fetch("http://localhost:8000/users", {
+//   //   method: "POST",
+//   //   headers: {
+//   //     "Content-Type": "application/json"
+//   //   },
+//   //   body: JSON.stringify(user)
+//   // });
+//   // return promise;
+// }

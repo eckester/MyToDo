@@ -94,6 +94,9 @@ function TableHeader({ setPriorityFilter }) {
 }
 
 function TableBody(props) {
+  if (props.taskData === null) {
+    return <caption>Data Unavailable</caption>;
+  }
   const [showCompletePopup, setShowCompletePopup] = useState({
     inUse: false,
     id: ""
