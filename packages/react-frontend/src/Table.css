@@ -53,6 +53,7 @@ td {
   text-align: left;
   color: #6e7c87;
   border-bottom: 1px solid #ccc;
+  width: 20rem;
 }
 
 .card-container {
@@ -90,6 +91,10 @@ td {
   cursor: pointer;
 }
 
+.test {
+  size: 0;
+}
+
 .centered-content {
   display: flex;
   align-items: center;
@@ -102,4 +107,40 @@ td {
   white-space: nowrap;
   width: 250px;
   display: inline-block;
+}
+
+.cancel-button {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+  align-self: center;
+  position: absolute;
+  bottom: 40px;
+  margin: 0 5px;
+  font-weight: bold;
+  right: 8px;
+  background: #8ba3cc;
+  color: #1d1d1e;
+}
+
+.delete-button {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+  align-self: center;
+  position: absolute;
+  bottom: 65px;
+  margin: 0 5px;
+  font-weight: bold;
+  right: 8px;
+  background: #F58F9B;
+  color: #1d1d1e;
+}
+
+.delete-button:hover {
+  background-color: #9B062A;
+}
+
+.delete-button:focus {
+  outline: none;
 }
