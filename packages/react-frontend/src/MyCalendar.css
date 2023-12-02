@@ -1,19 +1,42 @@
+
 .calendar-container {
   width: 90%;
-  height: 600px;
-  margin: 5px auto; /* Center the calendar horizontally and add margin */
-  padding: 30px; /* Add padding around the calendar */
+  height: 100%;
+  margin: 5px auto; 
+  padding: 2%;
   box-sizing: border-box;
 }
 
 .rbc-toolbar-label {
-  font-size: 30px; /* Adjust the font size as desired */
+  font-size: 180%; /* Adjust the font size as desired */
   font-weight: bold;
   display: flex;
 }
-.rbc-calendar {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.rbc-calendar{
+  background-color: #f0f0f0; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+}
+
+.rbc-date-cell {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0;
+  min-width: 0;
+  padding-right: 5px;
+  text-align: right;
+}
+
+.rbc-button-link {
+  color: inherit;
+  background: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
 }
