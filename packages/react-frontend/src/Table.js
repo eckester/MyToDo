@@ -4,6 +4,7 @@ import "./Table.css";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
+import chroma from "chroma-js";
 //import options from Form.js;
 
 const categoryColors = {
@@ -21,28 +22,40 @@ const getCategoryBackgroundColor = (category) =>
   categoryColors.default.backgroundColor;
 
 const classesColors = {
-  "": { textColor: "#FFF", backgroundColor: "#FFF" },
-  CS: { textColor: "#b52602", backgroundColor: "#f59c85" },
-  Math: { textColor: "#9c752f", backgroundColor: "#fac66b" },
-  English: { textColor: "#ad9640", backgroundColor: "#ffe172" },
-  History: { textColor: "#649e48", backgroundColor: "#affc89" },
-  Chemistry: {
-    textColor: "#407185",
-    backgroundColor: "#82d8fa"
-  },
-  "CSC-307": {
-    textColor: "#7042ad",
-    backgroundColor: "#d2b6f7"
-  },
-  default: { textColor: "#FFF", backgroundColor: "#FFF" }
+  "": { textColor: "#FFF", backgroundColor: "#FFF" }
 };
 
-const getClassesTextColor = (classes) =>
-  classesColors[classes]?.textColor ||
-  classesColors.default.textColor;
-const getClassesBackgroundColor = (classes) =>
-  classesColors[classes]?.backgroundColor ||
-  classesColors.default.backgroundColor;
+const isColorTooDark = (color) => {
+  const brightnessThreshold = 0.2;
+  return chroma(color).luminance() < brightnessThreshold;
+};
+
+const getOrCreateClassColors = (classes) => {
+  if (!classesColors[classes]) {
+    let backgroundColor;
+    do {
+      backgroundColor = chroma.random();
+    } while (isColorTooDark(backgroundColor));
+
+    const textColor = darkenColor(backgroundColor, 2);
+    classesColors[classes] = { textColor, backgroundColor };
+  }
+  return classesColors[classes];
+};
+
+const darkenColor = (color, percent) => {
+  return chroma(color).darken(percent).hex();
+};
+
+const getClassesTextColor = (classes) => {
+  const colors = getOrCreateClassColors(classes);
+  return colors.textColor;
+};
+
+const getClassesBackgroundColor = (classes) => {
+  const colors = getOrCreateClassColors(classes);
+  return colors.backgroundColor;
+};
 
 const convertUTCtoLocal = (utc) => {
   const utcDate = new Date(utc);
