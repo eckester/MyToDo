@@ -2,6 +2,11 @@
 import express from "express";
 import cors from "cors";
 import toDoListServices from "./models/toDoList-services.js";
+import {
+  authenticateUser,
+  registerUser,
+  loginUser
+} from "./auth.js";
 
 const app = express();
 const port = 8000;
@@ -13,11 +18,28 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// get tasks
-app.get("/tasks", async (req, res) => {
+// get tasks (all, category, priority, date)
+app.get("/tasks", authenticateUser, async (req, res) => {
+  //alert("get the tasks");
+  const { category, priority, date } = req.query;
   try {
-    const result = await toDoListServices.getTasks();
-    res.send({ toDoList: result });
+    let result;
+    if (category) {
+      result =
+        await toDoListServices.filterCategoryTasks(category);
+    } else if (priority) {
+      result =
+        await toDoListServices.filterPriorityTasks(priority);
+    } else if (date) {
+      result = await toDoListServices.sortToDoByDate(date);
+    } else {
+      result = await toDoListServices.getTasks();
+    }
+    if (result === undefined || result === null)
+      res.status(404).send("Resource not found.");
+    else {
+      res.send({ toDoList: result });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send("An error occurred in the server.");
@@ -25,7 +47,7 @@ app.get("/tasks", async (req, res) => {
 });
 
 // get task by id
-app.get("/tasks/:id", async (req, res) => {
+app.get("/tasks/:id", authenticateUser, async (req, res) => {
   const id = req.params.id;
   const result = await toDoListServices.findTaskById(id);
   if (result === undefined || result === null)
@@ -35,20 +57,8 @@ app.get("/tasks/:id", async (req, res) => {
   }
 });
 
-// get task by category
-app.get("/tasks/category/:cat", async (req, res) => {
-  const id = req.params.id;
-  const result =
-    await toDoListServices.filterCategoryTasks(cat);
-  if (result === undefined || result === null)
-    res.status(404).send("Resource not found.");
-  else {
-    res.send({ toDoList: result });
-  }
-});
-
 // add task
-app.post("/tasks", async (req, res) => {
+app.post("/tasks", authenticateUser, async (req, res) => {
   const task = req.body;
   const newTask = await toDoListServices.addTask(task);
 
@@ -57,7 +67,7 @@ app.post("/tasks", async (req, res) => {
 });
 
 // Delete a task by ID
-app.delete("/tasks/:id", async (req, res) => {
+app.delete("/tasks/:id", authenticateUser, async (req, res) => {
   const id = req.params.id;
   try {
     const deletedTask = await toDoListServices.deleteTask(id);
@@ -75,6 +85,54 @@ app.delete("/tasks/:id", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || port, () => {
-  console.log(`REST API is listening`);
+// edit existing task by ID
+app.put("/tasks/:id", authenticateUser, async (req, res) => {
+  const id = req.params.id;
+  const updatedTask = req.body;
+
+  try {
+    const result = await toDoListServices.updateTask(
+      id,
+      updatedTask
+    );
+    if (!result) {
+      res.status(404).send("Task not found.");
+    } else {
+      res.send({
+        message: "Task updated successfully.",
+        updatedTask: result
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred in the server.");
+  }
+});
+
+// Users
+// app.get("/users", authenticateUser, async (req, res) => {
+//   const result = await toDoListServices.getUsers();
+//   if (result === undefined || result === null)
+//     res.status(404).send("Resource not found.");
+//   else {
+//     res.send({ users: result });
+//   }
+// });
+//
+// app.post("/users", async (req, res) => {
+//   const user = req.body;
+//   const newUser = await toDoListServices.addUser(user);
+//
+//   if (newUser) res.status(201).json(newUser);
+//   else res.status(500).end();
+// });
+
+app.post("/signup", registerUser);
+
+app.post("/login", loginUser);
+
+app.listen(port, () => {
+  console.log(
+    `Example app listening at http://localhost:${port}`
+  );
 });

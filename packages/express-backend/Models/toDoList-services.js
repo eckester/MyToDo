@@ -1,6 +1,8 @@
 // toDoList-services.js
 import mongoose from "mongoose";
-import toDoModel from "./toDoList.js";
+//import { toDoModel, users } from "./toDoList.js";
+import scheme from "./toDoList.js";
+//import users from "./toDoList.js";
 
 import dotenv from "dotenv";
 
@@ -17,42 +19,66 @@ mongoose
   })
   .catch((error) => console.log(error));
 
+// is this correct for date? it doesn't use the parameter
 function sortToDoByDate(date) {
-  return toDoModel.find().sort({ due: 1 });
+  return scheme.toDoModel.find().sort({ due: 1 });
+}
+
+function filterPriorityTasks(prior) {
+  return scheme.toDoModel.find({ priority: prior });
 }
 
 function filterCategoryTasks(cat) {
-  return toDoModel.find().sort({ category: cat });
+  return scheme.toDoModel.find({ category: cat });
 }
 
-//function findToDoByDate(date) {
-//return toDoModel.find({ due: date });
-//}
-
 function addTask(task) {
-  const taskToAdd = new toDoModel(task);
+  const taskToAdd = new scheme.toDoModel(task);
   const promise = taskToAdd.save();
   return promise;
 }
 
 function deleteTask(taskId) {
-  return toDoModel.findByIdAndDelete(taskId);
+  return scheme.toDoModel.findByIdAndDelete(taskId);
 }
 
 function getTasks() {
-  return toDoModel.find();
+  return scheme.toDoModel.find().sort({ due: 1 });
 }
 
 function findTaskById(id) {
-  return toDoModel.find({ _id: id });
+  return scheme.toDoModel.find({ _id: id });
+}
+
+function updateTask(taskId, updatedTask) {
+  return scheme.toDoModel.findByIdAndUpdate(
+    taskId,
+    updatedTask,
+    {
+      new: true
+    }
+  );
+}
+
+// User stuff
+// function addUser(user) {
+//   const userToAdd = new scheme.users(user);
+//   const promise = userToAdd.save();
+//   return promise;
+// }
+
+function getUsers() {
+  return scheme.users;
 }
 
 export default {
   sortToDoByDate,
-  //findToDoByDate,
   filterCategoryTasks,
   addTask,
   deleteTask,
   getTasks,
-  findTaskById
+  findTaskById,
+  updateTask,
+  filterPriorityTasks,
+  getUsers
 };

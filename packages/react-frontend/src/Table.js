@@ -1,121 +1,289 @@
-import React from "react";
+// Table.js
+import React, { useState } from "react";
 import "./Table.css";
 import Card from "react-bootstrap/Card";
-import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
+import Container from "react-bootstrap/Container";
+import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
+import chroma from "chroma-js";
+//import options from Form.js;
 
-const getCategoryTextColor = (category) => {
-  switch (category) {
-    case "School":
-      return "#069B39";
-    case "Work":
-      return "#06399B";
-    case "Other":
-      return "#9B062A";
-    default:
-      return "#000"; // Default color if the category doesn't match any case
-  }
+const categoryColors = {
+  School: { textColor: "#069B39", backgroundColor: "#8FF5A6" },
+  Work: { textColor: "#06399B", backgroundColor: "#8FE3F5" },
+  Other: { textColor: "#9B062A", backgroundColor: "#F58F9B" },
+  default: { textColor: "#000", backgroundColor: "#FFF" }
 };
 
-const getCategoryBackgroundColor = (category) => {
-  switch (category) {
-    case "School":
-      return "#8FF5A6";
-    case "Work":
-      return "#8FE3F5";
-    case "Other":
-      return "#F58F9B";
-    default:
-      return "#FFF"; // Default background color if the category doesn't match any case
-  }
+const getCategoryTextColor = (category) =>
+  categoryColors[category]?.textColor ||
+  categoryColors.default.textColor;
+const getCategoryBackgroundColor = (category) =>
+  categoryColors[category]?.backgroundColor ||
+  categoryColors.default.backgroundColor;
+
+const classesColors = {
+  "": { textColor: "#FFF", backgroundColor: "#FFF" }
 };
-function TableHeader() {
+
+const isColorTooDark = (color) => {
+  const brightnessThreshold = 0.2;
+  return chroma(color).luminance() < brightnessThreshold;
+};
+
+const getOrCreateClassColors = (classes) => {
+  if (!classesColors[classes]) {
+    let backgroundColor;
+    do {
+      backgroundColor = chroma.random();
+    } while (isColorTooDark(backgroundColor));
+
+    const textColor = darkenColor(backgroundColor, 2);
+    classesColors[classes] = { textColor, backgroundColor };
+  }
+  return classesColors[classes];
+};
+
+const darkenColor = (color, percent) => {
+  return chroma(color).darken(percent).hex();
+};
+
+const getClassesTextColor = (classes) => {
+  const colors = getOrCreateClassColors(classes);
+  return colors.textColor;
+};
+
+const getClassesBackgroundColor = (classes) => {
+  const colors = getOrCreateClassColors(classes);
+  return colors.backgroundColor;
+};
+
+const convertUTCtoLocal = (utc) => {
+  const utcDate = new Date(utc);
+  return new Date(
+    utcDate.getTime() + utcDate.getTimezoneOffset() * 60000
+  );
+};
+
+const priorityOptions = ["None", "High", "Medium", "Low"];
+
+function TableHeader({ setPriorityFilter }) {
+  const handlePriorityFilterChange = (e) => {
+    setPriorityFilter(e.target.value);
+  };
+
   return (
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Status</th>
+        <label style={{ paddingLeft: "7px" }}>
+          Filter By Priority:
+          <select
+            name="Priority"
+            onChange={handlePriorityFilterChange}
+            style={{ width: "300px", paddingLeft: "7px" }}
+          >
+            {priorityOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
       </tr>
     </thead>
   );
 }
 
 function TableBody(props) {
-  const rows = props.taskData.map((row, index) => {
-    let stat = "In-Progress";
-    if (row.status) {
-      stat = "Complete";
-    }
-    const date = new Date(row.due);
-    return (
-      <tr key={index}>
-        <Card
-          style={{
-            width: "18rem",
-            border: "1px solid #ced4da",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-          }}
-        >
-          <Card.Body style={{ padding: "16px" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "start",
-                gap: "12px"
-              }}
-            >
-              <div>
-                <Card.Text>{row.task}</Card.Text>
-                <span
-                  style={{
-                    fontSize: "12px",
-                    padding: "5px",
-                    borderRadius: "5px",
-                    color: getCategoryTextColor(row.category),
-                    backgroundColor: getCategoryBackgroundColor(
-                      row.category
-                    )
-                  }}
-                >
-                  {row.category}
-                </span>
-                <span
-                  style={{ fontSize: "12px", color: "#777" }}
-                >
-                  {new Date(date).toLocaleDateString(
-                    undefined,
-                    { month: "short", day: "numeric" }
-                  )}
-                </span>
-                <div className={row.priority}>!</div>
-              </div>
-              <button
-                style={{
-                  border: "none",
-                  padding: "1px", // Adjust padding as needed
-                  cursor: "pointer"
-                }}
-                onClick={() => props.removeTask(row._id)}
-              >
-                <CheckBoxRoundedIcon />
-              </button>
-            </div>
-          </Card.Body>
-        </Card>
-        <td>{stat}</td>
-      </tr>
-    );
+  if (props.taskData === null) {
+    return <caption>Data Unavailable</caption>;
+  }
+  const [showCompletePopup, setShowCompletePopup] = useState({
+    inUse: false,
+    id: ""
   });
-  return <tbody>{rows}</tbody>;
+
+  const { priorityFilter } = props.filters;
+
+  const filteredTasks = props.taskData.filter((row) => {
+    // Apply priority filter
+    if (
+      priorityFilter !== "None" &&
+      row.priority !== priorityFilter
+    ) {
+      return false;
+    }
+    return true; // Task passes all filters
+  });
+
+  const generateTableRow = (tasks) =>
+    tasks.map((row, index) => {
+      const date = convertUTCtoLocal(row.due);
+      return (
+        <tr key={index}>
+          <Card className="custom-card">
+            <Card.Body
+              style={{ padding: "10px", position: "relative" }}
+            >
+              <div className="card-container">
+                <Card.Text
+                  className="task-title"
+                  onClick={() => (
+                    (row.status = !row.status),
+                    props.updateTask(row)
+                  )}
+                >
+                  {row.status === true ? (
+                    <span
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      {row.task}
+                    </span>
+                  ) : (
+                    <span>{row.task}</span>
+                  )}
+                </Card.Text>
+                <TaskAltOutlinedIcon
+                  className="card-icon"
+                  onClick={() =>
+                    setShowCompletePopup({
+                      inUse: true,
+                      id: row._id
+                    })
+                  }
+                ></TaskAltOutlinedIcon>
+                {showCompletePopup.inUse &&
+                  row._id === showCompletePopup.id && (
+                    <div className="popup">
+                      <button
+                        className="delete-button"
+                        onClick={() =>
+                          props.removeTask(showCompletePopup.id)
+                        }
+                      >
+                        Delete
+                      </button>
+                      <button
+                        className="cancel-button"
+                        onClick={() =>
+                          setShowCompletePopup({
+                            inUse: false,
+                            id: ""
+                          })
+                        }
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+              </div>
+              <div className="centered-content">
+                <Container className="card-container">
+                  <div className={row.priority}>!</div>
+                  <span
+                    className="card-span"
+                    style={{
+                      color: getCategoryTextColor(row.category),
+                      backgroundColor:
+                        getCategoryBackgroundColor(row.category)
+                    }}
+                  >
+                    {row.category}
+                  </span>
+                  <span
+                    className="card-span"
+                    style={{
+                      color: getClassesTextColor(row.class),
+                      backgroundColor:
+                        getClassesBackgroundColor(row.class)
+                    }}
+                  >
+                    {row.class}
+                  </span>
+                  <span className="card-date">
+                    {date
+                      .toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric"
+                      })
+                      .toUpperCase()}
+                  </span>
+                </Container>
+              </div>
+            </Card.Body>
+          </Card>
+        </tr>
+      );
+    });
+
+  const overdueTasks = generateTableRow(
+    filteredTasks.filter(
+      (row) =>
+        convertUTCtoLocal(row.due) <
+        new Date().setHours(0, 0, 0, 0)
+    ),
+    "OVERDUE"
+  );
+
+  const thisWeekTasks = generateTableRow(
+    filteredTasks.filter((row) => {
+      const dueDate = convertUTCtoLocal(row.due);
+      const currentDate = new Date().setHours(0, 0, 0, 0);
+      const weekFromToday = new Date(currentDate);
+      weekFromToday.setDate(weekFromToday.getDate() + 7);
+      return dueDate >= currentDate && dueDate < weekFromToday;
+    }),
+    "THIS WEEK"
+  );
+
+  const nextWeekTasks = generateTableRow(
+    filteredTasks.filter((row) => {
+      const dueDate = convertUTCtoLocal(row.due);
+      const currentDate = new Date().setHours(0, 0, 0, 0);
+      const weekFromToday = new Date(currentDate);
+      weekFromToday.setDate(weekFromToday.getDate() + 7);
+      return dueDate >= weekFromToday;
+    }),
+    "NEXT WEEK"
+  );
+
+  return (
+    <tbody>
+      <tr>
+        <td>
+          <b className="label-dates">OVERDUE</b>
+          {overdueTasks}
+        </td>
+        <td>
+          <b className="label-dates">THIS WEEK</b>
+          {thisWeekTasks}
+        </td>
+        <td>
+          <b className="label-dates">NEXT WEEK</b>
+          {nextWeekTasks}
+        </td>
+      </tr>
+    </tbody>
+  );
 }
 function Table(props) {
+  const [filters, setFilters] = useState({
+    categoryFilter: "All",
+    priorityFilter: "None"
+  });
+
+  const setPriorityFilter = (value) => {
+    setFilters({ ...filters, priorityFilter: value });
+  };
+
   return (
     <table>
-      <TableHeader />
+      <TableHeader setPriorityFilter={setPriorityFilter} />
       <TableBody
         taskData={props.taskData}
+        task2Data={props.task2Data}
         removeTask={props.removeTask}
+        updateTask={props.updateTask}
+        filters={filters}
       />
     </table>
   );

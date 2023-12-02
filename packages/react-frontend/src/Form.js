@@ -1,22 +1,23 @@
 import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import "./Form.css";
+
 function Form(props) {
-  //let date = Date.now();
-  //let str = date.toDateString();
-  //let date = Date
   const [tasks, setTask] = useState({
     task: "",
     category: "",
-    priority: "",
-    due: Date.now(),
+    priority: 0,
+    due: Date.now,
     status: "",
-    _id: ""
+    _id: "",
+    class: ""
   });
 
-  const [showPopup, setShowPopup] = useState(false);
+  //const [showPopup, setShowPopup] = useState(false);
 
   const categoryOptions = ["School", "Work", "Other"];
   const priorityOptions = ["Low", "Medium", "High", "None"];
-  //const statusOptions = ['In-Progress', 'Complete'];
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -25,35 +26,48 @@ function Form(props) {
         task: tasks["task"],
         category: value,
         priority: tasks["priority"],
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     } else if (name === "name") {
       setTask({
         task: value,
         category: tasks["category"],
         priority: tasks["priority"],
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     } else if (name === "priority") {
       setTask({
         task: tasks["task"],
         category: tasks["category"],
         priority: value,
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     } else if (name === "date") {
       setTask({
         task: tasks["task"],
         category: tasks["category"],
         priority: tasks["priority"],
-        due: value
+        due: value,
+        class: tasks["class"]
+      });
+    } else if (name === "class") {
+      setTask({
+        task: tasks["task"],
+        category: tasks["category"],
+        priority: tasks["priority"],
+        due: tasks["class"],
+        class: value
       });
     } else {
       setTask({
         task: tasks["task"],
         category: tasks["category"],
         priority: tasks["priority"],
-        due: tasks["due"]
+        due: tasks["due"],
+        class: tasks["class"]
       });
     }
   }
@@ -62,22 +76,31 @@ function Form(props) {
     props.handleSubmit(tasks);
     setTask({
       task: "",
-      category: tasks["category"],
-      priority: tasks["priority"],
-      due: tasks["due"],
-      status: false
+      category: "",
+      priority: "",
+      due: Date.now,
+      status: false,
+      class: ""
     });
-    setShowPopup(false); // close the popup after submitting
+    setShow(false); // close the popup after submitting
   }
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
-    <div>
-      <button onClick={() => setShowPopup(true)}>
+    <>
+      <Button variant="primary" onClick={handleShow}>
         Add Task
-      </button>{" "}
-      {/* Add Task button */}
-      {showPopup && (
-        <div className="popup">
+      </Button>
+      <Modal
+        centered
+        size="lg"
+        show={show}
+        onHide={handleClose}
+      >
+        <Modal.Title>Adding Task</Modal.Title>
+        <Modal.Body>
           <form>
             <label htmlFor="name">Name</label>
             <input
@@ -101,7 +124,13 @@ function Form(props) {
                 </option>
               ))}
             </select>
-
+            <input
+              type="text"
+              name="class"
+              id="class"
+              value={tasks.class}
+              onChange={handleChange}
+            />
             <label htmlFor="priority">Priority</label>
             <select
               name="priority"
@@ -125,19 +154,18 @@ function Form(props) {
               value={tasks.due}
               onChange={handleChange}
             />
-            <button type="button" onClick={submitForm}>
-              Submit
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowPopup(false)}
-            >
-              Cancel
-            </button>
           </form>
-        </div>
-      )}
-    </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button vairant="primary" onClick={submitForm}>
+            Submit
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

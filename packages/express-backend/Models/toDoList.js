@@ -9,15 +9,18 @@ const toDoSchema = new Schema(
       required: true
     },
     category: {
-      // create categories for school i.e. class type?
       type: String,
       required: true,
       enum: ["School", "Work", "Other"]
     },
     due: {
       type: Date,
-      default: Date.now,
-      required: true
+      default: () => {
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0); // Set to midnight
+        return currentDate;
+      },
+      required: false
     },
     priority: {
       type: String,
@@ -27,6 +30,10 @@ const toDoSchema = new Schema(
     status: {
       type: Boolean,
       default: false
+    },
+    class: {
+      type: String,
+      default: ""
     },
     notes: {
       type: String,
@@ -47,6 +54,25 @@ const toDoSchema = new Schema(
   { collection: "toDoList" }
 );
 
-const ToDo = mongoose.model("ToDoList", toDoSchema);
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    }
+  },
 
-export default ToDo;
+  { collection: "toDoList" }
+);
+
+const ToDo = mongoose.model("ToDoList", toDoSchema);
+const users = mongoose.model("toDoList", userSchema);
+
+export default {
+  toDoModel: ToDo,
+  userScheme: users
+};
