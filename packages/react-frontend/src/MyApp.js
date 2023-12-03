@@ -23,7 +23,6 @@ function MyApp() {
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);
 
-
   function fetchTasks() {
     const promise = fetch(
       //"http://localhost:8000"
@@ -48,7 +47,6 @@ function MyApp() {
         console.log(error);
       });
   }, [token]);
-
 
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
