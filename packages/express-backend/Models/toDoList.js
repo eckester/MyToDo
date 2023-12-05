@@ -54,6 +54,25 @@ const toDoSchema = new Schema(
   { collection: "toDoList" }
 );
 
-const ToDo = mongoose.model("ToDoList", toDoSchema);
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    }
+  },
 
-export default ToDo;
+  { collection: "toDoList" }
+);
+
+const ToDo = mongoose.model("ToDoList", toDoSchema);
+const users = mongoose.model("toDoList", userSchema);
+
+export default {
+  toDoModel: ToDo,
+  userScheme: users
+};
