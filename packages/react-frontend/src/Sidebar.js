@@ -1,19 +1,67 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  CalendarMonth as CalendarMonthIcon,
+  Checklist as ChecklistIcon,
+  SchoolOutlined as SchoolOutlinedIcon,
+  WorkOutline as WorkOutlineIcon,
+  ChevronRight as ChevronRightIcon,
+  ListAlt as ListAltIcon
+} from "@mui/icons-material";
 import "./Sidebar.css";
 
 function Sidebar({ setCategoryFilter }) {
   const [selectedCategory, setSelectedCategory] =
     useState("All Tasks"); // Set "All Tasks" as the default
 
+  const navigate = useNavigate();
+
   const handleCategoryClick = (category) => {
     if (category === "Calendar") {
-      window.location.href = "/calendar";
+      // navigate to calendar page
+      navigate("/calendar");
     } else if (category === "To Do List") {
-      window.location.href = "/";
+      navigate("/"); // navigate to To do list page
+      setCategoryFilter("All Tasks"); // automatically filters for all tasks
+      setSelectedCategory("All Tasks");
     } else {
-      setCategoryFilter(category);
+      navigate("/"); // navigate to To do list page
+      setCategoryFilter(category); // filtetr by category
       setSelectedCategory(category);
+    }
+  };
+
+  const renderListItems = (categories) => {
+    // helper function to filter when category is selected
+    return categories.map((category) => (
+      <li
+        key={category}
+        className={
+          selectedCategory === category ? "active" : ""
+        }
+        onClick={() => handleCategoryClick(category)}
+      >
+        <div className="IconWrapper">
+          {getCategoryIcon(category)}
+          <span>{category}</span>
+        </div>
+      </li>
+    ));
+  };
+
+  const getCategoryIcon = (category) => {
+    // helper function to get category icon for display
+    switch (category) {
+      case "All Tasks":
+        return <ListAltIcon className="Icon" />;
+      case "School":
+        return <SchoolOutlinedIcon className="Icon" />;
+      case "Work":
+        return <WorkOutlineIcon className="Icon" />;
+      case "Other":
+        return <ChevronRightIcon className="Icon" />;
+      default:
+        return null;
     }
   };
 
@@ -26,42 +74,19 @@ function Sidebar({ setCategoryFilter }) {
           }
           onClick={() => handleCategoryClick("To Do List")}
         >
-          To Do List
+          <div className="IconWrapper">
+            <ChecklistIcon className="Icon" />
+            <span>To Do List</span>
+          </div>
         </li>
       </Link>
       <ul className="SidebarList">
-        <li
-          className={
-            selectedCategory === "All Tasks" ? "active" : ""
-          }
-          onClick={() => handleCategoryClick("All Tasks")}
-        >
-          All Tasks
-        </li>
-        <li
-          className={
-            selectedCategory === "School" ? "active" : ""
-          }
-          onClick={() => handleCategoryClick("School")}
-        >
-          School
-        </li>
-        <li
-          className={
-            selectedCategory === "Work" ? "active" : ""
-          }
-          onClick={() => handleCategoryClick("Work")}
-        >
-          Work
-        </li>
-        <li
-          className={
-            selectedCategory === "Other" ? "active" : ""
-          }
-          onClick={() => handleCategoryClick("Other")}
-        >
-          Other
-        </li>
+        {renderListItems([
+          "All Tasks",
+          "School",
+          "Work",
+          "Other"
+        ])}
       </ul>
       <Link to="/calendar" className="SidebarCalendarLink">
         <li
@@ -70,7 +95,10 @@ function Sidebar({ setCategoryFilter }) {
           }
           onClick={() => handleCategoryClick("Calendar")}
         >
-          Calendar
+          <div className="IconWrapper">
+            <CalendarMonthIcon className="Icon" />
+            <span className="CalendarTitle">Calendar</span>
+          </div>
         </li>
       </Link>
     </div>
