@@ -8,10 +8,11 @@
 }
 
 .rbc-toolbar-label {
-  font-size: 180%; /* Adjust the font size as desired */
+  font-size: 180%; 
   font-weight: bold;
   display: flex;
 }
+
 .rbc-calendar{
   background-color: #f0f0f0; 
   border: 1px solid #ccc; 
@@ -19,24 +20,95 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
 }
 
-.rbc-date-cell {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 0px;
-          flex: 1 1 0;
-  min-width: 0;
-  padding-right: 5px;
-  text-align: right;
+.modal-show {
+  display: block;
 }
 
-.rbc-button-link {
-  color: inherit;
-  background: none;
-  margin: 0;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  -webkit-user-select: text;
-     -moz-user-select: text;
-      -ms-user-select: text;
-          user-select: text;
+.modal-hide {
+  display: none;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 5px;
+  width: 350px; 
+  height: 200px; 
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  text-align: left;
+  position: relative;
+  white-space: nowrap;
+}
+
+.modal-exit-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  margin: 0;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  width: 275px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.date-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.date-number {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.custom-day-cell:hover .date-number {
+  background-color: blue;
+  color: white;
+  pointer-events: auto;
+}
+
+

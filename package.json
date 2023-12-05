@@ -25,6 +25,7 @@
     "chroma-js": "^2.4.2",
     "create-react-app": "^5.0.1",
     "dotenv": "^16.3.1",
+    "moment": "^2.29.4",
     "jsonwebtoken": "^9.0.2",
     "randomcolor": "^0.6.2",
     "react": "^18.2.0",
@@ -33,6 +34,7 @@
     "react-bootstrap-validation": "^0.1.11",
     "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",
+    "the": "^1.0.2",
     "web-vitals": "^2.1.4"
   },
   "workspaces": [
