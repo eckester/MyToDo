@@ -5,7 +5,6 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 import chroma from "chroma-js";
-//import options from Form.js;
 
 const categoryColors = {
   School: { textColor: "#069B39", backgroundColor: "#8FF5A6" },

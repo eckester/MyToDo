@@ -67,8 +67,8 @@ function LoginPage(props) {
       </form>
       <br />
       <p
-        className={"centered-content"}
-        //onClick={() => setShowPopup(true)}
+        className={"centered-content-button"}
+        onClick={() => navigate("/signup")}
       >
         No account? Create one&nbsp;<b>here</b>
       </p>

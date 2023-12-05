@@ -1,4 +1,4 @@
-.centered-content {
+.centered-content, .centered-content-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,15 +24,28 @@
 .box {
   box-sizing: border-box;
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: baseline;
   padding: 1em;
   margin-top: 1em;
   margin-bottom: 1em;
-  margin-left: 25em;
-  margin-right: 25em;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #ecefeb;
   color: rgb(6, 6, 6);
+  width: 80%;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 600px) {
+  .box {
+    width: 90%
+  }
+}
+
+.centered-content-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
