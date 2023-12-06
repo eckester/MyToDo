@@ -135,12 +135,12 @@ td {
   margin: 0 5px;
   font-weight: bold;
   right: 8px;
-  background: #F58F9B;
+  background: #f58f9b;
   color: #1d1d1e;
 }
 
 .delete-button:hover {
-  background-color: #9B062A;
+  background-color: #9b062a;
 }
 
 .delete-button:focus {

@@ -1,4 +1,5 @@
-.centered-content, .centered-content-button {
+.centered-content,
+.centered-content-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +42,7 @@
 
 @media screen and (max-width: 600px) {
   .box {
-    width: 90%
+    width: 90%;
   }
 }
 
