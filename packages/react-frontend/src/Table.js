@@ -119,97 +119,95 @@ function TableBody(props) {
       const date = convertUTCtoLocal(row.due);
       return (
         <tr key={index}>
-          <Card className="custom-card">
-            <Card.Body
-              style={{ padding: "10px", position: "relative" }}
-            >
-              <div className="card-container">
-                <Card.Text
-                  className="task-title"
-                  onClick={() => (
-                    (row.status = !row.status),
-                    props.updateTask(row)
-                  )}
-                >
-                  {row.status === true ? (
-                    <span
-                      style={{ textDecoration: "line-through" }}
+          <td className="custom-card">
+            <div className="card-container">
+              <Card.Text
+                className="task-title"
+                onClick={() => (
+                  (row.status = !row.status),
+                  props.updateTask(row)
+                )}
+              >
+                {row.status === true ? (
+                  <span
+                    style={{ textDecoration: "line-through" }}
+                  >
+                    {row.task}
+                  </span>
+                ) : (
+                  <span>{row.task}</span>
+                )}
+              </Card.Text>
+              <TaskAltOutlinedIcon
+                className="card-icon"
+                onClick={() =>
+                  setShowCompletePopup({
+                    inUse: true,
+                    id: row._id
+                  })
+                }
+              ></TaskAltOutlinedIcon>
+              {showCompletePopup.inUse &&
+                row._id === showCompletePopup.id && (
+                  <div className="popup">
+                    <button
+                      className="delete-button"
+                      onClick={() =>
+                        props.removeTask(showCompletePopup.id)
+                      }
                     >
-                      {row.task}
-                    </span>
-                  ) : (
-                    <span>{row.task}</span>
-                  )}
-                </Card.Text>
-                <TaskAltOutlinedIcon
-                  className="card-icon"
-                  onClick={() =>
-                    setShowCompletePopup({
-                      inUse: true,
-                      id: row._id
+                      Delete
+                    </button>
+                    <button
+                      className="cancel-button"
+                      onClick={() =>
+                        setShowCompletePopup({
+                          inUse: false,
+                          id: ""
+                        })
+                      }
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
+            </div>
+            <div className="centered-content">
+              <Container className="card-container">
+                <div className={row.priority}>!</div>
+                <span
+                  className="card-span"
+                  style={{
+                    color: getCategoryTextColor(row.category),
+                    backgroundColor: getCategoryBackgroundColor(
+                      row.category
+                    )
+                  }}
+                >
+                  {row.category}
+                </span>
+                <span
+                  className="card-span"
+                  style={{
+                    color: getClassesTextColor(row.class),
+                    backgroundColor: getClassesBackgroundColor(
+                      row.class
+                    )
+                  }}
+                >
+                  {row.class}
+                </span>
+                <span className="card-date">
+                  {date
+                    .toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "numeric"
                     })
-                  }
-                ></TaskAltOutlinedIcon>
-                {showCompletePopup.inUse &&
-                  row._id === showCompletePopup.id && (
-                    <div className="popup">
-                      <button
-                        className="delete-button"
-                        onClick={() =>
-                          props.removeTask(showCompletePopup.id)
-                        }
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="cancel-button"
-                        onClick={() =>
-                          setShowCompletePopup({
-                            inUse: false,
-                            id: ""
-                          })
-                        }
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
-              </div>
-              <div className="centered-content">
-                <Container className="card-container">
-                  <div className={row.priority}>!</div>
-                  <span
-                    className="card-span"
-                    style={{
-                      color: getCategoryTextColor(row.category),
-                      backgroundColor:
-                        getCategoryBackgroundColor(row.category)
-                    }}
-                  >
-                    {row.category}
-                  </span>
-                  <span
-                    className="card-span"
-                    style={{
-                      color: getClassesTextColor(row.class),
-                      backgroundColor:
-                        getClassesBackgroundColor(row.class)
-                    }}
-                  >
-                    {row.class}
-                  </span>
-                  <span className="card-date">
-                    {date
-                      .toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "numeric"
-                      })
-                      .toUpperCase()}
-                  </span>
-                </Container>
-              </div>
-            </Card.Body>
-          </Card>
+                    .toUpperCase()}
+                </span>
+              </Container>
+            </div>
+          </td>
         </tr>
       );
     });
