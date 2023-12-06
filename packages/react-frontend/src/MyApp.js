@@ -25,8 +25,14 @@ function MyApp() {
 
   function fetchTasks() {
     const promise = fetch(
-      //"http://localhost:8000"
-      "https://black-beach-0a186661e.4.azurestaticapps.net"
+      "http://localhost:8000/tasks",
+      {
+        method: "GET",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        })
+      }
+      //"https://black-beach-0a186661e.4.azurestaticapps.net"
     );
     return promise;
   }
