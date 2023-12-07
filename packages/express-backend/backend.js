@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 // get tasks (all, category, priority, date)
-app.get("/tasks", async (req, res) => {
+app.get("/tasks", authenticateUser, async (req, res) => {
   //alert("get the tasks");
   const { category, priority, date } = req.query;
   try {
@@ -48,7 +48,7 @@ app.get("/tasks", async (req, res) => {
 });
 
 // get task by id
-app.get("/tasks/:id", async (req, res) => {
+app.get("/tasks/:id", authenticateUser, async (req, res) => {
   const id = req.params.id;
   const result = await toDoListServices.findTaskById(id);
   if (result === undefined || result === null)

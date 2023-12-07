@@ -96,45 +96,65 @@ export function authenticateUser(req, res, next) {
 export function loginUser(req, res) {
   const { username, pwd } = req.body; // from form
 
-  const promise = fetch(`http://localhost:8000/user/${username}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(creds)
-  })
-      .then((payload) => {
-         if (payload === []){
-           res.status(401).send("Unauthorized");
-         } else {
-           
-         }
-      })
-
-  const retrievedUser = creds.find(
-    (c) => c.username === username
-  );
-
-  if (!retrievedUser) {
-    // invalid username
-    res.status(401).send("Unauthorized");
-  } else {
-    bcrypt
-      .compare(pwd, retrievedUser.hashedPassword)
-      .then((matched) => {
-        if (matched) {
-          generateAccessToken(username).then((token) => {
-            res
-              .status(200)
-              .send({ token: token, username: username });
-          });
-        } else {
-          // invalid password
+  // alert(username);
+  // alert(pwd);
+  const promise = fetch(
+    `http://localhost:8000/user/${username}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    }
+  ).then((payload) => {
+    if (payload === []) {
+      console.log("Unauthorized");
+      res.status(401).send("Unauthorized");
+    } else {
+      bcrypt
+        .compare(pwd, payload.password)
+        .then((matched) => {
+          if (matched) {
+            generateAccessToken(username).then((token) => {
+              res
+                .status(200)
+                .send({ token: token, username: username });
+            });
+          } else {
+            // invalid password
+            res.status(401).send("Unauthorized");
+          }
+        })
+        .catch(() => {
           res.status(401).send("Unauthorized");
-        }
-      })
-      .catch(() => {
-        res.status(401).send("Unauthorized");
-      });
-  }
+        });
+    }
+  });
+
+  // const retrievedUser = creds.find(
+  //   (c) => c.username === username
+  // );
+
+  // if (!retrievedUser) {
+  //   // invalid username
+  //   res.status(401).send("Unauthorized");
+  // } else {
+  //   bcrypt
+  //     .compare(pwd, retrievedUser.hashedPassword)
+  //     .then((matched) => {
+  //       if (matched) {
+  //         generateAccessToken(username).then((token) => {
+  //           res
+  //             .status(200)
+  //             .send({ token: token, username: username });
+  //         });
+  //       } else {
+  //         // invalid password
+  //         res.status(401).send("Unauthorized");
+  //       }
+  //     })
+  //     .catch(() => {
+  //       res.status(401).send("Unauthorized");
+  //     });
+  // }
 }

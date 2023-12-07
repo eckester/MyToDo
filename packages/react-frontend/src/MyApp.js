@@ -199,6 +199,7 @@ function MyApp() {
             alert("here yee here yee");
             setToken(payload.token);
             setUserName(payload.username);
+            return 200;
           });
           setMessage(`Login successful; auth token saved`);
         } else {
