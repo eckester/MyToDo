@@ -58,6 +58,30 @@ app.get("/tasks/:id", authenticateUser, async (req, res) => {
   }
 });
 
+app.get(
+  "user/tasks/:id",
+  authenticateUser,
+  async (req, res) => {
+    const id = req.params.id;
+    const result = await toDoListServices.getTasksWID(id);
+    if (result === undefined || result === null)
+      res.status(404).send("Resource not found.");
+    else {
+      res.send({ toDoList: result });
+    }
+  }
+);
+
+app.get("user/:name", authenticateUser, async (req, res) => {
+  const id = req.params.name;
+  const result = await toDoListServices.getuserName(id);
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send({ _id: result });
+  }
+});
+
 // add task
 app.post("/tasks", authenticateUser, async (req, res) => {
   const task = req.body;

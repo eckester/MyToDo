@@ -40,7 +40,7 @@ const toDoSchema = new Schema(
       required: false
     },
     user: {
-      type: Schema.ObjectId,
+      type: Number,
       required: false
     }
   },

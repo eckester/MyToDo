@@ -5,6 +5,7 @@ import Header from "./header";
 import Sidebar from "./Sidebar";
 import LoginPage from "./Login";
 import MyCalendar from "./MyCalendar";
+//import toDoListServices from "./models/toDoList-services.js";
 import {
   BrowserRouter,
   Routes,
@@ -22,7 +23,7 @@ function MyApp() {
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(0);
   //const [returned, setReturned] = useState(false);
 
   const [categoryFilter, setCategoryFilter] =
@@ -43,22 +44,72 @@ function MyApp() {
     );
     return promise;
   }
+
+  function fetchTasksId() {
+    const promise = fetch(
+      `http://localhost:8000/user/tasks/${userId}`,
+      {
+        method: "GET",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        })
+      }
+      //"https://black-beach-0a186661e.4.azurestaticapps.net"
+    );
+    return promise;
+  }
+
+  function fetchUserId(name) {
+    const promise = fetch(
+      `http://localhost:8000/user/${name}`,
+      {
+        method: "GET",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        })
+      }
+      //"https://black-beach-0a186661e.4.azurestaticapps.net"
+    );
+    return promise;
+  }
+
   useEffect(() => {
-    fetchTasks()
-      .then((res) =>
-        res.status === 200 ? res.json() : undefined
-      )
-      .then((json) => {
-        if (json) {
-          setTasks(json["toDoList"]);
-          setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
-        } else {
-          setTasks(null);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log("useEffect");
+    if (userId === 0) {
+      console.log("noid");
+      fetchTasks()
+        .then((res) =>
+          res.status === 200 ? res.json() : undefined
+        )
+        .then((json) => {
+          if (json) {
+            setTasks(json["toDoList"]);
+            setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
+          } else {
+            setTasks(null);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log("IDDDD");
+      fetchTasksId(userId)
+        .then((res) =>
+          res.status === 200 ? res.json() : undefined
+        )
+        .then((json) => {
+          if (json) {
+            setTasks(json["toDoList"]);
+            setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
+          } else {
+            setTasks(null);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [token]);
 
   // function handleClick() {
@@ -196,11 +247,20 @@ function MyApp() {
       .then((response) => {
         console.log("Respomse", response);
         if (response.status === 201) {
+          console.log("boohoo");
+          alert("baaaa");
           response.json().then((payload) => {
+            alert(payload.username);
             console.log("Payload", payload);
             setToken(payload.token);
-            setUserId(payload._id);
-            console.log(userId);
+            console.log(payload.username);
+            fetchUserId(payload.username).then((response) => {
+              console.log("re", response);
+              response.json().then((res) => {
+                alert(res._id);
+                setUserId(res._id);
+              });
+            });
           });
           setMessage(
             `Signup successful for user: ${creds.username}; auth token saved`
