@@ -20,7 +20,7 @@ export function registerUser(req, res) {
           console.log("Token:", token);
           res.status(201).send({ token: token });
           creds.push({ username, hashedPassword });
-          addUser({ name: username, password: hashedPassword });
+          toDoListServices.addUser({ name: username, password: hashedPassword });
         });
       });
   }

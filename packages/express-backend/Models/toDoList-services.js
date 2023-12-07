@@ -83,5 +83,5 @@ export default {
   updateTask,
   filterPriorityTasks,
   getUsers,
-  addUsers
+  addUser
 };
