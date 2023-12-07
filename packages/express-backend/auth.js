@@ -18,9 +18,9 @@ export function registerUser(req, res) {
       .then((hashedPassword) => {
         generateAccessToken(username).then((token) => {
           console.log("Token:", token);
-          res.status(201).send({ token: token });
+          const add = toDoListServices.addUser({ name: username, password: hashedPassword });
+          res.status(201).send({ token: token, user: add});
           creds.push({ username, hashedPassword });
-          toDoListServices.addUser({ name: username, password: hashedPassword });
         });
       });
   }

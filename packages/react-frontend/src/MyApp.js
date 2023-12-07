@@ -22,6 +22,7 @@ function MyApp() {
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
+  const [userId, setUserId] = useState("");
   //const [returned, setReturned] = useState(false);
 
   const [categoryFilter, setCategoryFilter] =
@@ -198,6 +199,8 @@ function MyApp() {
           response.json().then((payload) => {
             console.log("Payload", payload);
             setToken(payload.token);
+            setUserId(payload._id);
+            console.log(userId);
           });
           setMessage(
             `Signup successful for user: ${creds.username}; auth token saved`
