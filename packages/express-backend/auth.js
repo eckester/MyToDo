@@ -36,10 +36,10 @@ export function registerUser(req, res) {
               setMessage(`Signup Error: ${error}`);
               alert(message);
             });
+
           res.status(201).send({
             token: token,
-            username: username,
-            password: pwd
+            username: username
           });
 
           creds.push({ username, hashedPassword });
@@ -95,6 +95,22 @@ export function authenticateUser(req, res, next) {
 
 export function loginUser(req, res) {
   const { username, pwd } = req.body; // from form
+
+  const promise = fetch(`http://localhost:8000/user/${username}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(creds)
+  })
+      .then((payload) => {
+         if (payload === []){
+           res.status(401).send("Unauthorized");
+         } else {
+           
+         }
+      })
+
   const retrievedUser = creds.find(
     (c) => c.username === username
   );
@@ -108,7 +124,9 @@ export function loginUser(req, res) {
       .then((matched) => {
         if (matched) {
           generateAccessToken(username).then((token) => {
-            res.status(200).send({ token: token });
+            res
+              .status(200)
+              .send({ token: token, username: username });
           });
         } else {
           // invalid password

@@ -40,8 +40,8 @@ const toDoSchema = new Schema(
       required: false
     },
     user: {
-      type: Number,
-      required: false
+      type: String,
+      default: ""
     }
   },
   {

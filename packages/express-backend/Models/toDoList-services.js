@@ -48,8 +48,8 @@ function getTasks() {
   return toDoModel.find().sort({ due: 1 });
 }
 
-function getuserName(name) {
-  return user.find({ name: name })._id;
+function getuserName(id) {
+  return users.find({ name: id });
 }
 
 function getTasksWID(userid) {
@@ -74,7 +74,7 @@ function addUser(user) {
 }
 
 function getUsers() {
-  return users;
+  return users.find();
 }
 
 export default {
