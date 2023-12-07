@@ -33,6 +33,7 @@ app.get("/tasks", authenticateUser, async (req, res) => {
     } else if (date) {
       result = await toDoListServices.sortToDoByDate(date);
     } else {
+      console.log("here yee");
       result = await toDoListServices.getTasks();
     }
     if (result === undefined || result === null)
@@ -54,6 +55,30 @@ app.get("/tasks/:id", authenticateUser, async (req, res) => {
     res.status(404).send("Resource not found.");
   else {
     res.send({ toDoList: result });
+  }
+});
+
+app.get(
+  "user/tasks/:id",
+  authenticateUser,
+  async (req, res) => {
+    const id = req.params.id;
+    const result = await toDoListServices.getTasksWID(id);
+    if (result === undefined || result === null)
+      res.status(404).send("Resource not found.");
+    else {
+      res.send({ toDoList: result });
+    }
+  }
+);
+
+app.get("user/:name", authenticateUser, async (req, res) => {
+  const id = req.params.name;
+  const result = await toDoListServices.getuserName(id);
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send({ _id: result });
   }
 });
 
@@ -110,22 +135,22 @@ app.put("/tasks/:id", authenticateUser, async (req, res) => {
 });
 
 // Users
-// app.get("/users", authenticateUser, async (req, res) => {
-//   const result = await toDoListServices.getUsers();
-//   if (result === undefined || result === null)
-//     res.status(404).send("Resource not found.");
-//   else {
-//     res.send({ users: result });
-//   }
-// });
+app.get("/users", authenticateUser, async (req, res) => {
+  const result = await toDoListServices.getUsers();
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send({ users: result });
+  }
+});
 //
-// app.post("/users", async (req, res) => {
-//   const user = req.body;
-//   const newUser = await toDoListServices.addUser(user);
-//
-//   if (newUser) res.status(201).json(newUser);
-//   else res.status(500).end();
-// });
+app.post("/users", async (req, res) => {
+  const user = req.body;
+  const newUser = await toDoListServices.addUser(user);
+
+  if (newUser) res.status(201).json(newUser);
+  else res.status(500).end();
+});
 
 app.post("/signup", registerUser);
 

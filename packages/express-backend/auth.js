@@ -1,10 +1,12 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+//import toDoListServices from "./models/toDoList-services.js";
 
 const creds = [];
 
 export function registerUser(req, res) {
   const { username, pwd } = req.body; // from form
+  //let add;
 
   if (!username || !pwd) {
     res.status(400).send("Bad request: Invalid input data.");
@@ -17,7 +19,29 @@ export function registerUser(req, res) {
       .then((hashedPassword) => {
         generateAccessToken(username).then((token) => {
           console.log("Token:", token);
-          res.status(201).send({ token: token });
+          const promise = fetch("http://localhost:8000/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              name: username,
+              password: pwd
+            })
+          })
+            .then((response) => {
+              console.log("Respomse", response);
+            })
+            .catch((error) => {
+              setMessage(`Signup Error: ${error}`);
+              alert(message);
+            });
+          res.status(201).send({
+            token: token,
+            username: username,
+            password: pwd
+          });
+
           creds.push({ username, hashedPassword });
         });
       });

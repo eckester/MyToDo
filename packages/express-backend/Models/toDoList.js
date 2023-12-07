@@ -38,6 +38,10 @@ const toDoSchema = new Schema(
     notes: {
       type: String,
       required: false
+    },
+    user: {
+      type: Number,
+      required: false
     }
   },
   {
@@ -54,25 +58,6 @@ const toDoSchema = new Schema(
   { collection: "toDoList" }
 );
 
-const userSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true
-    },
-    password: {
-      type: String,
-      required: true
-    }
-  },
+const toDoModel = mongoose.model("toDoList", toDoSchema);
 
-  { collection: "toDoList" }
-);
-
-const ToDo = mongoose.model("ToDoList", toDoSchema);
-const users = mongoose.model("toDoList", userSchema);
-
-export default {
-  toDoModel: ToDo,
-  userScheme: users
-};
+export default toDoModel;

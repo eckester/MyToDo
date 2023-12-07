@@ -1,11 +1,13 @@
 // toDoList-services.js
 import mongoose from "mongoose";
 //import { toDoModel, users } from "./toDoList.js";
-import scheme from "./toDoList.js";
+import toDoModel from "./toDoList.js";
+import users from "./users.js";
 //import users from "./toDoList.js";
 
 import dotenv from "dotenv";
 
+//const toDoModel = require("./toDoList.js");
 dotenv.config();
 
 mongoose.set("debug", true);
@@ -21,54 +23,58 @@ mongoose
 
 // is this correct for date? it doesn't use the parameter
 function sortToDoByDate(date) {
-  return scheme.toDoModel.find().sort({ due: 1 });
+  return toDoModel.find().sort({ due: 1 });
 }
 
 function filterPriorityTasks(prior) {
-  return scheme.toDoModel.find({ priority: prior });
+  return toDoModel.find({ priority: prior });
 }
 
 function filterCategoryTasks(cat) {
-  return scheme.toDoModel.find({ category: cat });
+  return toDoModel.find({ category: cat });
 }
 
 function addTask(task) {
-  const taskToAdd = new scheme.toDoModel(task);
+  const taskToAdd = new toDoModel(task);
   const promise = taskToAdd.save();
   return promise;
 }
 
 function deleteTask(taskId) {
-  return scheme.toDoModel.findByIdAndDelete(taskId);
+  return toDoModel.findByIdAndDelete(taskId);
 }
 
 function getTasks() {
-  return scheme.toDoModel.find().sort({ due: 1 });
+  return toDoModel.find().sort({ due: 1 });
+}
+
+function getuserName(name) {
+  return user.find({ name: name })._id;
+}
+
+function getTasksWID(userid) {
+  return toDoModel.find({ user: userid }).sort({ due: 1 });
 }
 
 function findTaskById(id) {
-  return scheme.toDoModel.find({ _id: id });
+  return toDoModel.find({ _id: id });
 }
 
 function updateTask(taskId, updatedTask) {
-  return scheme.toDoModel.findByIdAndUpdate(
-    taskId,
-    updatedTask,
-    {
-      new: true
-    }
-  );
+  return toDoModel.findByIdAndUpdate(taskId, updatedTask, {
+    new: true
+  });
 }
 
 // User stuff
-// function addUser(user) {
-//   const userToAdd = new scheme.users(user);
-//   const promise = userToAdd.save();
-//   return promise;
-// }
+function addUser(user) {
+  const userToAdd = new users(user);
+  const promise = userToAdd.save();
+  return promise;
+}
 
 function getUsers() {
-  return scheme.users;
+  return users;
 }
 
 export default {
@@ -80,5 +86,8 @@ export default {
   findTaskById,
   updateTask,
   filterPriorityTasks,
-  getUsers
+  getUsers,
+  addUser,
+  getTasksWID,
+  getuserName
 };
