@@ -1,6 +1,12 @@
 # MyToDo
 
-For college students who need to be organized, OnTrack is a to do list that caters to a college student’s schedule. Unlike reminders, paper to-do lists, google calendar, etc, our product allows for prioritization, tasks categorization, and filtration.
+Product Vision: For college students who need to be organized, OnTrack is a to do list that caters to a college student’s schedule. Unlike reminders, paper to-do lists, google calendar, etc, our product allows for prioritization, tasks categorization, and filtration. 
+
+Description: Users have the ability to add tasks with name, priority, category (Work, School, Other), optional label (like class) and due date. These tasks appear as cards sorted by due date into three columns and can be filtered by priority using the drop down, or by category using the sidebar navigation. Users can cross out tasks by clicking the text or delete them from view entirely by clicking the checkmark icon. Each user can keep their tasks saved with logging in. OnTrack functions as a useful organization tool for students to keep track of their assignemnts, work tasks, and other responsibilities.  
+
+## UI Prototype
+
+[Link](https://www.figma.com/proto/Zbvx0ihzM9d1PSOnWdikep/OnTrack?type=design&node-id=68-811&t=NdmSOxs5GdzR3Yce-1&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=68%3A811&mode=design) to our UI prototype (last updated Nov 8)
 
 # Contributing
 
