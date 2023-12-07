@@ -5,7 +5,12 @@ import Header from "./header";
 import Sidebar from "./Sidebar";
 import LoginPage from "./Login";
 import MyCalendar from "./MyCalendar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate
+} from "react-router-dom";
 // { useNavigate } from "react-router-dom";
 
 //import { useParams } from "react-router-dom";
@@ -22,6 +27,7 @@ function MyApp() {
   const [categoryFilter, setCategoryFilter] =
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);
+  //const navigate = useNavigate();
 
   function fetchTasks() {
     const promise = fetch(
@@ -53,6 +59,11 @@ function MyApp() {
         console.log(error);
       });
   }, [token]);
+
+  // function handleClick() {
+  //   const navigate = useNavigate();
+  //   navigate("/login");
+  // }
 
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
@@ -207,54 +218,75 @@ function MyApp() {
 
   return (
     <div className="header-container">
-      <Header />
       <BrowserRouter>
         <Routes>
           <Route
             path="/"
             element={
-              <div className="content-container">
-                <Sidebar
-                  setCategoryFilter={setCategoryFilter}
+              <>
+                <Header
+                  handleClick={() => useNavigate("/login")}
                 />
-                <div className="content-tasks">
-                  <ListPage
-                    removeTask={removeOneTask}
-                    handleSubmit={updateList}
-                    updateTask={updateTask}
-                    categoryFilter={categoryFilter}
-                  ></ListPage>
+                <div className="content-container">
+                  <Sidebar
+                    setCategoryFilter={setCategoryFilter}
+                  />
+                  <div className="content-tasks">
+                    <ListPage
+                      removeTask={removeOneTask}
+                      handleSubmit={updateList}
+                      updateTask={updateTask}
+                      categoryFilter={categoryFilter}
+                    ></ListPage>
+                  </div>
                 </div>
-              </div>
+              </>
             }
           />
           <Route
             path="/calendar"
             element={
               tasksLoaded && ( // Render MyCalendar only if tasks are loaded
-                <div className="content-container">
-                  <Sidebar
-                    setCategoryFilter={setCategoryFilter}
+                <>
+                  <Header
+                    handleClick={() => useNavigate("/login")}
                   />
-                  <MyCalendar
-                    className="calendar-container"
-                    tasks={tasks}
-                  />
-                </div>
+                  <div className="content-container">
+                    <Sidebar
+                      setCategoryFilter={setCategoryFilter}
+                    />
+                    <MyCalendar
+                      className="calendar-container"
+                      tasks={tasks}
+                    />
+                  </div>
+                </>
               )
             }
           />
           <Route
             path="/login"
-            element={<LoginPage handleSubmit={loginUser} />}
+            element={
+              <>
+                <Header
+                  handleClick={() => useNavigate("/login")}
+                />
+                <LoginPage handleSubmit={loginUser} />
+              </>
+            }
           />
           <Route
             path="/signup"
             element={
-              <LoginPage
-                handleSubmit={signupUser}
-                buttonLabel="Sign Up"
-              />
+              <>
+                <Header
+                  handleClick={() => useNavigate("/login")}
+                />
+                <LoginPage
+                  handleSubmit={signupUser}
+                  buttonLabel="Sign Up"
+                />
+              </>
             }
           />
         </Routes>
