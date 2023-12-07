@@ -109,3 +109,11 @@
   color: white;
   pointer-events: auto;
 }
+
+.rbc-row-content {
+  overflow-y: scroll;
+}
+
+
+
+
