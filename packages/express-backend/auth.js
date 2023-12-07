@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import toDoListServices from "./models/toDoList-services.js";
 
 const creds = [];
 
@@ -19,6 +20,7 @@ export function registerUser(req, res) {
           console.log("Token:", token);
           res.status(201).send({ token: token });
           creds.push({ username, hashedPassword });
+          addUser({ name: username, password: hashedPassword });
         });
       });
   }
