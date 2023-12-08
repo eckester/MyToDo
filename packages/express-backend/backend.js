@@ -91,7 +91,7 @@ app.post("/tasks", authenticateUser, async (req, res) => {
 });
 
 // Delete a task by ID
-app.delete("/tasks/:id", authenticateUser, async (req, res) => {
+app.delete("/tasks/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const deletedTask = await toDoListServices.deleteTask(id);
