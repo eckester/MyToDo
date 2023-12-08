@@ -37,11 +37,11 @@ Note: if you are not using an IDE, please refer to official documentation for ru
 # Development
 
 ## React and Node JS
-Clone our repository onto you local computer
-Run npm install 
-Run npm install bcryptjs
-Run npm install react-big-calendar
-Run npm install @mui/material @emotion/react @emotion/styled
+- Clone our repository onto you local computer: git clone https://github.com/eckester/MyToDo.git
+- Run npm install 
+- Run npm install bcryptjs
+- Run npm install react-big-calendar
+- Run npm install @mui/material @emotion/react @emotion/styled
 
 ## CI/CD
 
