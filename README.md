@@ -37,7 +37,7 @@ Note: if you are not using an IDE, please refer to official documentation for ru
 # Development
 
 ## React and Node JS
-- Clone our repository onto you local computer: git clone https://github.com/eckester/MyToDo.git
+Clone our repository onto you local computer: git clone https://github.com/eckester/MyToDo.git
 - Run npm install 
 - Run npm install bcryptjs
 - Run npm install react-big-calendar
@@ -58,6 +58,7 @@ There is nothing to do to be connected to the database.
 # Testing 
 
 We used Jest to test our backend, including our Mongo Database schemas. Files with route functions (i.e. backend.js) were not included in testing. 
+
 Please see ./packages/express-backend/Models/README.MD for more information
 
 
