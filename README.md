@@ -33,3 +33,19 @@ For VS Code:
 - If you have other formatters: Search "Format Document", then select prettier as default
 
 Note: if you are not using an IDE, please refer to official documentation for running eslint and prettier on the command line.
+
+# Development
+
+## React and Node JS
+- Clone our repository onto you local computer: git clone https://github.com/eckester/MyToDo.git
+- Run npm install 
+- Run npm install bcryptjs
+- Run npm install react-big-calendar
+- Run npm install @mui/material @emotion/react @emotion/styled
+
+## CI/CD
+
+## Mongo DB
+This environment utilizes mongoDB. 
+There is nothing to do to be connected to the database. 
+
