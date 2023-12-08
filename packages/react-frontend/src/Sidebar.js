@@ -21,11 +21,11 @@ function Sidebar({ setCategoryFilter }) {
       // navigate to calendar page
       navigate("/calendar");
     } else if (category === "To Do List") {
-      navigate("/"); // navigate to To do list page
+      navigate("/home"); // navigate to To do list page
       setCategoryFilter("All Tasks"); // automatically filters for all tasks
       setSelectedCategory("All Tasks");
     } else {
-      navigate("/"); // navigate to To do list page
+      navigate("/home"); // navigate to To do list page
       setCategoryFilter(category); // filtetr by category
       setSelectedCategory(category);
     }
@@ -67,7 +67,7 @@ function Sidebar({ setCategoryFilter }) {
 
   return (
     <div className="Sidebar">
-      <Link to="/" className="SidebarToDoListLink">
+      <Link to="/home" className="SidebarToDoListLink">
         <li
           className={
             selectedCategory === "To Do List" ? "active" : ""

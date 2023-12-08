@@ -5,18 +5,12 @@ import Header from "./header";
 import Sidebar from "./Sidebar";
 import LoginPage from "./Login";
 import MyCalendar from "./MyCalendar";
-//import toDoListServices from "./models/toDoList-services.js";
 import {
   BrowserRouter,
   Routes,
   Route,
   useNavigate
 } from "react-router-dom";
-// { useNavigate } from "react-router-dom";
-
-//import { useParams } from "react-router-dom";
-
-//const host = "http://localhost:8000";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
@@ -24,41 +18,10 @@ function MyApp() {
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
   const [userName, setUserName] = useState("");
-  //const [returned, setReturned] = useState(false);
 
   const [categoryFilter, setCategoryFilter] =
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);
-  //const navigate = useNavigate();
-
-  function fetchTasks() {
-    const promise = fetch(
-      "http://localhost:8000/tasks",
-      {
-        method: "GET",
-        headers: addAuthHeader({
-          "Content-Type": "application/json"
-        })
-      }
-      //"https://black-beach-0a186661e.4.azurestaticapps.net"
-    );
-    return promise;
-  }
-
-  function fetchTasksId() {
-    alert(userName);
-    const promise = fetch(
-      `http://localhost:8000/user/tasks/${userName}`,
-      {
-        method: "GET",
-        headers: addAuthHeader({
-          "Content-Type": "application/json"
-        })
-      }
-      //"https://black-beach-0a186661e.4.azurestaticapps.net"
-    );
-    return promise;
-  }
 
   useEffect(() => {
     console.log("useEffect");
@@ -99,10 +62,34 @@ function MyApp() {
     }
   }, [token, userName]);
 
-  // function handleClick() {
-  //   const navigate = useNavigate();
-  //   navigate("/login");
-  // }
+  function fetchTasks() {
+    const promise = fetch(
+      "http://localhost:8000/tasks",
+      {
+        method: "GET",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        })
+      }
+      //"https://black-beach-0a186661e.4.azurestaticapps.net"
+    );
+    return promise;
+  }
+
+  function fetchTasksId() {
+    alert(userName);
+    const promise = fetch(
+      `http://localhost:8000/user/tasks/${userName}`,
+      {
+        method: "GET",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        })
+      }
+      //"https://black-beach-0a186661e.4.azurestaticapps.net"
+    );
+    return promise;
+  }
 
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
@@ -187,7 +174,7 @@ function MyApp() {
 
   function loginUser(creds) {
     console.log(JSON.stringify(creds));
-    const promise = fetch("http://localhost:8000/login", {
+    const promise = fetch("http://localhost:8000/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -269,9 +256,16 @@ function MyApp() {
             path="/"
             element={
               <>
-                <Header
-                  handleClick={() => useNavigate("/login")}
-                />
+                <Header handleClick={() => useNavigate("/")} />
+                <LoginPage handleSubmit={loginUser} />
+              </>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <>
+                <Header handleClick={() => useNavigate("/")} />
                 <div className="content-container">
                   <Sidebar
                     setCategoryFilter={setCategoryFilter}
@@ -295,7 +289,7 @@ function MyApp() {
               tasksLoaded && ( // Render MyCalendar only if tasks are loaded
                 <>
                   <Header
-                    handleClick={() => useNavigate("/login")}
+                    handleClick={() => useNavigate("/")}
                   />
                   <div className="content-container">
                     <Sidebar
@@ -311,23 +305,10 @@ function MyApp() {
             }
           />
           <Route
-            path="/login"
-            element={
-              <>
-                <Header
-                  handleClick={() => useNavigate("/login")}
-                />
-                <LoginPage handleSubmit={loginUser} />
-              </>
-            }
-          />
-          <Route
             path="/signup"
             element={
               <>
-                <Header
-                  handleClick={() => useNavigate("/login")}
-                />
+                <Header handleClick={() => useNavigate("/")} />
                 <LoginPage
                   handleSubmit={signupUser}
                   buttonLabel="Sign Up"
@@ -373,36 +354,3 @@ function MyApp() {
 }
 
 export default MyApp;
-
-// Users!!!
-// function fetchUsers() {
-//   return users;
-// }
-
-// function fetchUsers() {
-//   // const promise = fetch("http://localhost:8000/users");
-//   // return promise;
-//     return users;
-// }
-// useEffect(() => {
-//   fetchUsers()
-//     .then((res) => res.json())
-//     .then((json) => {
-//       setUsers(json["users"]);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// }, []);
-
-// function updateUsers(user) {
-//   setUsers([...users, user]);
-//   // const promise = fetch("http://localhost:8000/users", {
-//   //   method: "POST",
-//   //   headers: {
-//   //     "Content-Type": "application/json"
-//   //   },
-//   //   body: JSON.stringify(user)
-//   // });
-//   // return promise;
-// }

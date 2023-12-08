@@ -154,7 +154,7 @@ app.post("/users", async (req, res) => {
 
 app.post("/signup", registerUser);
 
-app.post("/login", loginUser);
+app.post("/", loginUser);
 
 app.listen(port, () => {
   console.log(

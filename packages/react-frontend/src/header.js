@@ -14,7 +14,7 @@ function Header() {
   return (
     <div className="Header">
       <h1>OnTrack</h1>
-      <Link to="/login" className="SidebarToDoListLink">
+      <Link to="/" className="SidebarToDoListLink">
         <ListAltIcon
           style={{ justifyContent: screenLeft }}
           className="Icon"
