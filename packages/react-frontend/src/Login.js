@@ -38,7 +38,7 @@ function LoginPage(props) {
         </label>
         <br />
         <input
-          style={{ backgroundColor: "#C0C2C4" }}
+          style={{ backgroundColor: "#F3F8FF" }}
           name="username"
           id="username"
           value={creds.username}
@@ -52,7 +52,7 @@ function LoginPage(props) {
         </label>
         <br />
         <input
-          style={{ backgroundColor: "#C0C2C4" }}
+          style={{ backgroundColor: "#F3F8FF" }}
           className="textBox"
           id="password"
           name="password"
@@ -60,7 +60,7 @@ function LoginPage(props) {
           onChange={handleChange}
           type="password"
         />
-        <br />
+        <br style={{ alignContent: "center" }} />
         <input
           type="button"
           value={props.buttonLabel || "Log In"}
