@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-//import toDoListServices from "./models/toDoList-services.js";
+import toDoListServices from "./models/toDoList-services.js";
 
 const creds = [];
 
@@ -106,16 +106,40 @@ export function authenticateUser(req, res, next) {
   }
 }
 
-export function loginUser(req, res) {
+export async function loginUser(req, res) {
   const { username, pwd } = req.body; // from form
   console.log("FIODAJL:F");
   // alert(username);
   // alert(pwd);
   //res.status(401).send(`http://localhost:8000/user/${username}`);
-  getPassword(username)
-      .then((response) => {
-    response.status === 200 ? res.status(200).send(username) : res.status(401).send("Unauthorized")
-  })
+  const result = await toDoListServices.getuserName(username);
+  if (result === []){
+    res.status(400).send("unavailable");
+  } else {
+    bcrypt
+        .compare(pwd, result[0].password)
+        .then((matched) => {
+          if (matched) {
+            generateAccessToken(username).then((token) => {
+              res
+                .status(200)
+                .send({ token: token, username: username });
+            });
+          } else {
+            // invalid password
+            res.status(401).send("Unauthorized - doesnt match");
+          }
+        })
+        .catch(() => {
+          res.status(401).send("Unauthorized");
+        });
+    //res.status(200).send(result[0].password);
+  }
+
+  // getPassword(username)
+  //     .then((response) => {
+  //   response.status === 200 ? res.status(200).send(username) : res.status(401).send("Unauthorized")
+  // })
       // .then((json) => {
       //   res.status(400).send(response);
       //   // if (json) {
