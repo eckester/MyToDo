@@ -352,10 +352,10 @@ window.PR_SHOULD_USE_CONTINUATION = true;
             ? S
             : U
           : T === 3
-            ? v.test(U.nodeValue)
-              ? S
-              : V
-            : V;
+          ? v.test(U.nodeValue)
+            ? S
+            : V
+          : V;
     }
     return V === S ? undefined : V;
   }
