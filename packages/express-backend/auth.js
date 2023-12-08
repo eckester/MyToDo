@@ -65,16 +65,16 @@ function generateAccessToken(username) {
   });
 }
 
-function getPassword(username){
+function getPassword(username) {
   const promise = fetch(
-      `http://localhost:8000/user/${username}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
+    `http://localhost:8000/user/${username}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
       }
-  )
+    }
+  );
   return promise;
 }
 
@@ -113,26 +113,26 @@ export async function loginUser(req, res) {
   // alert(pwd);
   //res.status(401).send(`http://localhost:8000/user/${username}`);
   const result = await toDoListServices.getuserName(username);
-  if (result === []){
+  if (result === []) {
     res.status(400).send("unavailable");
   } else {
     bcrypt
-        .compare(pwd, result[0].password)
-        .then((matched) => {
-          if (matched) {
-            generateAccessToken(username).then((token) => {
-              res
-                .status(200)
-                .send({ token: token, username: username });
-            });
-          } else {
-            // invalid password
-            res.status(401).send("Unauthorized - doesnt match");
-          }
-        })
-        .catch(() => {
-          res.status(401).send("Unauthorized");
-        });
+      .compare(pwd, result[0].password)
+      .then((matched) => {
+        if (matched) {
+          generateAccessToken(username).then((token) => {
+            res
+              .status(200)
+              .send({ token: token, username: username });
+          });
+        } else {
+          // invalid password
+          res.status(401).send("Unauthorized - doesnt match");
+        }
+      })
+      .catch(() => {
+        res.status(401).send("Unauthorized");
+      });
     //res.status(200).send(result[0].password);
   }
 
@@ -140,37 +140,37 @@ export async function loginUser(req, res) {
   //     .then((response) => {
   //   response.status === 200 ? res.status(200).send(username) : res.status(401).send("Unauthorized")
   // })
-      // .then((json) => {
-      //   res.status(400).send(response);
-      //   // if (json) {
-      //   //   bcrypt.compare(
-      //   //     pwd,
-      //   //     json.password,
-      //   //     function (err, result) {
-      //   //       if (err) return console.log(err);
-      //   //       res.status(401).send(result);
-      //   //   }
-      //   //   );
-      //   // } else {
-      //   //   res.status(401).send("invalid");
-      //   // }
-      // })
+  // .then((json) => {
+  //   res.status(400).send(response);
+  //   // if (json) {
+  //   //   bcrypt.compare(
+  //   //     pwd,
+  //   //     json.password,
+  //   //     function (err, result) {
+  //   //       if (err) return console.log(err);
+  //   //       res.status(401).send(result);
+  //   //   }
+  //   //   );
+  //   // } else {
+  //   //   res.status(401).send("invalid");
+  //   // }
+  // })
 
-    //res.status(response.status).send("Why")});
-    // if (payload[0] === {} || payload === [] || payload === [{}]) {
-    //   console.log("Unauthorized");
-    //   res.status(401).send("Unauthorized - no user");
-    // } else {
-    //   res.status(401).send(payload);
-      // bcrypt.compare(
-      //   pwd,
-      //   payload.password,
-      //   function (err, result) {
-      //     if (err) return console.log(err);
-      //     res.status(401).send(result);
-       // }
-      // );
-   // }
+  //res.status(response.status).send("Why")});
+  // if (payload[0] === {} || payload === [] || payload === [{}]) {
+  //   console.log("Unauthorized");
+  //   res.status(401).send("Unauthorized - no user");
+  // } else {
+  //   res.status(401).send(payload);
+  // bcrypt.compare(
+  //   pwd,
+  //   payload.password,
+  //   function (err, result) {
+  //     if (err) return console.log(err);
+  //     res.status(401).send(result);
+  // }
+  // );
+  // }
   //   //       .then((matched) => {
   //   //         if (matched) {
   //   //           generateAccessToken(username).then((token) => {
@@ -185,8 +185,8 @@ export async function loginUser(req, res) {
   //   //       })
   //   //       .catch(() => {
   //   //         res.status(401).send("Unauthorized - error");
-          //});
-    // }
+  //});
+  // }
   //});
 
   // const retrievedUser = creds.find(
