@@ -147,3 +147,9 @@
       max-width: 800px;
     }
   }
+
+.task-button {
+  position: absolute;
+  bottom: 706px;
+  right: 1280px;
+}

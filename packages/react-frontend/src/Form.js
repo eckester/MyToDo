@@ -90,7 +90,11 @@ function Form(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="primary"
+        className="task-button"
+        onClick={handleShow}
+      >
         Add Task
       </Button>
       <Modal
