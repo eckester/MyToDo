@@ -100,7 +100,7 @@ function MyApp() {
       .then((response) => {
         if (response.status === 204) {
           const updated = tasks.filter(
-            (task) => task.id !== id
+            (task) => task._id !== id
           );
           setTasks(updated);
         } else if (response.status === 404) {
