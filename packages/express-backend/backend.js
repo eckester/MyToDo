@@ -98,7 +98,7 @@ app.delete("/tasks/:id", async (req, res) => {
     if (!deletedTask) {
       res.status(404).send("Task not found.");
     } else {
-      res.send({
+      res.status(204).send({
         message: "Task deleted successfully.",
         deletedTask
       });
