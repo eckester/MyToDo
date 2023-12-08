@@ -804,9 +804,9 @@ button,
 [type="button"] {
   -webkit-appearance: none;
   display: inline-block;
-  border: 1px solid #0366ee;
+  border: 1px solid #4b9afb;
   border-radius: 4px;
-  background: #0366ee;
+  background: #4b9afb;
   color: #ffffff;
   font-weight: 600;
   font-family:
