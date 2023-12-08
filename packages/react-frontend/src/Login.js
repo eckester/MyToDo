@@ -25,6 +25,14 @@ function LoginPage(props) {
     props.handleSubmit(creds);
     setCreds({ username: "", pwd: "" });
     navigate("/");
+    // props.handleSubmit(creds).then((res) => {
+    //   if (res.status === 201 || res.status == 200) {
+    //     setCreds({ username: "", pwd: "" });
+    //     navigate("/");
+    //   } else {
+    //     alert("Invalid login");
+    //   }
+    // });
   }
 
   return (

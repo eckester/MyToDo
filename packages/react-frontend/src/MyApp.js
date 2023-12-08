@@ -23,7 +23,7 @@ function MyApp() {
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
-  const [userId, setUserId] = useState(0);
+  const [userName, setUserName] = useState("");
   //const [returned, setReturned] = useState(false);
 
   const [categoryFilter, setCategoryFilter] =
@@ -46,22 +46,9 @@ function MyApp() {
   }
 
   function fetchTasksId() {
+    alert(userName);
     const promise = fetch(
-      `http://localhost:8000/user/tasks/${userId}`,
-      {
-        method: "GET",
-        headers: addAuthHeader({
-          "Content-Type": "application/json"
-        })
-      }
-      //"https://black-beach-0a186661e.4.azurestaticapps.net"
-    );
-    return promise;
-  }
-
-  function fetchUserId(name) {
-    const promise = fetch(
-      `http://localhost:8000/user/${name}`,
+      `http://localhost:8000/user/tasks/${userName}`,
       {
         method: "GET",
         headers: addAuthHeader({
@@ -75,7 +62,7 @@ function MyApp() {
 
   useEffect(() => {
     console.log("useEffect");
-    if (userId === 0) {
+    if (userName === "") {
       console.log("noid");
       fetchTasks()
         .then((res) =>
@@ -94,7 +81,7 @@ function MyApp() {
         });
     } else {
       console.log("IDDDD");
-      fetchTasksId(userId)
+      fetchTasksId()
         .then((res) =>
           res.status === 200 ? res.json() : undefined
         )
@@ -110,7 +97,7 @@ function MyApp() {
           console.log(error);
         });
     }
-  }, [token]);
+  }, [token, userName]);
 
   // function handleClick() {
   //   const navigate = useNavigate();
@@ -199,6 +186,7 @@ function MyApp() {
   }
 
   function loginUser(creds) {
+    console.log(JSON.stringify(creds));
     const promise = fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
@@ -208,9 +196,12 @@ function MyApp() {
     })
       .then((response) => {
         if (response.status === 200) {
-          response
-            .json()
-            .then((payload) => setToken(payload.token));
+          response.json().then((payload) => {
+            alert("here yee here yee");
+            setToken(payload.token);
+            setUserName(payload.username);
+            return 200;
+          });
           setMessage(`Login successful; auth token saved`);
         } else {
           setMessage(
@@ -247,20 +238,11 @@ function MyApp() {
       .then((response) => {
         console.log("Respomse", response);
         if (response.status === 201) {
-          console.log("boohoo");
-          alert("baaaa");
           response.json().then((payload) => {
             alert(payload.username);
             console.log("Payload", payload);
             setToken(payload.token);
-            console.log(payload.username);
-            fetchUserId(payload.username).then((response) => {
-              console.log("re", response);
-              response.json().then((res) => {
-                alert(res._id);
-                setUserId(res._id);
-              });
-            });
+            setUserName(payload.username);
           });
           setMessage(
             `Signup successful for user: ${creds.username}; auth token saved`
@@ -300,6 +282,7 @@ function MyApp() {
                       handleSubmit={updateList}
                       updateTask={updateTask}
                       categoryFilter={categoryFilter}
+                      userName={userName}
                     ></ListPage>
                   </div>
                 </div>
@@ -362,7 +345,8 @@ function MyApp() {
       removeTask,
       handleSubmit,
       updateTask,
-      categoryFilter
+      categoryFilter,
+      userName
     } = props;
 
     setTasks(tasks);
@@ -382,7 +366,7 @@ function MyApp() {
           removeTask={removeTask}
           updateTask={updateTask}
         />
-        <Form handleSubmit={handleSubmit} />
+        <Form name={userName} handleSubmit={handleSubmit} />
       </>
     );
   }

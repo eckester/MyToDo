@@ -59,7 +59,7 @@ app.get("/tasks/:id", authenticateUser, async (req, res) => {
 });
 
 app.get(
-  "user/tasks/:id",
+  "/user/tasks/:id",
   authenticateUser,
   async (req, res) => {
     const id = req.params.id;
@@ -72,13 +72,13 @@ app.get(
   }
 );
 
-app.get("user/:name", authenticateUser, async (req, res) => {
-  const id = req.params.name;
+app.get("/user/:id", async (req, res) => {
+  const id = req.params.id;
   const result = await toDoListServices.getuserName(id);
   if (result === undefined || result === null)
     res.status(404).send("Resource not found.");
   else {
-    res.send({ _id: result });
+    res.status(200).send({user : result});
   }
 });
 
@@ -135,7 +135,7 @@ app.put("/tasks/:id", authenticateUser, async (req, res) => {
 });
 
 // Users
-app.get("/users", authenticateUser, async (req, res) => {
+app.get("/users", async (req, res) => {
   const result = await toDoListServices.getUsers();
   if (result === undefined || result === null)
     res.status(404).send("Resource not found.");
