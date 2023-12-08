@@ -186,6 +186,7 @@ function MyApp() {
   }
 
   function loginUser(creds) {
+    console.log(JSON.stringify(creds));
     const promise = fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {

@@ -78,7 +78,7 @@ app.get("/user/:id", async (req, res) => {
   if (result === undefined || result === null)
     res.status(404).send("Resource not found.");
   else {
-    res.send(result);
+    res.status(200).send({user : result});
   }
 });
 

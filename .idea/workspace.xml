@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/express-backend/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/express-backend/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/backend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +80,7 @@
       <workItem from="1701379929649" duration="5163000" />
       <workItem from="1701389512994" duration="1445000" />
       <workItem from="1701404264721" duration="880000" />
-      <workItem from="1701887393836" duration="25242000" />
+      <workItem from="1701887393836" duration="30887000" />
     </task>
     <servers />
   </component>
