@@ -7,7 +7,7 @@
   align-items: baseline;
   padding: 0.5em;
   margin-bottom: 0em;
-  background-color: rgb(192, 194, 196);
+  background-image: linear-gradient(to bottom right, rgb(75, 154, 251) , rgb(218, 239, 255));
   color: rgb(6, 6, 6);
   height: 15vh;
 }
@@ -18,4 +18,9 @@
 
 .header-container {
   width: 100vw;
+}
+
+.Icon {
+  color: black;
+  margin-left: 8px;
 }

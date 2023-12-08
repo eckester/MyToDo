@@ -2,8 +2,8 @@
 
 import React from "react";
 import "./header.css";
-import { ListAlt as ListAltIcon } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 function Header() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function Header() {
     <div className="Header">
       <h1>OnTrack</h1>
       <Link to="/" className="SidebarToDoListLink">
-        <ListAltIcon
+        <ExitToAppIcon
           style={{ justifyContent: screenLeft }}
           className="Icon"
           onClick={handleClick}
