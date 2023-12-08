@@ -1,20 +1,28 @@
 {
   "name": "express-backend",
   "version": "1.0.0",
-  "description": "",
   "main": "backend.js",
   "type": "module",
   "scripts": {
-    "test": "exit 0",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "dev": "npx nodemon backend.js",
     "start": "node backend.js",
     "lint": "npx prettier --check ."
+  },
+  "jest": {
+    "transform": {}
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^9.1.1",
     "mongoose": "^8.0.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "mockingoose": "^2.16.2"
   }
 }

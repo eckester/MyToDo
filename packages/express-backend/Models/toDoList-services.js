@@ -12,12 +12,14 @@ mongoose.set("debug", true);
 
 console.log(">>mongo cluster: ");
 
+//***** Comment out for testing DB
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
   .catch((error) => console.log(error));
+//***** END comment out for testing DB
 
 // is this correct for date? it doesn't use the parameter
 function sortToDoByDate(date) {
@@ -67,9 +69,9 @@ function updateTask(taskId, updatedTask) {
 //   return promise;
 // }
 
-function getUsers() {
-  return scheme.users;
-}
+// function getUsers() {
+//   return scheme.users;
+// }
 
 export default {
   sortToDoByDate,
@@ -80,5 +82,5 @@ export default {
   findTaskById,
   updateTask,
   filterPriorityTasks,
-  getUsers
+  //getUsers
 };
