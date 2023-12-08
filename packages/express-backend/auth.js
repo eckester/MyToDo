@@ -33,7 +33,7 @@ export function registerUser(req, res) {
             })
             .catch((error) => {
               setMessage(`Signup Error: ${error}`);
-              alert(message);
+              //alert(message);
             });
 
           res.status(201).send({
@@ -117,22 +117,22 @@ export async function loginUser(req, res) {
   } else {
     if (result.length !== 0) {
       bcrypt
-          .compare(pwd, result[0].password)
-          .then((matched) => {
-            if (matched) {
-              generateAccessToken(username).then((token) => {
-                res
-                    .status(200)
-                    .send({token: token, username: username});
-              });
-            } else {
-              // invalid password
-              res.status(401).send("Unauthorized - doesnt match");
-            }
-          })
-          .catch(() => {
-            res.status(401).send("Unauthorized");
-          });
+        .compare(pwd, result[0].password)
+        .then((matched) => {
+          if (matched) {
+            generateAccessToken(username).then((token) => {
+              res
+                .status(200)
+                .send({ token: token, username: username });
+            });
+          } else {
+            // invalid password
+            res.status(401).send("Unauthorized - doesnt match");
+          }
+        })
+        .catch(() => {
+          res.status(401).send("Unauthorized");
+        });
       // res.status(200).send(result[0].password);
     } else {
       res.status(400).send("No user with that name!");

@@ -184,7 +184,7 @@ function MyApp() {
       .then((response) => {
         if (response.status === 200) {
           response.json().then((payload) => {
-            alert("here yee here yee");
+            //alert("here yee here yee");
             setToken(payload.token);
             setUserName(payload.username);
             return 200;
@@ -226,7 +226,7 @@ function MyApp() {
         console.log("Respomse", response);
         if (response.status === 201) {
           response.json().then((payload) => {
-            alert(payload.username);
+            //alert(payload.username);
             console.log("Payload", payload);
             setToken(payload.token);
             setUserName(payload.username);
