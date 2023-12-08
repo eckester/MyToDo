@@ -44,16 +44,6 @@ const toDoSchema = new Schema(
       default: ""
     }
   },
-  {
-    virtuals: {
-      isOverdue: {
-        get() {
-          const currentDate = new Date();
-          return !this.status && this.due > currentDate;
-        }
-      }
-    }
-  },
 
   { collection: "toDoList" }
 );

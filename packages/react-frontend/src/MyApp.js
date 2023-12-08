@@ -77,7 +77,7 @@ function MyApp() {
   }
 
   function fetchTasksId() {
-    alert(userName);
+    // alert("fetch user tasks", userName);
     const promise = fetch(
       `http://localhost:8000/user/tasks/${userName}`,
       {
@@ -329,8 +329,6 @@ function MyApp() {
       categoryFilter,
       userName
     } = props;
-
-    setTasks(tasks);
 
     const filteredTasks =
       categoryFilter === "All Tasks"

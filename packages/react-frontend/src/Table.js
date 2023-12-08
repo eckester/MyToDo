@@ -6,6 +6,8 @@ import Container from "react-bootstrap/Container";
 import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 import chroma from "chroma-js";
 
+const priorityOptions = ["None", "High", "Medium", "Low"];
+
 const categoryColors = {
   School: { textColor: "#069B39", backgroundColor: "#8FF5A6" },
   Work: { textColor: "#06399B", backgroundColor: "#8FE3F5" },
@@ -16,6 +18,7 @@ const categoryColors = {
 const getCategoryTextColor = (category) =>
   categoryColors[category]?.textColor ||
   categoryColors.default.textColor;
+
 const getCategoryBackgroundColor = (category) =>
   categoryColors[category]?.backgroundColor ||
   categoryColors.default.backgroundColor;
@@ -63,8 +66,6 @@ const convertUTCtoLocal = (utc) => {
   );
 };
 
-const priorityOptions = ["None", "High", "Medium", "Low"];
-
 function TableHeader({ setPriorityFilter }) {
   const handlePriorityFilterChange = (e) => {
     setPriorityFilter(e.target.value);
@@ -73,27 +74,29 @@ function TableHeader({ setPriorityFilter }) {
   return (
     <thead>
       <tr>
-        <label style={{ paddingLeft: "7px" }}>
-          Filter By Priority:
-          <select
-            name="Priority"
-            onChange={handlePriorityFilterChange}
-            style={{ width: "300px", paddingLeft: "7px" }}
-          >
-            {priorityOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
+        <th>
+          <label style={{ paddingLeft: "7px" }}>
+            Filter By Priority:
+            <select
+              name="Priority"
+              onChange={handlePriorityFilterChange}
+              style={{ width: "300px", paddingLeft: "7px" }}
+            >
+              {priorityOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+        </th>
       </tr>
     </thead>
   );
 }
 
 function TableBody(props) {
-  if (props.taskData === null) {
+  if (!props.taskData) {
     return <caption>Data Unavailable</caption>;
   }
   const [showCompletePopup, setShowCompletePopup] = useState({
@@ -248,20 +251,27 @@ function TableBody(props) {
       <tr>
         <td>
           <b className="label-dates">OVERDUE</b>
-          {overdueTasks}
+          <table>
+            <tbody>{overdueTasks}</tbody>
+          </table>
         </td>
         <td>
           <b className="label-dates">THIS WEEK</b>
-          {thisWeekTasks}
+          <table>
+            <tbody>{thisWeekTasks}</tbody>
+          </table>
         </td>
         <td>
           <b className="label-dates">NEXT WEEK</b>
-          {nextWeekTasks}
+          <table>
+            <tbody>{nextWeekTasks}</tbody>
+          </table>
         </td>
       </tr>
     </tbody>
   );
 }
+
 function Table(props) {
   const [filters, setFilters] = useState({
     categoryFilter: "All",

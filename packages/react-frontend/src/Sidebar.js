@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Sidebar.css";
 import {
   CalendarMonth as CalendarMonthIcon,
   Checklist as ChecklistIcon,
@@ -8,13 +9,11 @@ import {
   ChevronRight as ChevronRightIcon,
   ListAlt as ListAltIcon
 } from "@mui/icons-material";
-import "./Sidebar.css";
 
 function Sidebar({ setCategoryFilter }) {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] =
     useState("All Tasks"); // Set "All Tasks" as the default
-
-  const navigate = useNavigate();
 
   const handleCategoryClick = (category) => {
     if (category === "Calendar") {

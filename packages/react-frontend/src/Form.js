@@ -15,8 +15,6 @@ function Form(props) {
     user: props.name
   });
 
-  //const [showPopup, setShowPopup] = useState(false);
-
   const categoryOptions = ["School", "Work", "Other"];
   const priorityOptions = ["Low", "Medium", "High", "None"];
 

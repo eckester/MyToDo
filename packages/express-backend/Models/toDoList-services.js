@@ -1,13 +1,10 @@
 // toDoList-services.js
 import mongoose from "mongoose";
-//import { toDoModel, users } from "./toDoList.js";
 import toDoModel from "./toDoList.js";
 import users from "./users.js";
-//import users from "./toDoList.js";
 
 import dotenv from "dotenv";
 
-//const toDoModel = require("./toDoList.js");
 dotenv.config();
 
 mongoose.set("debug", true);
@@ -21,8 +18,7 @@ mongoose
   })
   .catch((error) => console.log(error));
 
-// is this correct for date? it doesn't use the parameter
-function sortToDoByDate(date) {
+function sortToDoByDate() {
   return toDoModel.find().sort({ due: 1 });
 }
 

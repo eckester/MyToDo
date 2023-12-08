@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
 
 // get tasks (all, category, priority, date)
 app.get("/tasks", authenticateUser, async (req, res) => {
-  //alert("get the tasks");
   const { category, priority, date } = req.query;
   try {
     let result;
@@ -135,7 +134,7 @@ app.put("/tasks/:id", authenticateUser, async (req, res) => {
 });
 
 // Users
-app.get("/users", async (req, res) => {
+app.get("/users", authenticateUser, async (req, res) => {
   const result = await toDoListServices.getUsers();
   if (result === undefined || result === null)
     res.status(404).send("Resource not found.");
@@ -143,7 +142,7 @@ app.get("/users", async (req, res) => {
     res.send({ users: result });
   }
 });
-//
+
 app.post("/users", async (req, res) => {
   const user = req.body;
   const newUser = await toDoListServices.addUser(user);
