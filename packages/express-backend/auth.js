@@ -115,23 +115,27 @@ export async function loginUser(req, res) {
   if (result === []) {
     res.status(400).send("unavailable");
   } else {
-    bcrypt
-      .compare(pwd, result[0].password)
-      .then((matched) => {
-        if (matched) {
-          generateAccessToken(username).then((token) => {
-            res
-              .status(200)
-              .send({ token: token, username: username });
+    if (result.length !== 0) {
+      bcrypt
+          .compare(pwd, result[0].password)
+          .then((matched) => {
+            if (matched) {
+              generateAccessToken(username).then((token) => {
+                res
+                    .status(200)
+                    .send({token: token, username: username});
+              });
+            } else {
+              // invalid password
+              res.status(401).send("Unauthorized - doesnt match");
+            }
+          })
+          .catch(() => {
+            res.status(401).send("Unauthorized");
           });
-        } else {
-          // invalid password
-          res.status(401).send("Unauthorized - doesnt match");
-        }
-      })
-      .catch(() => {
-        res.status(401).send("Unauthorized");
-      });
-    // res.status(200).send(result[0].password);
+      // res.status(200).send(result[0].password);
+    } else {
+      res.status(400).send("No user with that name!");
+    }
   }
 }

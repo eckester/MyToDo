@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="" />
+    <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/dbTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/dbTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/coverage-final.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/coverage-final.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/block-navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/block-navigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/dbTest.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/dbTest.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/prettify.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/prettify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/prettify.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/prettify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/sorter.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/sorter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/toDoList-services.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/toDoList-services.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/toDoList.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/toDoList.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/users.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/coverage/lcov-report/users.js.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,18 +44,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/camie/Desktop/Fall 2023/CSC 307/MyToDo/packages/express-backend",
-    "nodejs_package_manager_path": "npm"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "derby"
-    ]
-  }
-}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/packages/express-backend" />
