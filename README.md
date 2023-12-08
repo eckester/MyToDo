@@ -44,6 +44,12 @@ Note: if you are not using an IDE, please refer to official documentation for ru
 - Run npm install @mui/material @emotion/react @emotion/styled
 
 ## CI/CD
+We use Github actions for our CI/CD connected to an azure-deployment.
+
+Commiting to the main branch will trigger a CI/CD run, which if successful,
+you can view at https://black-beach-0a186661e.4.azurestaticapps.net/.
+
+We used Emma's Microsoft Student Azure account for the deployment, so for more extensive error messages please contact her.
 
 ## Mongo DB
 This environment utilizes mongoDB. 
