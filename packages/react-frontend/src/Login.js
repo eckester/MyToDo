@@ -24,12 +24,14 @@ function LoginPage(props) {
   function submitForm() {
     props.handleSubmit(creds);
     setCreds({ username: "", pwd: "" });
-    navigate("/");
+    navigate("/home");
   }
 
   return (
     <div>
-      <h1 className="centered-content">Login</h1>
+      <h1 className="centered-content">
+        {props.buttonLabel || "Log In"}
+      </h1>
       <form className="box">
         <label htmlFor="username" className="center-content">
           Username

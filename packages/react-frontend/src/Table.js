@@ -6,6 +6,8 @@ import Container from "react-bootstrap/Container";
 import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
 import chroma from "chroma-js";
 
+const priorityOptions = ["None", "High", "Medium", "Low"];
+
 const categoryColors = {
   School: { textColor: "#069B39", backgroundColor: "#8FF5A6" },
   Work: { textColor: "#06399B", backgroundColor: "#8FE3F5" },
@@ -16,6 +18,7 @@ const categoryColors = {
 const getCategoryTextColor = (category) =>
   categoryColors[category]?.textColor ||
   categoryColors.default.textColor;
+
 const getCategoryBackgroundColor = (category) =>
   categoryColors[category]?.backgroundColor ||
   categoryColors.default.backgroundColor;
@@ -63,8 +66,6 @@ const convertUTCtoLocal = (utc) => {
   );
 };
 
-const priorityOptions = ["None", "High", "Medium", "Low"];
-
 function TableHeader({ setPriorityFilter }) {
   const handlePriorityFilterChange = (e) => {
     setPriorityFilter(e.target.value);
@@ -73,27 +74,29 @@ function TableHeader({ setPriorityFilter }) {
   return (
     <thead>
       <tr>
-        <label style={{ paddingLeft: "7px" }}>
-          Filter By Priority:
-          <select
-            name="Priority"
-            onChange={handlePriorityFilterChange}
-            style={{ width: "300px", paddingLeft: "7px" }}
-          >
-            {priorityOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
+        <th>
+          <label style={{ paddingLeft: "7px" }}>
+            Filter By Priority:
+            <select
+              name="Priority"
+              onChange={handlePriorityFilterChange}
+              style={{ width: "300px", paddingLeft: "7px" }}
+            >
+              {priorityOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+        </th>
       </tr>
     </thead>
   );
 }
 
 function TableBody(props) {
-  if (props.taskData === null) {
+  if (!props.taskData) {
     return <caption>Data Unavailable</caption>;
   }
   const [showCompletePopup, setShowCompletePopup] = useState({
@@ -119,97 +122,95 @@ function TableBody(props) {
       const date = convertUTCtoLocal(row.due);
       return (
         <tr key={index}>
-          <Card className="custom-card">
-            <Card.Body
-              style={{ padding: "10px", position: "relative" }}
-            >
-              <div className="card-container">
-                <Card.Text
-                  className="task-title"
-                  onClick={() => (
-                    (row.status = !row.status),
-                    props.updateTask(row)
-                  )}
-                >
-                  {row.status === true ? (
-                    <span
-                      style={{ textDecoration: "line-through" }}
+          <td className="custom-card">
+            <div className="card-container">
+              <Card.Text
+                className="task-title"
+                onClick={() => (
+                  (row.status = !row.status),
+                  props.updateTask(row)
+                )}
+              >
+                {row.status === true ? (
+                  <span
+                    style={{ textDecoration: "line-through" }}
+                  >
+                    {row.task}
+                  </span>
+                ) : (
+                  <span>{row.task}</span>
+                )}
+              </Card.Text>
+              <TaskAltOutlinedIcon
+                className="card-icon"
+                onClick={() =>
+                  setShowCompletePopup({
+                    inUse: true,
+                    id: row._id
+                  })
+                }
+              ></TaskAltOutlinedIcon>
+              {showCompletePopup.inUse &&
+                row._id === showCompletePopup.id && (
+                  <div className="popup">
+                    <button
+                      className="delete-button"
+                      onClick={() =>
+                        props.removeTask(showCompletePopup.id)
+                      }
                     >
-                      {row.task}
-                    </span>
-                  ) : (
-                    <span>{row.task}</span>
-                  )}
-                </Card.Text>
-                <TaskAltOutlinedIcon
-                  className="card-icon"
-                  onClick={() =>
-                    setShowCompletePopup({
-                      inUse: true,
-                      id: row._id
+                      Delete
+                    </button>
+                    <button
+                      className="cancel-button"
+                      onClick={() =>
+                        setShowCompletePopup({
+                          inUse: false,
+                          id: ""
+                        })
+                      }
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
+            </div>
+            <div className="centered-content">
+              <Container className="card-container">
+                <div className={row.priority}>!</div>
+                <span
+                  className="card-span"
+                  style={{
+                    color: getCategoryTextColor(row.category),
+                    backgroundColor: getCategoryBackgroundColor(
+                      row.category
+                    )
+                  }}
+                >
+                  {row.category}
+                </span>
+                <span
+                  className="card-span"
+                  style={{
+                    color: getClassesTextColor(row.class),
+                    backgroundColor: getClassesBackgroundColor(
+                      row.class
+                    )
+                  }}
+                >
+                  {row.class}
+                </span>
+                <span className="card-date">
+                  {date
+                    .toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "numeric"
                     })
-                  }
-                ></TaskAltOutlinedIcon>
-                {showCompletePopup.inUse &&
-                  row._id === showCompletePopup.id && (
-                    <div className="popup">
-                      <button
-                        className="delete-button"
-                        onClick={() =>
-                          props.removeTask(showCompletePopup.id)
-                        }
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="cancel-button"
-                        onClick={() =>
-                          setShowCompletePopup({
-                            inUse: false,
-                            id: ""
-                          })
-                        }
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
-              </div>
-              <div className="centered-content">
-                <Container className="card-container">
-                  <div className={row.priority}>!</div>
-                  <span
-                    className="card-span"
-                    style={{
-                      color: getCategoryTextColor(row.category),
-                      backgroundColor:
-                        getCategoryBackgroundColor(row.category)
-                    }}
-                  >
-                    {row.category}
-                  </span>
-                  <span
-                    className="card-span"
-                    style={{
-                      color: getClassesTextColor(row.class),
-                      backgroundColor:
-                        getClassesBackgroundColor(row.class)
-                    }}
-                  >
-                    {row.class}
-                  </span>
-                  <span className="card-date">
-                    {date
-                      .toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "numeric"
-                      })
-                      .toUpperCase()}
-                  </span>
-                </Container>
-              </div>
-            </Card.Body>
-          </Card>
+                    .toUpperCase()}
+                </span>
+              </Container>
+            </div>
+          </td>
         </tr>
       );
     });
@@ -250,20 +251,27 @@ function TableBody(props) {
       <tr>
         <td>
           <b className="label-dates">OVERDUE</b>
-          {overdueTasks}
+          <table>
+            <tbody>{overdueTasks}</tbody>
+          </table>
         </td>
         <td>
           <b className="label-dates">THIS WEEK</b>
-          {thisWeekTasks}
+          <table>
+            <tbody>{thisWeekTasks}</tbody>
+          </table>
         </td>
         <td>
           <b className="label-dates">NEXT WEEK</b>
-          {nextWeekTasks}
+          <table>
+            <tbody>{nextWeekTasks}</tbody>
+          </table>
         </td>
       </tr>
     </tbody>
   );
 }
+
 function Table(props) {
   const [filters, setFilters] = useState({
     categoryFilter: "All",

@@ -38,41 +38,16 @@ const toDoSchema = new Schema(
     notes: {
       type: String,
       required: false
-    }
-  },
-  {
-    virtuals: {
-      isOverdue: {
-        get() {
-          const currentDate = new Date();
-          return !this.status && this.due > currentDate;
-        }
-      }
-    }
-  },
-
-  { collection: "toDoList" }
-);
-
-const userSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true
     },
-    password: {
+    user: {
       type: String,
-      required: true
+      default: ""
     }
   },
 
   { collection: "toDoList" }
 );
 
-const ToDo = mongoose.model("ToDoList", toDoSchema);
-const users = mongoose.model("toDoList", userSchema);
+const toDoModel = mongoose.model("toDoList", toDoSchema);
 
-export default {
-  toDoModel: ToDo,
-  userScheme: users
-};
+export default toDoModel;

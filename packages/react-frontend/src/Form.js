@@ -11,10 +11,9 @@ function Form(props) {
     due: Date.now,
     status: "",
     _id: "",
-    class: ""
+    class: "",
+    user: props.name
   });
-
-  //const [showPopup, setShowPopup] = useState(false);
 
   const categoryOptions = ["School", "Work", "Other"];
   const priorityOptions = ["Low", "Medium", "High", "None"];
@@ -27,7 +26,8 @@ function Form(props) {
         category: value,
         priority: tasks["priority"],
         due: tasks["due"],
-        class: tasks["class"]
+        class: tasks["class"],
+        user: tasks["user"]
       });
     } else if (name === "name") {
       setTask({
@@ -35,7 +35,8 @@ function Form(props) {
         category: tasks["category"],
         priority: tasks["priority"],
         due: tasks["due"],
-        class: tasks["class"]
+        class: tasks["class"],
+        user: tasks["user"]
       });
     } else if (name === "priority") {
       setTask({
@@ -43,7 +44,8 @@ function Form(props) {
         category: tasks["category"],
         priority: value,
         due: tasks["due"],
-        class: tasks["class"]
+        class: tasks["class"],
+        user: tasks["user"]
       });
     } else if (name === "date") {
       setTask({
@@ -51,7 +53,8 @@ function Form(props) {
         category: tasks["category"],
         priority: tasks["priority"],
         due: value,
-        class: tasks["class"]
+        class: tasks["class"],
+        user: tasks["user"]
       });
     } else if (name === "class") {
       setTask({
@@ -59,7 +62,8 @@ function Form(props) {
         category: tasks["category"],
         priority: tasks["priority"],
         due: tasks["class"],
-        class: value
+        class: value,
+        user: tasks["user"]
       });
     } else {
       setTask({
@@ -67,7 +71,8 @@ function Form(props) {
         category: tasks["category"],
         priority: tasks["priority"],
         due: tasks["due"],
-        class: tasks["class"]
+        class: tasks["class"],
+        user: tasks["user"]
       });
     }
   }
@@ -80,7 +85,8 @@ function Form(props) {
       priority: "",
       due: Date.now,
       status: false,
-      class: ""
+      class: "",
+      user: props.name
     });
     setShow(false); // close the popup after submitting
   }

@@ -26,8 +26,7 @@
 }
 
 .SidebarList li {
-  padding: 3px 0;  
-  
+  padding: 3px 0;
 }
 
 .SidebarList li:hover {
@@ -35,18 +34,18 @@
   cursor: pointer;
 }
 
-
 .SidebarList li.active {
   background-color: #ddd;
   color: rgb(0, 0, 0);
 }
 
-.SidebarToDoListLink, .SidebarCalendarLink {
+.SidebarToDoListLink,
+.SidebarCalendarLink {
   text-decoration-line: none;
   color: rgb(77, 77, 77);
   margin-right: 5px;
   margin-bottom: 0;
-  display: inline-block; 
+  display: inline-block;
   line-height: 1;
 }
 
@@ -60,7 +59,6 @@
   padding: 0;
 }
 
-
 .content-container {
   display: flex;
 }
@@ -71,7 +69,7 @@
 }
 
 .Icon {
-  margin-right: 8px; 
+  margin-right: 8px;
 }
 
 ul {

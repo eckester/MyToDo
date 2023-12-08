@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Sidebar.css";
 import {
   CalendarMonth as CalendarMonthIcon,
   Checklist as ChecklistIcon,
@@ -8,24 +9,22 @@ import {
   ChevronRight as ChevronRightIcon,
   ListAlt as ListAltIcon
 } from "@mui/icons-material";
-import "./Sidebar.css";
 
 function Sidebar({ setCategoryFilter }) {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] =
     useState("All Tasks"); // Set "All Tasks" as the default
-
-  const navigate = useNavigate();
 
   const handleCategoryClick = (category) => {
     if (category === "Calendar") {
       // navigate to calendar page
       navigate("/calendar");
     } else if (category === "To Do List") {
-      navigate("/"); // navigate to To do list page
+      navigate("/home"); // navigate to To do list page
       setCategoryFilter("All Tasks"); // automatically filters for all tasks
       setSelectedCategory("All Tasks");
     } else {
-      navigate("/"); // navigate to To do list page
+      navigate("/home"); // navigate to To do list page
       setCategoryFilter(category); // filtetr by category
       setSelectedCategory(category);
     }
@@ -67,7 +66,7 @@ function Sidebar({ setCategoryFilter }) {
 
   return (
     <div className="Sidebar">
-      <Link to="/" className="SidebarToDoListLink">
+      <Link to="/home" className="SidebarToDoListLink">
         <li
           className={
             selectedCategory === "To Do List" ? "active" : ""

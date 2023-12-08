@@ -1,23 +1,22 @@
-
 .calendar-container {
   width: 90%;
   height: 100%;
-  margin: 5px auto; 
+  margin: 5px auto;
   padding: 2%;
   box-sizing: border-box;
 }
 
 .rbc-toolbar-label {
-  font-size: 180%; 
+  font-size: 180%;
   font-weight: bold;
   display: flex;
 }
 
-.rbc-calendar{
-  background-color: #f0f0f0; 
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+.rbc-calendar {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .modal-show {
@@ -34,8 +33,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 1000; 
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,8 +43,8 @@
 .modal-content {
   background-color: white;
   padding: 5px;
-  width: 350px; 
-  height: 200px; 
+  width: 350px;
+  height: 200px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
   overflow-y: auto;
@@ -111,4 +110,6 @@
   pointer-events: auto;
 }
 
-
+.rbc-row-content {
+  overflow-y: scroll;
+}

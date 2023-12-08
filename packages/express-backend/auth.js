@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import toDoListServices from "./models/toDoList-services.js";
 
 const creds = [];
 
@@ -17,7 +18,29 @@ export function registerUser(req, res) {
       .then((hashedPassword) => {
         generateAccessToken(username).then((token) => {
           console.log("Token:", token);
-          res.status(201).send({ token: token });
+          const promise = fetch("http://localhost:8000/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              name: username,
+              password: hashedPassword
+            })
+          })
+            .then((response) => {
+              console.log("Respomse", response);
+            })
+            .catch((error) => {
+              setMessage(`Signup Error: ${error}`);
+              alert(message);
+            });
+
+          res.status(201).send({
+            token: token,
+            username: username
+          });
+
           creds.push({ username, hashedPassword });
         });
       });
@@ -39,6 +62,19 @@ function generateAccessToken(username) {
       }
     );
   });
+}
+
+function getPassword(username) {
+  const promise = fetch(
+    `http://localhost:8000/user/${username}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
+  return promise;
 }
 
 export function authenticateUser(req, res, next) {
@@ -69,30 +105,33 @@ export function authenticateUser(req, res, next) {
   }
 }
 
-export function loginUser(req, res) {
+export async function loginUser(req, res) {
   const { username, pwd } = req.body; // from form
-  const retrievedUser = creds.find(
-    (c) => c.username === username
-  );
-
-  if (!retrievedUser) {
-    // invalid username
-    res.status(401).send("Unauthorized");
+  console.log("FIODAJL:F");
+  // alert(username);
+  // alert(pwd);
+  // res.status(401).send(`http://localhost:8000/user/${username}`);
+  const result = await toDoListServices.getuserName(username);
+  if (result === []) {
+    res.status(400).send("unavailable");
   } else {
     bcrypt
-      .compare(pwd, retrievedUser.hashedPassword)
+      .compare(pwd, result[0].password)
       .then((matched) => {
         if (matched) {
           generateAccessToken(username).then((token) => {
-            res.status(200).send({ token: token });
+            res
+              .status(200)
+              .send({ token: token, username: username });
           });
         } else {
           // invalid password
-          res.status(401).send("Unauthorized");
+          res.status(401).send("Unauthorized - doesnt match");
         }
       })
       .catch(() => {
         res.status(401).send("Unauthorized");
       });
+    // res.status(200).send(result[0].password);
   }
 }

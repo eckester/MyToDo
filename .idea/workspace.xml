@@ -2,8 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1e8a1fe-afee-4b25-a916-684bab941508" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/react-frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/express-backend/Models/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList-services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/Models/toDoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/Models/toDoList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/express-backend/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/express-backend/backend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Form.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/MyCalendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/MyCalendar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Table.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/Table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/react-frontend/src/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/react-frontend/src/header.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +54,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/camie/Desktop/Fall 2023/CSC 307/MyToDo",
+    "last_opened_file_path": "/Users/camie/Desktop/Fall 2023/CSC 307/MyToDo/packages/express-backend",
     "nodejs_package_manager_path": "npm"
   },
   "keyToStringList": {
@@ -46,6 +65,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/express-backend" />
       <recent name="$PROJECT_DIR$/packages/express-backend/Models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -90,7 +110,7 @@
       <workItem from="1701389512994" duration="1445000" />
       <workItem from="1701404264721" duration="880000" />
       <workItem from="1701810652692" duration="4201000" />
-      <workItem from="1701995056727" duration="20560000" />
+      <workItem from="1701995056727" duration="21241000" />
     </task>
     <servers />
   </component>

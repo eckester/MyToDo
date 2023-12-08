@@ -46,6 +46,8 @@ td {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-block-end: 10px;
+  padding: 10px;
+  position: relative;
 }
 
 .label-dates {
@@ -63,6 +65,12 @@ td {
   padding: 0px;
   align-items: flex-start;
   gap: 12px;
+}
+
+.centered-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-span {
@@ -93,12 +101,6 @@ td {
 
 .test {
   size: 0;
-}
-
-.centered-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .task-title {
@@ -133,12 +135,12 @@ td {
   margin: 0 5px;
   font-weight: bold;
   right: 8px;
-  background: #F58F9B;
+  background: #f58f9b;
   color: #1d1d1e;
 }
 
 .delete-button:hover {
-  background-color: #9B062A;
+  background-color: #9b062a;
 }
 
 .delete-button:focus {

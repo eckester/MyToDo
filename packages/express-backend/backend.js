@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
 
 // get tasks (all, category, priority, date)
 app.get("/tasks", authenticateUser, async (req, res) => {
-  //alert("get the tasks");
   const { category, priority, date } = req.query;
   try {
     let result;
@@ -33,6 +32,7 @@ app.get("/tasks", authenticateUser, async (req, res) => {
     } else if (date) {
       result = await toDoListServices.sortToDoByDate(date);
     } else {
+      console.log("here yee");
       result = await toDoListServices.getTasks();
     }
     if (result === undefined || result === null)
@@ -57,6 +57,30 @@ app.get("/tasks/:id", authenticateUser, async (req, res) => {
   }
 });
 
+app.get(
+  "/user/tasks/:id",
+  authenticateUser,
+  async (req, res) => {
+    const id = req.params.id;
+    const result = await toDoListServices.getTasksWID(id);
+    if (result === undefined || result === null)
+      res.status(404).send("Resource not found.");
+    else {
+      res.send({ toDoList: result });
+    }
+  }
+);
+
+app.get("/user/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await toDoListServices.getuserName(id);
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.status(200).send({ user: result });
+  }
+});
+
 // add task
 app.post("/tasks", authenticateUser, async (req, res) => {
   const task = req.body;
@@ -67,7 +91,7 @@ app.post("/tasks", authenticateUser, async (req, res) => {
 });
 
 // Delete a task by ID
-app.delete("/tasks/:id", authenticateUser, async (req, res) => {
+app.delete("/tasks/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const deletedTask = await toDoListServices.deleteTask(id);
@@ -110,26 +134,26 @@ app.put("/tasks/:id", authenticateUser, async (req, res) => {
 });
 
 // Users
-// app.get("/users", authenticateUser, async (req, res) => {
-//   const result = await toDoListServices.getUsers();
-//   if (result === undefined || result === null)
-//     res.status(404).send("Resource not found.");
-//   else {
-//     res.send({ users: result });
-//   }
-// });
-//
-// app.post("/users", async (req, res) => {
-//   const user = req.body;
-//   const newUser = await toDoListServices.addUser(user);
-//
-//   if (newUser) res.status(201).json(newUser);
-//   else res.status(500).end();
-// });
+app.get("/users", authenticateUser, async (req, res) => {
+  const result = await toDoListServices.getUsers();
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send({ users: result });
+  }
+});
+
+app.post("/users", async (req, res) => {
+  const user = req.body;
+  const newUser = await toDoListServices.addUser(user);
+
+  if (newUser) res.status(201).json(newUser);
+  else res.status(500).end();
+});
 
 app.post("/signup", registerUser);
 
-app.post("/login", loginUser);
+app.post("/", loginUser);
 
 app.listen(port, () => {
   console.log(

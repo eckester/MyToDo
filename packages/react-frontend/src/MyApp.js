@@ -5,48 +5,91 @@ import Header from "./header";
 import Sidebar from "./Sidebar";
 import LoginPage from "./Login";
 import MyCalendar from "./MyCalendar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// { useNavigate } from "react-router-dom";
-
-//import { useParams } from "react-router-dom";
-
-//const host = "http://localhost:8000";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate
+} from "react-router-dom";
 
 function MyApp() {
   const [tasks, setTasks] = useState([]);
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
-  //const [returned, setReturned] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const [categoryFilter, setCategoryFilter] =
     useState("All Tasks");
   const [tasksLoaded, setTasksLoaded] = useState(false);
 
+  useEffect(() => {
+    console.log("useEffect");
+    if (userName === "") {
+      console.log("noid");
+      fetchTasks()
+        .then((res) =>
+          res.status === 200 ? res.json() : undefined
+        )
+        .then((json) => {
+          if (json) {
+            setTasks(json["toDoList"]);
+            setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
+          } else {
+            setTasks(null);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log("IDDDD");
+      fetchTasksId()
+        .then((res) =>
+          res.status === 200 ? res.json() : undefined
+        )
+        .then((json) => {
+          if (json) {
+            setTasks(json["toDoList"]);
+            setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
+          } else {
+            setTasks(null);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [token, userName]);
+
   function fetchTasks() {
     const promise = fetch(
-      //"http://localhost:8000"
-      "https://black-beach-0a186661e.4.azurestaticapps.net"
+      "http://localhost:8000/tasks",
+      {
+        method: "GET",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        })
+      }
+      //"https://black-beach-0a186661e.4.azurestaticapps.net"
     );
     return promise;
   }
-  useEffect(() => {
-    fetchTasks()
-      .then((res) =>
-        res.status === 200 ? res.json() : undefined
-      )
-      .then((json) => {
-        if (json) {
-          setTasks(json["toDoList"]);
-          setTasksLoaded(true); // Set tasksLoaded to true when tasks are fetched
-        } else {
-          setTasks(null);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [token]);
+
+  function fetchTasksId() {
+    // alert("fetch user tasks", userName);
+    const promise = fetch(
+      `http://localhost:8000/user/tasks/${userName}`,
+      {
+        method: "GET",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        })
+      }
+      //"https://black-beach-0a186661e.4.azurestaticapps.net"
+    );
+    return promise;
+  }
 
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
@@ -130,7 +173,8 @@ function MyApp() {
   }
 
   function loginUser(creds) {
-    const promise = fetch("http://localhost:8000/login", {
+    console.log(JSON.stringify(creds));
+    const promise = fetch("http://localhost:8000/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -139,9 +183,12 @@ function MyApp() {
     })
       .then((response) => {
         if (response.status === 200) {
-          response
-            .json()
-            .then((payload) => setToken(payload.token));
+          response.json().then((payload) => {
+            alert("here yee here yee");
+            setToken(payload.token);
+            setUserName(payload.username);
+            return 200;
+          });
           setMessage(`Login successful; auth token saved`);
         } else {
           setMessage(
@@ -179,8 +226,10 @@ function MyApp() {
         console.log("Respomse", response);
         if (response.status === 201) {
           response.json().then((payload) => {
+            alert(payload.username);
             console.log("Payload", payload);
             setToken(payload.token);
+            setUserName(payload.username);
           });
           setMessage(
             `Signup successful for user: ${creds.username}; auth token saved`
@@ -201,54 +250,70 @@ function MyApp() {
 
   return (
     <div className="header-container">
-      <Header />
       <BrowserRouter>
         <Routes>
           <Route
             path="/"
             element={
-              <div className="content-container">
-                <Sidebar
-                  setCategoryFilter={setCategoryFilter}
-                />
-                <div className="content-tasks">
-                  <ListPage
-                    removeTask={removeOneTask}
-                    handleSubmit={updateList}
-                    updateTask={updateTask}
-                    categoryFilter={categoryFilter}
-                  ></ListPage>
+              <>
+                <Header handleClick={() => useNavigate("/")} />
+                <LoginPage handleSubmit={loginUser} />
+              </>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <>
+                <Header handleClick={() => useNavigate("/")} />
+                <div className="content-container">
+                  <Sidebar
+                    setCategoryFilter={setCategoryFilter}
+                  />
+                  <div className="content-tasks">
+                    <ListPage
+                      removeTask={removeOneTask}
+                      handleSubmit={updateList}
+                      updateTask={updateTask}
+                      categoryFilter={categoryFilter}
+                      userName={userName}
+                    ></ListPage>
+                  </div>
                 </div>
-              </div>
+              </>
             }
           />
           <Route
             path="/calendar"
             element={
               tasksLoaded && ( // Render MyCalendar only if tasks are loaded
-                <div className="content-container">
-                  <Sidebar
-                    setCategoryFilter={setCategoryFilter}
+                <>
+                  <Header
+                    handleClick={() => useNavigate("/")}
                   />
-                  <MyCalendar
-                    className="calendar-container"
-                    tasks={tasks}
-                  />
-                </div>
+                  <div className="content-container">
+                    <Sidebar
+                      setCategoryFilter={setCategoryFilter}
+                    />
+                    <MyCalendar
+                      className="calendar-container"
+                      tasks={tasks}
+                    />
+                  </div>
+                </>
               )
             }
           />
           <Route
-            path="/login"
-            element={<LoginPage handleSubmit={loginUser} />}
-          />
-          <Route
             path="/signup"
             element={
-              <LoginPage
-                handleSubmit={signupUser}
-                buttonLabel="Sign Up"
-              />
+              <>
+                <Header handleClick={() => useNavigate("/")} />
+                <LoginPage
+                  handleSubmit={signupUser}
+                  buttonLabel="Sign Up"
+                />
+              </>
             }
           />
         </Routes>
@@ -261,10 +326,9 @@ function MyApp() {
       removeTask,
       handleSubmit,
       updateTask,
-      categoryFilter
+      categoryFilter,
+      userName
     } = props;
-
-    setTasks(tasks);
 
     const filteredTasks =
       categoryFilter === "All Tasks"
@@ -281,43 +345,10 @@ function MyApp() {
           removeTask={removeTask}
           updateTask={updateTask}
         />
-        <Form handleSubmit={handleSubmit} />
+        <Form name={userName} handleSubmit={handleSubmit} />
       </>
     );
   }
 }
 
 export default MyApp;
-
-// Users!!!
-// function fetchUsers() {
-//   return users;
-// }
-
-// function fetchUsers() {
-//   // const promise = fetch("http://localhost:8000/users");
-//   // return promise;
-//     return users;
-// }
-// useEffect(() => {
-//   fetchUsers()
-//     .then((res) => res.json())
-//     .then((json) => {
-//       setUsers(json["users"]);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// }, []);
-
-// function updateUsers(user) {
-//   setUsers([...users, user]);
-//   // const promise = fetch("http://localhost:8000/users", {
-//   //   method: "POST",
-//   //   headers: {
-//   //     "Content-Type": "application/json"
-//   //   },
-//   //   body: JSON.stringify(user)
-//   // });
-//   // return promise;
-// }
