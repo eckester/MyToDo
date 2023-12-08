@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">63.15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>12/19</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">58.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>7/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">63.15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>12/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -147,8 +147,14 @@
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,6 +166,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,7 +203,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,14 +222,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,9 +247,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// toDoList-services.js
 import mongoose from "mongoose";
-//import { toDoModel, users } from "./toDoList.js";
-import scheme from "./toDoList.js";
-//import users from "./toDoList.js";
+import toDoModel from "./toDoList.js";
+import users from "./users.js";
 &nbsp;
 import dotenv from "dotenv";
 &nbsp;
@@ -245,64 +258,69 @@ mongoose.set("debug", true);
 &nbsp;
 console.log("&gt;&gt;mongo cluster: ");
 &nbsp;
+//***** Comment out for testing DB
 // mongoose
 //   .connect(process.env.MONGODB_URI, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 //   })
 //   .catch((error) =&gt; console.log(error));
+//***** END comment out for testing DB
 &nbsp;
-// is this correct for date? it doesn't use the parameter
-function sortToDoByDate(date) {
-  return scheme.toDoModel.find().sort({ due: 1 });
+function sortToDoByDate() {
+  return toDoModel.find().sort({ due: 1 });
 }
 &nbsp;
 function filterPriorityTasks(prior) {
-  return scheme.toDoModel.find({ priority: prior });
+  return toDoModel.find({ priority: prior });
 }
 &nbsp;
 function filterCategoryTasks(cat) {
-  return scheme.toDoModel.find({ category: cat });
+  return toDoModel.find({ category: cat });
 }
 &nbsp;
 function addTask(task) {
-  const taskToAdd = new scheme.toDoModel(task);
+  const taskToAdd = new toDoModel(task);
   const promise = taskToAdd.save();
   return promise;
 }
 &nbsp;
 function deleteTask(taskId) {
-  return scheme.toDoModel.findByIdAndDelete(taskId);
+  return toDoModel.findByIdAndDelete(taskId);
 }
 &nbsp;
 function getTasks() {
-  return scheme.toDoModel.find().sort({ due: 1 });
+  return toDoModel.find().sort({ due: 1 });
 }
 &nbsp;
-function findTaskById(id) {
-  return scheme.toDoModel.find({ _id: id });
+function <span class="fstat-no" title="function not covered" >getuserName(</span>id) {
+<span class="cstat-no" title="statement not covered" >  return users.find({ name: id });</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >getTasksWID(</span>userid) {
+<span class="cstat-no" title="statement not covered" >  return toDoModel.find({ user: userid }).sort({ due: 1 });</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >findTaskById(</span>id) {
+<span class="cstat-no" title="statement not covered" >  return toDoModel.find({ _id: id });</span>
 }
 &nbsp;
 function updateTask(taskId, updatedTask) {
-  return scheme.toDoModel.findByIdAndUpdate(
-    taskId,
-    updatedTask,
-    {
-      new: true
-    }
-  );
+  return toDoModel.findByIdAndUpdate(taskId, updatedTask, {
+    new: true
+  });
 }
 &nbsp;
 // User stuff
-// function addUser(user) {
-//   const userToAdd = new scheme.users(user);
-//   const promise = userToAdd.save();
-//   return promise;
-// }
+function <span class="fstat-no" title="function not covered" >addUser(</span>user) {
+  const userToAdd = <span class="cstat-no" title="statement not covered" >new users(user);</span>
+  const promise = <span class="cstat-no" title="statement not covered" >userToAdd.save();</span>
+<span class="cstat-no" title="statement not covered" >  return promise;</span>
+}
 &nbsp;
-// function getUsers() {
-//   return scheme.users;
-// }
+function <span class="fstat-no" title="function not covered" >getUsers(</span>) {
+<span class="cstat-no" title="statement not covered" >  return users.find();</span>
+}
 &nbsp;
 export default {
   sortToDoByDate,
@@ -313,7 +331,10 @@ export default {
   findTaskById,
   updateTask,
   filterPriorityTasks,
-  //getUsers
+  getUsers,
+  addUser,
+  getTasksWID,
+  getuserName
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -322,7 +343,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-08T08:17:28.434Z
+                at 2023-12-08T17:52:38.645Z
             </div>
         <script src="prettify.js"></script>
         <script>

@@ -12,12 +12,12 @@ mongoose.set("debug", true);
 console.log(">>mongo cluster: ");
 
 //***** Comment out for testing DB
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .catch((error) => console.log(error));
+// mongoose
+//   .connect(process.env.MONGODB_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   })
+//   .catch((error) => console.log(error));
 //***** END comment out for testing DB
 
 function sortToDoByDate() {
