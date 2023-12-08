@@ -3,9 +3,14 @@
 import React from "react";
 import "./header.css";
 import { ListAlt as ListAltIcon } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Header(props) {
+function Header() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="Header">
       <h1>OnTrack</h1>
@@ -13,7 +18,7 @@ function Header(props) {
         <ListAltIcon
           style={{ justifyContent: screenLeft }}
           className="Icon"
-          onClick={props.handleClick}
+          onClick={handleClick}
         />
       </Link>
     </div>
