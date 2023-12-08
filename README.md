@@ -49,6 +49,10 @@ We use Github actions for our CI/CD connected to an azure-deployment.
 Commiting to the main branch will trigger a CI/CD run, which if successful,
 you can view at https://black-beach-0a186661e.4.azurestaticapps.net/.
 
+# Testing 
+
+We used Jest to test out backend, including our Mongo Database schemas. Files with route functions (i.e. backend.js) were not included in testing. 
+
 We used Emma's Microsoft Student Azure account for the deployment, so for more extensive error messages please contact her.
 
 ## Mongo DB
