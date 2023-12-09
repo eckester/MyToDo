@@ -58,8 +58,7 @@ We used Emma's Microsoft Student Azure account for the deployment, so for more e
 This environment utilizes mongoDB.
 There is nothing to do to be connected to the database.
 
-# Testing 
+# Testing
 
-We used Jest to test our backend, including our Mongo Database schemas. Files with route functions (i.e. backend.js) were not included in testing. 
+We used Jest to test our backend, including our Mongo Database schemas. Files with route functions (i.e. backend.js) were not included in testing.
 Please see ./packages/express-backend/Models/README.MD for more information
-
