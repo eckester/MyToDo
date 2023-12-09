@@ -64,7 +64,7 @@ function MyApp() {
 
   function fetchTasks() {
     const promise = fetch(
-      "mytodo2-307.azurewebsites.net/tasks",
+      "https://black-beach-0a186661e.4.azurestaticapps.net/tasks",
       {
         method: "GET",
         headers: addAuthHeader({
@@ -79,7 +79,7 @@ function MyApp() {
   function fetchTasksId() {
     // alert("fetch user tasks", userName);
     const promise = fetch(
-      `mytodo2-307.azurewebsites.net/user/tasks/${userName}`,
+      `https://black-beach-0a186661e.4.azurestaticapps.net/user/tasks/${userName}`,
       {
         method: "GET",
         headers: addAuthHeader({
@@ -95,7 +95,7 @@ function MyApp() {
     const updated = tasks.filter((task) => task._id !== id);
     setTasks(updated);
     fetch(
-      `mytodo2-307.azurewebsites.net/tasks/${id}`,
+      `https://black-beach-0a186661e.4.azurestaticapps.net/tasks/${id}`,
       {
         method: "DELETE"
       }
@@ -146,7 +146,7 @@ function MyApp() {
 
   function postTask(task) {
     const promise = fetch(
-      "mytodo2-307.azurewebsites.net/tasks",
+      "https://black-beach-0a186661e.4.azurestaticapps.net/tasks",
       {
         method: "POST",
         headers: addAuthHeader({
@@ -166,7 +166,7 @@ function MyApp() {
     setTasks([tasks, ...after]);
 
     const promise = fetch(
-      `mytodo2-307.azurewebsites.net/tasks/${tasker._id}`,
+      `https://black-beach-0a186661e.4.azurestaticapps.net/tasks/${tasker._id}`,
       {
         method: "PUT",
         headers: {
@@ -181,7 +181,7 @@ function MyApp() {
   function loginUser(creds) {
     console.log(JSON.stringify(creds));
     const promise = fetch(
-      "mytodo2-307.azurewebsites.net/",
+      "https://black-beach-0a186661e.4.azurestaticapps.net/",
       {
         method: "POST",
         headers: {
@@ -225,7 +225,7 @@ function MyApp() {
 
   function signupUser(creds) {
     const promise = fetch(
-      "mytodo2-307.azurewebsites.net/signup",
+      "https://black-beach-0a186661e.4.azurestaticapps.net/signup",
       {
         method: "POST",
         headers: {
