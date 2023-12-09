@@ -45,7 +45,7 @@ td {
   border: 1px solid #ced4da;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-block-end: 10px;
+  margin-bottom: 10px;
   padding: 10px;
   position: relative;
 }
@@ -64,7 +64,7 @@ td {
   flex-direction: row;
   padding: 0px;
   align-items: flex-start;
-  gap: 12px;
+  border-radius: "5px";
 }
 
 .centered-content {
