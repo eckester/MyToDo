@@ -94,12 +94,9 @@ function MyApp() {
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
     setTasks(updated);
-    fetch(
-      `mytodo2-307.azurewebsites.net/tasks/${id}`,
-      {
-        method: "DELETE"
-      }
-    )
+    fetch(`mytodo2-307.azurewebsites.net/tasks/${id}`, {
+      method: "DELETE"
+    })
       .then((response) => {
         if (response.status === 204) {
           const updated = tasks.filter(
@@ -180,16 +177,13 @@ function MyApp() {
 
   function loginUser(creds) {
     console.log(JSON.stringify(creds));
-    const promise = fetch(
-      "mytodo2-307.azurewebsites.net/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(creds)
-      }
-    )
+    const promise = fetch("mytodo2-307.azurewebsites.net/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(creds)
+    })
       .then((response) => {
         if (response.status === 200) {
           response.json().then((payload) => {
