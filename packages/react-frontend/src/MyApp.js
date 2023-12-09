@@ -64,7 +64,7 @@ function MyApp() {
 
   function fetchTasks() {
     const promise = fetch(
-      "http://localhost:8000/tasks",
+      "https://black-beach-0a186661e.4.azurestaticapps.net/tasks",
       {
         method: "GET",
         headers: addAuthHeader({
@@ -79,7 +79,7 @@ function MyApp() {
   function fetchTasksId() {
     // alert("fetch user tasks", userName);
     const promise = fetch(
-      `http://localhost:8000/user/tasks/${userName}`,
+      `https://black-beach-0a186661e.4.azurestaticapps.net/user/tasks/${userName}`,
       {
         method: "GET",
         headers: addAuthHeader({
@@ -94,9 +94,12 @@ function MyApp() {
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
     setTasks(updated);
-    fetch(`http://localhost:8000/tasks/${id}`, {
-      method: "DELETE"
-    })
+    fetch(
+      `https://black-beach-0a186661e.4.azurestaticapps.net/tasks/${id}`,
+      {
+        method: "DELETE"
+      }
+    )
       .then((response) => {
         if (response.status === 204) {
           const updated = tasks.filter(
@@ -142,13 +145,16 @@ function MyApp() {
   }
 
   function postTask(task) {
-    const promise = fetch("http://localhost:8000/tasks", {
-      method: "POST",
-      headers: addAuthHeader({
-        "Content-Type": "application/json"
-      }),
-      body: JSON.stringify(task)
-    });
+    const promise = fetch(
+      "https://black-beach-0a186661e.4.azurestaticapps.net/tasks",
+      {
+        method: "POST",
+        headers: addAuthHeader({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(task)
+      }
+    );
     return promise;
   }
 
@@ -160,7 +166,7 @@ function MyApp() {
     setTasks([tasks, ...after]);
 
     const promise = fetch(
-      `http://localhost:8000/tasks/${tasker._id}`,
+      `https://black-beach-0a186661e.4.azurestaticapps.net/tasks/${tasker._id}`,
       {
         method: "PUT",
         headers: {
@@ -174,13 +180,16 @@ function MyApp() {
 
   function loginUser(creds) {
     console.log(JSON.stringify(creds));
-    const promise = fetch("http://localhost:8000/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(creds)
-    })
+    const promise = fetch(
+      "https://black-beach-0a186661e.4.azurestaticapps.net/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(creds)
+      }
+    )
       .then((response) => {
         if (response.status === 200) {
           response.json().then((payload) => {
@@ -215,13 +224,16 @@ function MyApp() {
   }
 
   function signupUser(creds) {
-    const promise = fetch("http://localhost:8000/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(creds)
-    })
+    const promise = fetch(
+      "https://black-beach-0a186661e.4.azurestaticapps.net/signup",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(creds)
+      }
+    )
       .then((response) => {
         console.log("Respomse", response);
         if (response.status === 201) {
