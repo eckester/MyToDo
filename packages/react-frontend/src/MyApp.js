@@ -94,12 +94,9 @@ function MyApp() {
   function removeOneTask(id) {
     const updated = tasks.filter((task) => task._id !== id);
     setTasks(updated);
-    fetch(
-      `https://localhost:8000/tasks/${id}`,
-      {
-        method: "DELETE"
-      }
-    )
+    fetch(`https://localhost:8000/tasks/${id}`, {
+      method: "DELETE"
+    })
       .then((response) => {
         if (response.status === 204) {
           const updated = tasks.filter(
@@ -145,16 +142,13 @@ function MyApp() {
   }
 
   function postTask(task) {
-    const promise = fetch(
-      "https://localhost:8000/tasks",
-      {
-        method: "POST",
-        headers: addAuthHeader({
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify(task)
-      }
-    );
+    const promise = fetch("https://localhost:8000/tasks", {
+      method: "POST",
+      headers: addAuthHeader({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify(task)
+    });
     return promise;
   }
 
@@ -180,16 +174,13 @@ function MyApp() {
 
   function loginUser(creds) {
     console.log(JSON.stringify(creds));
-    const promise = fetch(
-      "https://localhost:8000/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(creds)
-      }
-    )
+    const promise = fetch("https://localhost:8000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(creds)
+    })
       .then((response) => {
         if (response.status === 200) {
           response.json().then((payload) => {
@@ -224,16 +215,13 @@ function MyApp() {
   }
 
   function signupUser(creds) {
-    const promise = fetch(
-      "https://localhost:8000/signup",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(creds)
-      }
-    )
+    const promise = fetch("https://localhost:8000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(creds)
+    })
       .then((response) => {
         console.log("Respomse", response);
         if (response.status === 201) {
