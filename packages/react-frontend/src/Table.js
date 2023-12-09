@@ -122,7 +122,7 @@ function TableBody(props) {
       const date = convertUTCtoLocal(row.due);
       return (
         <tr key={index}>
-          <td className="custom-card">
+          <div className="custom-card">
             <div className="card-container">
               <Card.Text
                 className="task-title"
@@ -210,7 +210,7 @@ function TableBody(props) {
                 </span>
               </Container>
             </div>
-          </td>
+          </div>
         </tr>
       );
     });
