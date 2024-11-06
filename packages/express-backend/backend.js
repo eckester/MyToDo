@@ -7,6 +7,11 @@ import {
   registerUser,
   loginUser
 } from "./auth.js";
+import { Cookie, CookieJar } from 'tough-cookie';
+
+// NOT USED -- just so I can add new dependencies
+const cookieJar = new CookieJar()
+
 
 const app = express();
 const port = 8000;
